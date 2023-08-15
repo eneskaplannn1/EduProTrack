@@ -1,0 +1,71 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: white;
+
+  min-height: 100vh;
+}
+
+img {
+  width: 100%;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #3b3c3d;
+}
+
+svg {
+  transition: 0.4s ease;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-weight: bold;
+}
+
+*:disabled {
+  cursor: not-allowed;
+}
+
+select:disabled,
+input:disabled {
+  background-color: var(--color-grey-200);
+  color: var(--color-grey-500);
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: 0.4s ease;
+}
+
+a.active {
+  color: green;
+}
+
+ul {
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}

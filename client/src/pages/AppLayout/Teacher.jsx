@@ -1,3 +1,11 @@
+import { Fragment } from "react";
+
+import TeacherList from "../../UI/TeacherList";
+
 export default function Teacher() {
-  return <div>Teacher</div>;
+  return (
+    <Fragment>
+      <TeacherList />
+    </Fragment>
+  );
 }

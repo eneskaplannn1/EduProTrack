@@ -3,6 +3,7 @@ import { Fragment } from "react";
 
 import Signup from "./pages/Auth/Signup";
 import Login from "./pages/Auth/Login";
+
 import PageNotFound from "./pages/Error/PageNotFound";
 import Notification from "./pages/AppLayout/Notification";
 import Message from "./pages/AppLayout/Message";
@@ -10,22 +11,22 @@ import Settings from "./pages/AppLayout/Settings";
 import Homework from "./pages/AppLayout/Homework";
 import Student from "./pages/AppLayout/Student";
 import Teacher from "./pages/AppLayout/Teacher";
-import DashBoard from "./pages/AppLayout/DashBoard";
+import Profile from "./pages/AppLayout/Profile";
 import AppLayout from "./UI/AppLayout";
 
-import GlobalStyles from "./styles/GlobalStyles";
 import Account from "./pages/AppLayout/Account";
+import TeacherDetail from "./UI/TeacherDetail";
 
 function App() {
   return (
     <Fragment>
-      <GlobalStyles />
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route index element={<Navigate replace to="dashboard" />} />
-            <Route path="dashboard" element={<DashBoard />} />
+            <Route index element={<Navigate replace to="profile" />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="teacher" element={<Teacher />} />
+            <Route path="teacher/:teacherId" element={<TeacherDetail />} />
             <Route path="students" element={<Student />} />
             <Route path="homework" element={<Homework />} />
             <Route path="settings" element={<Settings />} />

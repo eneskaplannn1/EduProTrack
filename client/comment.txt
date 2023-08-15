@@ -1,0 +1,10 @@
+main colors 
+
+white
+#fff
+
+#343a40
+#495057
+
+#69db7c
+##40c057

@@ -1,0 +1,47 @@
+.container {
+  padding: 3.2rem;
+  position: relative;
+}
+
+.back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.photo img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.manage {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.manage button {
+  background-color: #40c057;
+  margin-left: 1rem;
+  color: #fff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: background-color 0.3s, transform 0.2s;
+  transition: 1s ease;
+}
+
+.delete:hover {
+  background-color: red;
+}
