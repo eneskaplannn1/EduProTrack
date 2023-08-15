@@ -1,5 +1,15 @@
+import UpdateUserDataForm from "../../features/auth/UpdateUserDataForm";
+import UpdateUserPassword from "../../features/auth/UpdateUserPassword";
+
 function Account() {
-  return <div>account</div>;
+  return (
+    <>
+      <h2>Update your account</h2>
+
+      <UpdateUserDataForm />
+      <UpdateUserPassword />
+    </>
+  );
 }
 
 export default Account;

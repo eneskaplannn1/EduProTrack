@@ -1,10 +1,9 @@
-import { PiStudentBold } from "react-icons/pi";
+import StudentList from "../../features/Student/StudentList";
 
 export default function Student() {
   return (
     <>
-      <div>Student</div>
-      <PiStudentBold />
+      <StudentList />
     </>
   );
 }

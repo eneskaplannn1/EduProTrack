@@ -15,8 +15,8 @@ import Profile from "./pages/AppLayout/Profile";
 import AppLayout from "./UI/AppLayout";
 
 import Account from "./pages/AppLayout/Account";
-import TeacherDetail from "./UI/TeacherDetail";
-
+import TeacherDetail from "./features/Teacher/TeacherDetail";
+import StudentDetail from "./features/Student/StudentDetail";
 function App() {
   return (
     <Fragment>
@@ -25,9 +25,10 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="profile" />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="teacher" element={<Teacher />} />
-            <Route path="teacher/:teacherId" element={<TeacherDetail />} />
+            <Route path="teachers" element={<Teacher />} />
+            <Route path="teachers/:teacherId" element={<TeacherDetail />} />
             <Route path="students" element={<Student />} />
+            <Route path="students/:studentId" element={<StudentDetail />} />
             <Route path="homework" element={<Homework />} />
             <Route path="settings" element={<Settings />} />
             <Route path="messages" element={<Message />} />

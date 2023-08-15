@@ -51,8 +51,9 @@ a {
   transition: 0.4s ease;
 }
 
-a.active {
-  color: green;
+a.active,
+a.active svg {
+  color: rgb(144, 229, 17);
 }
 
 ul {

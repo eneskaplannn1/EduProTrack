@@ -19,7 +19,7 @@ function Sidebar() {
         </li>
         <li>
           <GiTeacher />
-          <NavLink to="/teacher">Teacher</NavLink>
+          <NavLink to="/teachers">Teacher</NavLink>
         </li>
         <li>
           <PiStudentBold />

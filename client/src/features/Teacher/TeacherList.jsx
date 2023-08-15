@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import classes from "./TeacherList.module.css";
 
-import img1 from "./Screenshot_6.png";
+import img1 from "../Screenshot_6.png";
 
 function TeacherList() {
   return (
@@ -14,27 +14,27 @@ function TeacherList() {
       <div className={classes.teacher}>
         <img src={img1} />
         <div>Enes Kaplan</div>
-        <NavLink to="/teacher/123123213">See details</NavLink>
+        <NavLink to="/teachers/123123213">See details</NavLink>
       </div>
       <div className={classes.teacher}>
         <img src={img1} />
         <div>Ömer Kaplan</div>
-        <NavLink to="/teacher/123123213">See details</NavLink>
+        <NavLink to="/teachers/123123213">See details</NavLink>
       </div>
       <div className={classes.teacher}>
         <img src={img1} />
         <div>Berkay Acer</div>
-        <NavLink to="/teacher/123123213">See details</NavLink>
+        <NavLink to="/teachers/123123213">See details</NavLink>
       </div>
       <div className={classes.teacher}>
         <img src={img1} />
         <div>Sülo çoban</div>
-        <NavLink to="/teacher/123123213">See details</NavLink>
+        <NavLink to="/teachers/123123213">See details</NavLink>
       </div>
       <div className={classes.teacher}>
         <img src={img1} />
         <div>Yağiz Öztürk</div>
-        <NavLink to="/teacher/123123213">See details</NavLink>
+        <NavLink to="/teachers/123123213">See details</NavLink>
       </div>
     </div>
   );

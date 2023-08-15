@@ -1,6 +1,5 @@
 import { Fragment } from "react";
-
-import TeacherList from "../../UI/TeacherList";
+import TeacherList from "../../features/Teacher/TeacherList";
 
 export default function Teacher() {
   return (

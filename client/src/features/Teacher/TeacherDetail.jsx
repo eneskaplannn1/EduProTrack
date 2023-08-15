@@ -1,5 +1,6 @@
 import classes from "./TeacherDetail.module.css";
-import img1 from "./Screenshot_6.png";
+
+import img1 from "../Screenshot_6.png";
 
 import { ImArrowLeft2 } from "react-icons/im";
 
@@ -22,6 +23,7 @@ function TeacherDetail() {
         <div>Age : 19</div>
         <div>Admission Date : 13.09.2022</div>
         <div>Class : 12/B</div>
+        <div>Role : Teacher</div>
       </div>
       <div className={classes.manage}>
         <button>Update Information</button>

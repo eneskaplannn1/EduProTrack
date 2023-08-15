@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import classes from "./Header.module.css";
 import User from "./User";
 
@@ -10,7 +11,9 @@ function Header() {
       <h3>School Management System</h3>
       <div className={classes.container}>
         <User />
-        <HiOutlineUser />
+        <NavLink to="/account">
+          <HiOutlineUser />
+        </NavLink>
         <HiArrowRightOnRectangle />
       </div>
     </div>
