@@ -19,29 +19,25 @@ function Sidebar() {
         </li>
         <li>
           <GiTeacher />
-          <NavLink to="/teachers">Teacher</NavLink>
+          <NavLink to="/teachers">Teachers</NavLink>
         </li>
         <li>
           <PiStudentBold />
-          <NavLink to="/students">Student</NavLink>
+          <NavLink to="/students">Students</NavLink>
         </li>
         <li>
           <MdAssignment />
-          <NavLink to="/homework">Homework</NavLink>
+          <NavLink to="/homeworks">Homeworks</NavLink>
         </li>
         <li>
           <AiFillMessage />
-          <NavLink to="/messages">Message</NavLink>
+          <NavLink to="/messages">Messages</NavLink>
         </li>
         <li>
           <IoMdNotifications />
-          <NavLink to="/notifications">Upload Notice</NavLink>
+          <NavLink to="/notifications">Upload Notices</NavLink>
         </li>
-        {/* Check complain maybe  */}
-        {/* Check complain maybe  */}
-        {/* Check complain maybe  */}
-        {/* Check complain maybe  */}
-        {/* Check complain maybe  */}
+
         <li>
           <IoSettingsSharp />
           <NavLink to="/settings">Settings</NavLink>
@@ -50,5 +46,7 @@ function Sidebar() {
     </div>
   );
 }
+
+// complain kısmı eklenebilir
 
 export default Sidebar;

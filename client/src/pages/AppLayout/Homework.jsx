@@ -1,9 +1,7 @@
+import HomeworkList from "../../features/homework/HomeworkList";
+
 function Homework() {
-    return (
-        <div>
-           Homework 
-        </div>
-    )
+  return <HomeworkList />;
 }
 
-export default Homework
+export default Homework;

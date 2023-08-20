@@ -13,6 +13,9 @@
 .student a {
   color: purple;
 }
+.student a:hover {
+  color: #69db7c;
+}
 
 .head {
   display: flex;

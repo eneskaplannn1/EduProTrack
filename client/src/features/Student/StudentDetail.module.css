@@ -42,6 +42,9 @@
   transition: 1s ease;
 }
 
+.manage .delete {
+  background-color: rgb(180, 84, 84);
+}
 .delete:hover {
-  background-color: red;
+  background-color: rgb(255, 0, 0);
 }

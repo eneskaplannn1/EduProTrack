@@ -1,0 +1,26 @@
+.container {
+  padding: 3.2rem;
+  position: relative;
+}
+
+.back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.photo img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}

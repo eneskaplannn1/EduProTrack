@@ -1,9 +1,5 @@
+import UserProfile from "../../features/profile/UserProfile";
+
 export default function Profile() {
-  return (
-    <div className="container">
-      <div>
-        <img />
-      </div>
-    </div>
-  );
+  return <UserProfile />;
 }

@@ -1,13 +1,12 @@
 .container {
-    min-height: 100vh;
-    min-width: 100vw;
-    display: grid;
-    grid-template-columns: 10rem 1fr;
-    grid-template-rows: 4rem 1fr;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  grid-template-rows: 4rem 1fr;
 }
 
-
 .main {
-    padding: 3.2rem;
-    background-color: #111827;
+  padding: 3.2rem;
+  background-color: #111827;
+  overflow: scroll;
 }
