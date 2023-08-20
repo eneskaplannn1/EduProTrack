@@ -18,6 +18,9 @@ import Account from "./pages/AppLayout/Account";
 import TeacherDetail from "./features/Teacher/TeacherDetail";
 import StudentDetail from "./features/Student/StudentDetail";
 import HomeworkDetail from "./features/homework/HomeworkDetail";
+import HomeworkForm from "./UI/form/HomeworkForm";
+import StudentForm from "./UI/form/StudentForm";
+import TeacherForm from "./UI/form/TeacherForm";
 function App() {
   return (
     <Fragment>
@@ -32,7 +35,10 @@ function App() {
             <Route path="students/:studentId" element={<StudentDetail />} />
             <Route path="homeworks" element={<Homework />} />
             <Route path="homeworks/:homeworkId" element={<HomeworkDetail />} />
-            <Route path="settings" element={<Settings />} />
+            {/* <Route path="settings" element={<Settings />} /> */}
+            <Route path="settings/hm" element={<HomeworkForm />} />
+            <Route path="settings/st" element={<StudentForm />} />
+            <Route path="settings/tc" element={<TeacherForm />} />
             <Route path="messages" element={<Message />} />
             <Route path="notifications" element={<Notification />} />
             <Route path="account" element={<Account />} />

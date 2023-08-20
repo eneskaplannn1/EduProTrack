@@ -4,12 +4,25 @@ import classes from "./TeacherList.module.css";
 
 import img1 from "../Screenshot_6.png";
 
+import Modal from "../../UI/Modal";
+import TeacherForm from "../../UI/form/TeacherForm";
+import Button from "../../UI/Button";
+
 function TeacherList() {
   return (
     <div className={classes.container}>
       <div className={classes.head}>
         <div>Teachers List</div>
-        <button>Add new teacher</button>
+        <Modal>
+          <Modal.Open>
+            <Button size="small" variation="add">
+              Add New Teacher
+            </Button>
+          </Modal.Open>
+          <Modal.Window>
+            <TeacherForm />
+          </Modal.Window>
+        </Modal>
       </div>
       <div className={classes.teacher}>
         <img src={img1} />

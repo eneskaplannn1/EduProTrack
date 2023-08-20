@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
 
 import classes from "./HomeworkList.module.css";
+import Modal from "../../UI/Modal";
+import HomeworkForm from "../../UI/form/HomeworkForm";
+import Button from "../../UI/Button";
 
 function HomeworkList() {
   return (
@@ -9,7 +12,16 @@ function HomeworkList() {
       <div className={classes.head}>
         <div>Subject</div>
         <div>Topic</div>
-        <div></div>
+        <Modal>
+          <Modal.Open>
+            <Button size="small" variation="add">
+              Add New Homework
+            </Button>
+          </Modal.Open>
+          <Modal.Window>
+            <HomeworkForm />
+          </Modal.Window>
+        </Modal>
       </div>
       <div className={classes.homework}>
         <div>Science</div>

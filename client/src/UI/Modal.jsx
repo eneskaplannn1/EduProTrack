@@ -37,7 +37,7 @@ function Window({ children, name }) {
         <button onClick={close}>
           <ImCross />
         </button>
-        <>{children}</>
+        <div className={classes.content}>{children}</div>
       </div>
     </div>,
     document.getElementById("modal")

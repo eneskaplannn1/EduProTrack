@@ -1,3 +1,6 @@
+import Modal from "../../UI/Modal";
+import TeacherForm from "../../UI/form/TeacherForm";
+
 import classes from "./TeacherDetail.module.css";
 
 import img1 from "../Screenshot_6.png";
@@ -26,7 +29,14 @@ function TeacherDetail() {
         <div>Role : Teacher</div>
       </div>
       <div className={classes.manage}>
-        <button>Update Information</button>
+        <Modal>
+          <Modal.Open opens="update-teacher">
+            <button>Update Information</button>
+          </Modal.Open>
+          <Modal.Window name="update-teacher">
+            <TeacherForm />
+          </Modal.Window>
+        </Modal>
         <button className={classes.delete}>Delete Account</button>
       </div>
     </div>

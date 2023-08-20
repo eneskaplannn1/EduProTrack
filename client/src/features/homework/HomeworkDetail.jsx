@@ -2,6 +2,10 @@ import classes from "./HomeworkDetail.module.css";
 
 import { ImArrowLeft2 } from "react-icons/im";
 
+import Modal from "../../UI/Modal";
+import HomeworkForm from "../../UI/form/HomeworkForm";
+import Button from "../../UI/Button";
+
 function HomeworkDetail() {
   return (
     <>
@@ -20,8 +24,19 @@ function HomeworkDetail() {
         <div>Expiration Date : 13.09.2022</div>
       </div>
       <div className={classes.manage}>
-        <button>Update Homework</button>
-        <button className={classes.delete}>Delete Homework</button>
+        <Modal>
+          <Modal.Open opens="update-homework">
+            <Button variation="update" size="small">
+              Update Homework
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="update-homework">
+            <HomeworkForm />
+          </Modal.Window>
+        </Modal>
+        <Button variation="delete" size="small">
+          Update Homework
+        </Button>
       </div>
     </>
   );

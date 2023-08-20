@@ -3,6 +3,8 @@ import classes from "./StudentDetail.module.css";
 import img1 from "../Screenshot_6.png";
 
 import { ImArrowLeft2 } from "react-icons/im";
+import Modal from "../../UI/Modal";
+import StudentForm from "../../UI/form/StudentForm";
 
 function StudentDetail() {
   return (
@@ -26,7 +28,14 @@ function StudentDetail() {
         <div>Role : Student</div>
       </div>
       <div className={classes.manage}>
-        <button>Update Information</button>
+        <Modal>
+          <Modal.Open opens="update-student">
+            <button>Update Information</button>
+          </Modal.Open>
+          <Modal.Window name="update-student">
+            <StudentForm />
+          </Modal.Window>
+        </Modal>
         <button className={classes.delete}>Delete Account</button>
       </div>
     </div>
