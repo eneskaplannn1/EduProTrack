@@ -16,12 +16,17 @@ function UserProfile() {
       <DetailInfo>
         <div>FullName : {user.name}</div>
         <div>Email : {user.email}</div>
-        <div>Phone : +80 487612374</div>
-        <div>Address : Some dummy address</div>
-        <div>Gender : Male</div>
-        <div>Age : 19</div>
-        <div>Admission Date : 13.09.2022</div>
-        <div>Class : 12/B</div>
+        <div>Phone : {user.phoneNum}</div>
+        <div>Address : 123 Main Street, City</div>
+        <div>Gender : {user.gender}</div>
+        <div>Age : {user.age}</div>
+        <div>
+          Admission Date :
+          {new Intl.DateTimeFormat("en-US").format(
+            new Date(user.adminssionDate)
+          )}
+        </div>
+        <div>ClassName : {user.phoneNum}</div>
       </DetailInfo>
       <ButtonContainer>
         <NavLink to="/account">

@@ -6,8 +6,25 @@ import img1 from "../Screenshot_6.png";
 import { DetailImage, DetailInfo } from "../../UI/Detail";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
 import Button from "../../UI/Button/Button";
+import { useQuery } from "@tanstack/react-query";
+import { getOne } from "../../services/apiTeacher";
+import { useParams } from "react-router-dom";
 
 function TeacherDetail() {
+  const { teacherId } = useParams();
+
+  const { data, isLoading, isError } = useQuery({
+    queryFn: () => {
+      return getOne("teachers", teacherId);
+    },
+    queryKey: ["Teacher"],
+  });
+
+  if (isLoading) return <></>;
+
+  const { name, email, age, gender, adminssionDate, address, phoneNum, role } =
+    data.data.doc;
+
   return (
     <>
       <BackButton />
@@ -15,15 +32,18 @@ function TeacherDetail() {
         <img src={img1} />
       </DetailImage>
       <DetailInfo>
-        <div>FullName : Enes Kaplan</div>
-        <div>Email : deneme@gmail.com</div>
-        <div>Phone : +80 487612374</div>
-        <div>Address : Some dummy address</div>
-        <div>Gender : Male</div>
-        <div>Age : 19</div>
-        <div>Admission Date : 13.09.2022</div>
-        <div>Class : 12/B</div>
-        <div>Role : Teacher</div>
+        <div>FullName : {name}</div>
+        <div>Email :{email}</div>
+        <div>Phone : {phoneNum}</div>
+        <div>Address :{address}</div>
+        <div>Gender : {gender}</div>
+        <div>Age : {age}</div>
+        <div>
+          Admission Date :
+          {new Intl.DateTimeFormat("en-US").format(new Date(adminssionDate))}
+        </div>
+        <div>Class : I will handle this</div>
+        <div>Role : {role}</div>
       </DetailInfo>
       <ButtonContainer>
         <Modal>

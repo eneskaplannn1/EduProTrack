@@ -4,20 +4,34 @@ import Button from "../../UI/Button/Button";
 import BackButton from "../../UI/Button/BackButton";
 import { DetailInfo } from "../../UI/Detail";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getOne } from "../../services/requestHelpers";
 
 function HomeworkDetail() {
+  const { homeworkId } = useParams();
+
+  const { data, isLoading, isError } = useQuery({
+    queryFn: () => getOne("homeworks", homeworkId),
+    queryKey: ["Homework"],
+  });
+  if (isLoading) return <></>;
+  console.log(data);
+  const { subject, topic, description, status, startDate, expirationDate } =
+    data.data.doc;
+
   return (
     <>
       <BackButton />
       <DetailInfo>
-        <div>Subject : Enes Kaplan</div>
-        <div>Topic : deneme@gmail.com</div>
-        <div>Description : +80 487612374</div>
-        <div>Status : Some dummy address</div>
-        <div>Teacher : Male</div>
-        <div>Students : 19</div>
-        <div>Starting Date : 11.09.2022</div>
-        <div>Expiration Date : 13.09.2022</div>
+        <div>Subject : {subject}</div>
+        <div>Topic : {topic}</div>
+        <div>Description : {description}</div>
+        <div>Status : {status}</div>
+        <div>Teacher :I will handle this later</div>
+        <div>Students : I will handle this later</div>
+        <div>Starting Date :{startDate}</div>
+        <div>Expiration Date : {expirationDate}</div>
       </DetailInfo>
       <ButtonContainer>
         <Modal>

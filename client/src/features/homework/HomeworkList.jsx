@@ -6,8 +6,18 @@ import Button from "../../UI/Button/Button";
 import StyledListHead from "../../UI/List/ListHead";
 import StyledListElement from "../../UI/List/ListElement";
 import { Fragment } from "react";
+import { getAll } from "../../services/requestHelpers";
+import { useQuery } from "@tanstack/react-query";
 
 function HomeworkList() {
+  const { data, isLoading } = useQuery({
+    queryFn: () => getAll("homeworks"),
+    queryKey: ["Homeworks"],
+  });
+
+  if (isLoading) return <></>;
+  console.log(data.data.doc);
+
   return (
     <Fragment>
       <h1>Homework List</h1>
@@ -25,31 +35,15 @@ function HomeworkList() {
           </Modal.Window>
         </Modal>
       </StyledListHead>
-      <StyledListElement>
-        <div>Science</div>
-        <div>Laws of Motion Experiment</div>
-        <NavLink to="/homeworks/123123213">See details</NavLink>
-      </StyledListElement>
-      <StyledListElement>
-        <div>English</div>
-        <div>Literary Exploration</div>
-        <NavLink to="/homeworks/123123213">See details</NavLink>
-      </StyledListElement>
-      <StyledListElement>
-        <div>Physics</div>
-        <div>Projectile Motion Problems</div>
-        <NavLink to="/homeworks/123123213">See details</NavLink>
-      </StyledListElement>
-      <StyledListElement>
-        <div>Geography</div>
-        <div>Continents and Countries</div>
-        <NavLink to="/homeworks/123123213">See details</NavLink>
-      </StyledListElement>
-      <StyledListElement>
-        <div>Biology</div>
-        <div>Human Anatomy Report</div>
-        <NavLink to="/homeworks/123123213">See details</NavLink>
-      </StyledListElement>
+      {data.data.doc.map((homework) => {
+        return (
+          <StyledListElement key={homework._id}>
+            <div>{homework.subject}</div>
+            <div>{homework.topic}</div>
+            <NavLink to={`/homeworks/${homework._id}`}>See details</NavLink>
+          </StyledListElement>
+        );
+      })}
     </Fragment>
   );
 }

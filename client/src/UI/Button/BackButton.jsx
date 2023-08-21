@@ -1,4 +1,5 @@
 import { ImArrowLeft2 } from "react-icons/im";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 const StyledBack = styled.div`
@@ -11,11 +12,15 @@ const StyledBack = styled.div`
 `;
 
 function BackButton() {
+  const navigate = useNavigate();
   return (
-    <StyledBack>
-      <ImArrowLeft2 />
-      <span>Go back</span>
-    </StyledBack>
+    <div style={{ display: "inline-block" }}>
+      <StyledBack onClick={() => navigate(-1)}>
+        <ImArrowLeft2 />
+
+        <span>Go back</span>
+      </StyledBack>
+    </div>
   );
 }
 

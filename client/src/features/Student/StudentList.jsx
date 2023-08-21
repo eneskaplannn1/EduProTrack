@@ -8,8 +8,17 @@ import StyledListHead from "../../UI/List/ListHead";
 import StyledListElement from "../../UI/List/ListElement";
 
 import img1 from "../Screenshot_6.png";
+import { useQuery } from "@tanstack/react-query";
+import { getAll } from "../../services/apiTeacher";
 
 function StudentList() {
+  const { data, isLoading } = useQuery({
+    queryFn: () => getAll("students"),
+    queryKey: ["Students"],
+  });
+
+  if (isLoading) return <></>;
+  console.log(data.data.doc);
   return (
     <Fragment>
       <h1>Student List</h1>
@@ -27,26 +36,15 @@ function StudentList() {
           </Modal.Window>
         </Modal>
       </StyledListHead>
-      <StyledListElement>
-        <img src={img1} />
-        <div>Enes Kaplan</div>
-        <NavLink to="/students/123123213">See details</NavLink>
-      </StyledListElement>
-      <StyledListElement>
-        <img src={img1} />
-        <div>Ömer Kaplan</div>
-        <NavLink to="/students/123123213">See details</NavLink>
-      </StyledListElement>
-      <StyledListElement>
-        <img src={img1} />
-        <div>Berkay Acer</div>
-        <NavLink to="/students/123123213">See details</NavLink>
-      </StyledListElement>
-      <StyledListElement>
-        <img src={img1} />
-        <div>Sülo çoban</div>
-        <NavLink to="/students/123123213">See details</NavLink>
-      </StyledListElement>
+      {data.data.doc.map((student) => {
+        return (
+          <StyledListElement key={student._id}>
+            <img src={img1} />
+            <div>{student.name}</div>
+            <NavLink to={`/students/${student._id}`}>See details</NavLink>
+          </StyledListElement>
+        );
+      })}
     </Fragment>
   );
 }

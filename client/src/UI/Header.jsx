@@ -9,7 +9,7 @@ import { toast } from "react-hot-toast";
 
 function Header() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   function handleLogout() {
     toast.success("logged out successfully");
@@ -19,6 +19,7 @@ function Header() {
   return (
     <div className={classes.header}>
       <h3>School Management System</h3>
+      {user.role === "Admin" ? <div className={classes.hero}>Admin</div> : ""}
       <div className={classes.container}>
         <User />
         <NavLink to="/account">
