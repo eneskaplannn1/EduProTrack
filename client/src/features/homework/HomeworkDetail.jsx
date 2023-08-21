@@ -1,19 +1,15 @@
-import classes from "./HomeworkDetail.module.css";
-
-import { ImArrowLeft2 } from "react-icons/im";
-
 import Modal from "../../UI/Modal";
 import HomeworkForm from "../../UI/form/HomeworkForm";
-import Button from "../../UI/Button";
+import Button from "../../UI/Button/Button";
+import BackButton from "../../UI/Button/BackButton";
+import { DetailInfo } from "../../UI/Detail";
+import ButtonContainer from "../../UI/Button/ButtonContainer";
 
 function HomeworkDetail() {
   return (
     <>
-      <div className={classes.back}>
-        <ImArrowLeft2 />
-        <span>Go back</span>
-      </div>
-      <div className={classes.info}>
+      <BackButton />
+      <DetailInfo>
         <div>Subject : Enes Kaplan</div>
         <div>Topic : deneme@gmail.com</div>
         <div>Description : +80 487612374</div>
@@ -22,8 +18,8 @@ function HomeworkDetail() {
         <div>Students : 19</div>
         <div>Starting Date : 11.09.2022</div>
         <div>Expiration Date : 13.09.2022</div>
-      </div>
-      <div className={classes.manage}>
+      </DetailInfo>
+      <ButtonContainer>
         <Modal>
           <Modal.Open opens="update-homework">
             <Button variation="update" size="small">
@@ -37,7 +33,7 @@ function HomeworkDetail() {
         <Button variation="delete" size="small">
           Update Homework
         </Button>
-      </div>
+      </ButtonContainer>
     </>
   );
 }

@@ -1,13 +1,14 @@
-
-import classes from './User.module.css'
+import { useAuth } from "../context/AuthProvider";
+import classes from "./User.module.css";
 
 function User() {
-    return (
-        <div className={classes.user}>
-            {/* <img/> */}
-            <p>Enes Kaplan</p>
-        </div>
-    )
+  const { user } = useAuth();
+  return (
+    <div className={classes.user}>
+      {/* <img/> */}
+      <p>{user.name}</p>
+    </div>
+  );
 }
 
-export default User 
+export default User;

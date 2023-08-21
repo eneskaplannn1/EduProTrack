@@ -12,7 +12,10 @@ body {
 
   min-height: 100vh;
 }
-
+button {
+  color: inherit;
+  background-color: inherit;
+}
 img {
   width: 100%;
 }

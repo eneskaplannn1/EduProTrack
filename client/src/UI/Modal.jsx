@@ -34,7 +34,7 @@ function Window({ children, name }) {
   return createPortal(
     <div className={classes.overlay}>
       <div className={classes.modal}>
-        <button onClick={close}>
+        <button className={classes.close} onClick={close}>
           <ImCross />
         </button>
         <div className={classes.content}>{children}</div>

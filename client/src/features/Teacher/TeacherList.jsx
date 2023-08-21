@@ -1,18 +1,20 @@
 import { NavLink } from "react-router-dom";
-
-import classes from "./TeacherList.module.css";
-
+import { Fragment } from "react";
 import img1 from "../Screenshot_6.png";
 
-import Modal from "../../UI/Modal";
 import TeacherForm from "../../UI/form/TeacherForm";
-import Button from "../../UI/Button";
+import Modal from "../../UI/Modal";
+import Button from "../../UI/Button/Button";
+import StyledListElement from "../../UI/List/ListElement";
+import StyledListHead from "../../UI/List/ListHead";
 
 function TeacherList() {
   return (
-    <div className={classes.container}>
-      <div className={classes.head}>
-        <div>Teachers List</div>
+    <Fragment>
+      <h1>Teacher List</h1>
+      <StyledListHead>
+        <div>Teacher Avatar</div>
+        <div>Teacher Name</div>
         <Modal>
           <Modal.Open>
             <Button size="small" variation="add">
@@ -23,33 +25,33 @@ function TeacherList() {
             <TeacherForm />
           </Modal.Window>
         </Modal>
-      </div>
-      <div className={classes.teacher}>
+      </StyledListHead>
+      <StyledListElement>
         <img src={img1} />
         <div>Enes Kaplan</div>
         <NavLink to="/teachers/123123213">See details</NavLink>
-      </div>
-      <div className={classes.teacher}>
+      </StyledListElement>
+      <StyledListElement>
         <img src={img1} />
         <div>Ömer Kaplan</div>
         <NavLink to="/teachers/123123213">See details</NavLink>
-      </div>
-      <div className={classes.teacher}>
+      </StyledListElement>
+      <StyledListElement>
         <img src={img1} />
         <div>Berkay Acer</div>
         <NavLink to="/teachers/123123213">See details</NavLink>
-      </div>
-      <div className={classes.teacher}>
+      </StyledListElement>
+      <StyledListElement>
         <img src={img1} />
         <div>Sülo çoban</div>
         <NavLink to="/teachers/123123213">See details</NavLink>
-      </div>
-      <div className={classes.teacher}>
+      </StyledListElement>
+      <StyledListElement>
         <img src={img1} />
         <div>Yağiz Öztürk</div>
         <NavLink to="/teachers/123123213">See details</NavLink>
-      </div>
-    </div>
+      </StyledListElement>
+    </Fragment>
   );
 }
 

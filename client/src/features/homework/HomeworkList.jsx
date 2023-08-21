@@ -1,15 +1,17 @@
 import { NavLink } from "react-router-dom";
 
-import classes from "./HomeworkList.module.css";
 import Modal from "../../UI/Modal";
 import HomeworkForm from "../../UI/form/HomeworkForm";
-import Button from "../../UI/Button";
+import Button from "../../UI/Button/Button";
+import StyledListHead from "../../UI/List/ListHead";
+import StyledListElement from "../../UI/List/ListElement";
+import { Fragment } from "react";
 
 function HomeworkList() {
   return (
-    <div className={classes.container}>
+    <Fragment>
       <h1>Homework List</h1>
-      <div className={classes.head}>
+      <StyledListHead>
         <div>Subject</div>
         <div>Topic</div>
         <Modal>
@@ -22,33 +24,33 @@ function HomeworkList() {
             <HomeworkForm />
           </Modal.Window>
         </Modal>
-      </div>
-      <div className={classes.homework}>
+      </StyledListHead>
+      <StyledListElement>
         <div>Science</div>
         <div>Laws of Motion Experiment</div>
         <NavLink to="/homeworks/123123213">See details</NavLink>
-      </div>
-      <div className={classes.homework}>
+      </StyledListElement>
+      <StyledListElement>
         <div>English</div>
         <div>Literary Exploration</div>
         <NavLink to="/homeworks/123123213">See details</NavLink>
-      </div>
-      <div className={classes.homework}>
+      </StyledListElement>
+      <StyledListElement>
         <div>Physics</div>
         <div>Projectile Motion Problems</div>
         <NavLink to="/homeworks/123123213">See details</NavLink>
-      </div>
-      <div className={classes.homework}>
+      </StyledListElement>
+      <StyledListElement>
         <div>Geography</div>
         <div>Continents and Countries</div>
         <NavLink to="/homeworks/123123213">See details</NavLink>
-      </div>
-      <div className={classes.homework}>
+      </StyledListElement>
+      <StyledListElement>
         <div>Biology</div>
         <div>Human Anatomy Report</div>
         <NavLink to="/homeworks/123123213">See details</NavLink>
-      </div>
-    </div>
+      </StyledListElement>
+    </Fragment>
   );
 }
 

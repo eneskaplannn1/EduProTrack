@@ -1,16 +1,17 @@
-import Button from "../../UI/Button";
+import Button from "../../UI/Button/Button";
+import ButtonContainer from "../../UI/Button/ButtonContainer";
 import FormElement from "../../UI/form/FormElement";
-import FormLayout from "../../UI/form/FormLayout";
+import StyledFormLayout from "../../UI/form/FormLayout";
 import classes from "./UpdateUserDataForm.module.css";
 
 function UpdatePasswordForm() {
   //prettier-ignore
-  const { container, input, buttonContainer, cancelButton, updateButton } = classes;
+  const { container, input } = classes;
 
   return (
     <div className={container}>
       <h4>Update Password</h4>
-      <FormLayout>
+      <StyledFormLayout>
         <FormElement>
           <label htmlFor="password">New password (min 8 chars)</label>
           <input type="password" id="password" className={input} />
@@ -24,15 +25,15 @@ function UpdatePasswordForm() {
             className={input}
           />
         </FormElement>
-        <div className={buttonContainer}>
+        <ButtonContainer>
           <Button size="small" variation="cancel">
             Cancel
           </Button>
           <Button size="small" variation="update">
             Update Password
           </Button>
-        </div>
-      </FormLayout>
+        </ButtonContainer>
+      </StyledFormLayout>
     </div>
   );
 }

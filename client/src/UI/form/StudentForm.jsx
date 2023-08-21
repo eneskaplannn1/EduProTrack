@@ -1,9 +1,11 @@
-import FormLayout from "./FormLayout";
+import StyledFormLayout from "./FormLayout";
 import FormElement from "./FormElement";
+import Button from "../Button/Button";
+import ButtonContainer from "../Button/ButtonContainer";
 
-function StudentForm({ isEditing }) {
+function StudentForm() {
   return (
-    <FormLayout>
+    <StyledFormLayout>
       <FormElement>
         <label htmlFor="name">Name</label>
         <input type="text" id="name" />
@@ -20,7 +22,15 @@ function StudentForm({ isEditing }) {
         <label htmlFor="password">Password</label>
         <input type="password" id="password" />
       </FormElement>
-    </FormLayout>
+      <ButtonContainer>
+        <Button variation="cancel" type="small">
+          Cancel
+        </Button>
+        <Button variation="update" type="small">
+          Add Student
+        </Button>
+      </ButtonContainer>
+    </StyledFormLayout>
   );
 }
 

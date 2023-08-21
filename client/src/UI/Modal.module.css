@@ -28,7 +28,7 @@
   transition: all 0.4s ease;
 }
 
-.overlay .modal button {
+.overlay .modal .close {
   position: absolute;
   top: 1.2rem;
   right: 1.8rem;

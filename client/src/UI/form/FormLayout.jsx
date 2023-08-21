@@ -1,7 +1,13 @@
-import classes from "./FormLayout.module.css";
+import { styled } from "styled-components";
 
-function FormLayout({ children }) {
-  return <form className={classes.formLayout}>{children}</form>;
-}
+const StyledFormLayout = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  gap: 0.8rem;
+  border-radius: 8px;
+  color: #fff;
+  background-color: #18212f;
+`;
 
-export default FormLayout;
+export default StyledFormLayout;

@@ -37,6 +37,14 @@ const variations = {
       background-color: #3730a3;
     }
   `,
+  login: css`
+    background: #4f46e5;
+    color: #fff;
+
+    &:hover {
+      background-color: #3730a3;
+    }
+  `,
   delete: css`
     background-color: #fa5252;
     color: #fff;

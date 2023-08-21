@@ -1,16 +1,17 @@
-import Button from "../../UI/Button";
+import Button from "../../UI/Button/Button";
+import ButtonContainer from "../../UI/Button/ButtonContainer";
 import FormElement from "../../UI/form/FormElement";
-import FormLayout from "../../UI/form/FormLayout";
+import StyledFormLayout from "../../UI/form/FormLayout";
 import classes from "./UpdateUserDataForm.module.css";
 
 function UpdateUserDataForm() {
   //prettier-ignore
-  const { container, input, buttonContainer, cancelButton, updateButton } = classes;
+  const { container, input  } = classes;
 
   return (
     <div className={container}>
       <h4>Update User Data</h4>
-      <FormLayout>
+      <StyledFormLayout>
         <FormElement>
           <label htmlFor="email">Email Address</label>
           <input
@@ -33,15 +34,15 @@ function UpdateUserDataForm() {
           <label htmlFor="avatar">Avatar Image</label>
           <input type="file" id="avatar" accept="image/*" className={input} />
         </FormElement>
-        <div className={buttonContainer}>
+        <ButtonContainer>
           <Button size="small" variation="cancel">
             Cancel
           </Button>
           <Button size="small" variation="update">
             Update Account
           </Button>
-        </div>
-      </FormLayout>
+        </ButtonContainer>
+      </StyledFormLayout>
     </div>
   );
 }

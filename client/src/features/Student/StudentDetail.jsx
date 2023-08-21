@@ -1,22 +1,21 @@
-import classes from "./StudentDetail.module.css";
-
 import img1 from "../Screenshot_6.png";
 
-import { ImArrowLeft2 } from "react-icons/im";
 import Modal from "../../UI/Modal";
 import StudentForm from "../../UI/form/StudentForm";
+import BackButton from "../../UI/Button/BackButton";
+import Button from "../../UI/Button/Button";
+import { DetailImage, DetailInfo } from "../../UI/Detail";
+import ButtonContainer from "../../UI/Button/ButtonContainer";
 
 function StudentDetail() {
   return (
-    <div className={classes.container}>
-      <div className={classes.back}>
-        <ImArrowLeft2 />
-        <span>Go back</span>
-      </div>
-      <div className={classes.photo}>
+    <>
+      <BackButton />
+
+      <DetailImage>
         <img src={img1} />
-      </div>
-      <div className={classes.info}>
+      </DetailImage>
+      <DetailInfo>
         <div>FullName : Enes Kaplan</div>
         <div>Email : deneme@gmail.com</div>
         <div>Phone : +80 487612374</div>
@@ -26,19 +25,23 @@ function StudentDetail() {
         <div>Admission Date : 13.09.2022</div>
         <div>Class : 12/B</div>
         <div>Role : Student</div>
-      </div>
-      <div className={classes.manage}>
+      </DetailInfo>
+      <ButtonContainer>
         <Modal>
           <Modal.Open opens="update-student">
-            <button>Update Information</button>
+            <Button size="small" variation="update">
+              Update Student
+            </Button>
           </Modal.Open>
           <Modal.Window name="update-student">
             <StudentForm />
           </Modal.Window>
         </Modal>
-        <button className={classes.delete}>Delete Account</button>
-      </div>
-    </div>
+        <Button type="small" variation="delete">
+          Delete Student
+        </Button>
+      </ButtonContainer>
+    </>
   );
 }
 

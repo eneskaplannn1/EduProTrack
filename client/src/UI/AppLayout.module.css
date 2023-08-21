@@ -8,5 +8,5 @@
 .main {
   padding: 3.2rem;
   background-color: #111827;
-  overflow: scroll;
+  overflow: auto;
 }
