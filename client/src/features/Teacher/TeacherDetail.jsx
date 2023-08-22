@@ -7,7 +7,7 @@ import { DetailImage, DetailInfo } from "../../UI/Detail";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
 import Button from "../../UI/Button/Button";
 import { useQuery } from "@tanstack/react-query";
-import { getOne } from "../../services/apiTeacher";
+import { getOne } from "../../services/requestHelpers";
 import { useParams } from "react-router-dom";
 
 function TeacherDetail() {

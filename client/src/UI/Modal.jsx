@@ -1,9 +1,76 @@
 import { createPortal } from "react-dom";
-import classes from "./Modal.module.css";
 
 import { ImCross } from "react-icons/im";
 import { cloneElement, createContext, useState } from "react";
 import { useContext } from "react";
+import { styled } from "styled-components";
+
+const StyledOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+  transition: all 0.4s ease;
+`;
+const StyledModal = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 80vw;
+  max-width: 80vw;
+
+  height: 80vh;
+  max-height: 80vh;
+
+  overflow: auto;
+
+  background-color: #18212f;
+  color: white;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+
+  .content h4 {
+    text-align: left;
+
+    margin: 1rem 0 0 1.8rem;
+  }
+
+  .close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: inherit;
+    padding: 0.4rem;
+    border-radius: 5px;
+
+    border: none;
+    outline: none;
+
+    transform: translateX(0.8rem);
+    transition: all 0.3s;
+
+    svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      color: #9ca3af;
+    }
+
+    :hover {
+      background-color: #263756;
+    }
+  }
+`;
 
 const modalContext = createContext();
 
@@ -13,7 +80,6 @@ function Modal({ children }) {
   const close = () => setOpenName("");
   const open = (windowName) => setOpenName(windowName);
 
-  console.log(openName);
   return (
     <modalContext.Provider value={{ open, close, openName }}>
       {children}
@@ -32,14 +98,14 @@ function Window({ children, name }) {
   if (name !== openName) return;
 
   return createPortal(
-    <div className={classes.overlay}>
-      <div className={classes.modal}>
-        <button className={classes.close} onClick={close}>
+    <StyledOverlay>
+      <StyledModal>
+        <button className="close" onClick={close}>
           <ImCross />
         </button>
-        <div className={classes.content}>{children}</div>
-      </div>
-    </div>,
+        <div className="content">{children}</div>
+      </StyledModal>
+    </StyledOverlay>,
     document.getElementById("modal")
   );
 }

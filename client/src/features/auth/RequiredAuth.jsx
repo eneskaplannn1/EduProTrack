@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthProvider";
 function RequiredAuth({ allowedRoles, children }) {
   const { user } = useAuth();
   const location = useLocation();
-  console.log(user);
+  // console.log(user);
 
   return allowedRoles.includes(user?.role) ? (
     children

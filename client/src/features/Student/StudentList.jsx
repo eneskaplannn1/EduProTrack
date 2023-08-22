@@ -9,7 +9,7 @@ import StyledListElement from "../../UI/List/ListElement";
 
 import img1 from "../Screenshot_6.png";
 import { useQuery } from "@tanstack/react-query";
-import { getAll } from "../../services/apiTeacher";
+import { getAll } from "../../services/requestHelpers";
 
 function StudentList() {
   const { data, isLoading } = useQuery({
@@ -18,7 +18,7 @@ function StudentList() {
   });
 
   if (isLoading) return <></>;
-  console.log(data.data.doc);
+
   return (
     <Fragment>
       <h1>Student List</h1>
@@ -32,6 +32,7 @@ function StudentList() {
             </Button>
           </Modal.Open>
           <Modal.Window>
+            <h4>Add New Student</h4>
             <StudentForm />
           </Modal.Window>
         </Modal>

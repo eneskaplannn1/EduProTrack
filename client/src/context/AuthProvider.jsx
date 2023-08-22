@@ -6,7 +6,8 @@ const initialState = {
   user: null,
 };
 function reducer(state, action) {
-  if (action.type === "login") return { ...state, user: action.payload };
+  if (action.type === "login")
+    return { ...state, user: { ...action.payload, role: "Admin" } };
   if (action.type === "logout") return { ...initialState };
 }
 

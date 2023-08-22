@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import img1 from "../Screenshot_6.png";
 
 import TeacherForm from "../../UI/form/TeacherForm";
@@ -21,7 +21,7 @@ function TeacherList() {
 
   if (isLoading) return <></>;
 
-  console.log(data.data.doc);
+  // console.log(data.data.doc);
   return (
     <Fragment>
       <h1>Teacher List</h1>

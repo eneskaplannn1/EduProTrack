@@ -12,11 +12,10 @@ import { useQuery } from "@tanstack/react-query";
 function HomeworkList() {
   const { data, isLoading } = useQuery({
     queryFn: () => getAll("homeworks"),
-    queryKey: ["Homeworks"],
+    queryKey: ["homeworks"],
   });
 
   if (isLoading) return <></>;
-  console.log(data.data.doc);
 
   return (
     <Fragment>

@@ -4,8 +4,9 @@ import Button from "../../UI/Button/Button";
 import BackButton from "../../UI/Button/BackButton";
 import { DetailInfo } from "../../UI/Detail";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
-import { useParams } from "react-router-dom";
+
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import { getOne } from "../../services/requestHelpers";
 
 function HomeworkDetail() {
@@ -45,7 +46,7 @@ function HomeworkDetail() {
           </Modal.Window>
         </Modal>
         <Button variation="delete" size="small">
-          Update Homework
+          Delete Homework
         </Button>
       </ButtonContainer>
     </>
