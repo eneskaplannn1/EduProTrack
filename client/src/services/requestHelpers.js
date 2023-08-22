@@ -21,8 +21,9 @@ export const createOne = async function (body) {
     throw new Error(err.response.data.message);
   }
 };
-export const deleteOne = async function (model, id) {
-  return await axios.delete(`http://localhost:3000/api/v1/${model}/${id}`);
+export const deleteOne = async function (body) {
+  const { model, _id } = body;
+  return await axios.delete(`http://localhost:3000/api/v1/${model}/${_id}`);
 };
 
 // export const getAllTeachers = async function () {

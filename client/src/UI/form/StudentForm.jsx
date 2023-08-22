@@ -1,15 +1,16 @@
-import StyledFormLayout from "./FormLayout";
 import FormElement from "./FormElement";
 import Button from "../Button/Button";
 import ButtonContainer from "../Button/ButtonContainer";
+import StyledFormLayout from "./FormLayout";
 
+import { useAuth } from "../../context/AuthProvider";
 import { useForm } from "react-hook-form";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createOne } from "../../services/requestHelpers";
 import { toast } from "react-hot-toast";
-import { useAuth } from "../../context/AuthProvider";
 
-function StudentForm() {
+function StudentForm({ onCloseModal }) {
   const QueryClient = useQueryClient();
   const { user } = useAuth();
 
@@ -107,7 +108,12 @@ function StudentForm() {
         </select>
       </FormElement>
       <ButtonContainer>
-        <Button disabled={isAddingStudent} variation="cancel" type="small">
+        <Button
+          onClick={onCloseModal}
+          disabled={isAddingStudent}
+          variation="cancel"
+          type="small"
+        >
           Cancel
         </Button>
         <Button disabled={isAddingStudent} variation="update" type="small">

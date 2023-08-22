@@ -41,6 +41,10 @@ const StyledModal = styled.div`
     margin: 1rem 0 0 1.8rem;
   }
 
+  .content {
+    height: 100%;
+  }
+
   .close {
     position: absolute;
     top: 1.2rem;
@@ -103,7 +107,9 @@ function Window({ children, name }) {
         <button className="close" onClick={close}>
           <ImCross />
         </button>
-        <div className="content">{children}</div>
+        <div className="content">
+          {cloneElement(children, { onCloseModal: close })}
+        </div>
       </StyledModal>
     </StyledOverlay>,
     document.getElementById("modal")

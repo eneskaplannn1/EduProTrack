@@ -32,7 +32,6 @@ function StudentList() {
             </Button>
           </Modal.Open>
           <Modal.Window>
-            <h4>Add New Student</h4>
             <StudentForm />
           </Modal.Window>
         </Modal>

@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 import { createOne } from "../../services/requestHelpers";
 import { useAuth } from "../../context/AuthProvider";
 
-function HomeworkForm() {
+function HomeworkForm({ onCloseModal }) {
   const { user } = useAuth();
   const QueryClient = useQueryClient();
 
@@ -31,6 +31,7 @@ function HomeworkForm() {
   function handleSubmitForm(data) {
     const refactoredData = { ...data, teacher: user._id, class: user.class };
     AddHomework({ model: "homeworks", refactoredData });
+    onCloseModal();
   }
 
   return (
@@ -91,7 +92,7 @@ function HomeworkForm() {
         )}
       </FormElement>
       <ButtonContainer>
-        <Button variation="cancel" type="small">
+        <Button onClick={onCloseModal} variation="cancel" type="small">
           Cancel
         </Button>
         <Button variation="update" type="small">

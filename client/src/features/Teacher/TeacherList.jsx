@@ -16,7 +16,7 @@ function TeacherList() {
     queryFn: () => {
       return getAll("teachers");
     },
-    queryKey: ["Teachers"],
+    queryKey: ["teachers"],
   });
 
   if (isLoading) return <></>;

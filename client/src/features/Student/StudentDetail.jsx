@@ -9,10 +9,12 @@ import ButtonContainer from "../../UI/Button/ButtonContainer";
 import BackButton from "../../UI/Button/BackButton";
 import Button from "../../UI/Button/Button";
 
-import { getOne } from "../../services/requestHelpers";
+import { deleteOne, getOne } from "../../services/requestHelpers";
 
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import ConfirmDelete from "../../UI/ConfirmDelete";
 
 function StudentDetail() {
   const { studentId } = useParams();
@@ -22,10 +24,31 @@ function StudentDetail() {
     queryKey: ["Student"],
   });
 
+  const navigate = useNavigate();
+  const QueryClient = useQueryClient();
+
+  const { isLoading: isDeleting, mutate: deleteStudent } = useMutation({
+    mutationFn: deleteOne,
+    mutationKey: ["deleteStudent"],
+    onSuccess: async () => {
+      toast.success("Student deleted successfully");
+      await QueryClient.invalidateQueries({ queryKey: ["students"] });
+      navigate("/students");
+    },
+  });
+
   if (isLoading) return <></>;
-  console.log(data);
-  const { name, email, age, gender, adminssionDate, address, phoneNum, role } =
-    data.data.doc;
+  const {
+    name,
+    email,
+    age,
+    gender,
+    adminssionDate,
+    address,
+    phoneNum,
+    role,
+    _id,
+  } = data.data.doc;
 
   return (
     <>
@@ -59,9 +82,22 @@ function StudentDetail() {
             <StudentForm />
           </Modal.Window>
         </Modal>
-        <Button type="small" variation="delete">
-          Delete Student
-        </Button>
+        <Modal>
+          <Modal.Open opens="delete-student">
+            <Button type="small" variation="delete">
+              Delete Student
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="delete-student">
+            <ConfirmDelete
+              resourceName="student"
+              onConfirm={() => {
+                deleteStudent({ model: "students", _id: _id });
+              }}
+              disabled={isDeleting}
+            />
+          </Modal.Window>
+        </Modal>
       </ButtonContainer>
     </>
   );

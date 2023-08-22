@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createOne } from "../../services/requestHelpers";
 import { toast } from "react-hot-toast";
 
-function TeacherForm() {
+function TeacherForm({ onCloseModal }) {
   const QueryClient = useQueryClient();
 
   const { register, handleSubmit, reset, formState } = useForm();
@@ -114,7 +114,7 @@ function TeacherForm() {
       </FormElement>
 
       <ButtonContainer>
-        <Button variation="cancel" type="small">
+        <Button variation="cancel" type="small" onClick={onCloseModal}>
           Cancel
         </Button>
         <Button variation="update" type="small">
