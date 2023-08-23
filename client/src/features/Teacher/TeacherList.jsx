@@ -11,17 +11,19 @@ import StyledListHead from "../../UI/List/ListHead";
 import { useQuery } from "@tanstack/react-query";
 import { getAll } from "../../services/requestHelpers";
 
+import { ClipLoader } from "react-spinners";
+
 function TeacherList() {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => {
       return getAll("teachers");
     },
     queryKey: ["teachers"],
   });
 
-  if (isLoading) return <></>;
+  if (isLoading)
+    return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
-  // console.log(data.data.doc);
   return (
     <Fragment>
       <h1>Teacher List</h1>

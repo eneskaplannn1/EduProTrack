@@ -3,19 +3,30 @@ import axios from "axios";
 export const getAll = async function (model) {
   return await axios.get(`http://localhost:3000/api/v1/${model}`);
 };
+
 export const getOne = async function (model, id) {
   return await axios.get(`http://localhost:3000/api/v1/${model}/${id}`);
 };
-export const updateOne = async function (model, id, data) {
-  return await axios.patch(`http://localhost:3000/api/v1/${model}/${id}`, data);
-};
-export const createOne = async function (body) {
-  let { model, refactoredData } = body;
+
+export const updateOne = async function (body) {
+  const { model, id, data } = body;
+  console.log(15);
   try {
-    const res = await axios.post(
-      `http://localhost:3000/api/v1/${model}`,
-      refactoredData
+    console.log("hi there");
+    const res = await axios.patch(
+      `http://localhost:3000/api/v1/${model}/${id}`,
+      data
     );
+    console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const createOne = async function (body) {
+  let { model, data } = body;
+  try {
+    const res = await axios.post(`http://localhost:3000/api/v1/${model}`, data);
     console.log(res);
   } catch (err) {
     throw new Error(err.response.data.message);

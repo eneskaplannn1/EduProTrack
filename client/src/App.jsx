@@ -17,6 +17,7 @@ import TeacherDetail from "./features/Teacher/TeacherDetail";
 import StudentDetail from "./features/Student/StudentDetail";
 import HomeworkDetail from "./features/homework/HomeworkDetail";
 
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthProvider";
@@ -29,6 +30,7 @@ const client = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={client}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <Toaster
         position="top-center"
         gutter={12}

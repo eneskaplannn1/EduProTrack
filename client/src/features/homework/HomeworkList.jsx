@@ -8,6 +8,7 @@ import StyledListElement from "../../UI/List/ListElement";
 import { Fragment } from "react";
 import { getAll } from "../../services/requestHelpers";
 import { useQuery } from "@tanstack/react-query";
+import { ClipLoader } from "react-spinners";
 
 function HomeworkList() {
   const { data, isLoading } = useQuery({
@@ -15,7 +16,8 @@ function HomeworkList() {
     queryKey: ["homeworks"],
   });
 
-  if (isLoading) return <></>;
+  if (isLoading)
+    return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
   return (
     <Fragment>

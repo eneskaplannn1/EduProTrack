@@ -2,37 +2,18 @@ import StyledFormLayout from "./FormLayout";
 import FormElement from "./FormElement";
 import ButtonContainer from "../Button/ButtonContainer";
 import Button from "../Button/Button";
-import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
-import { createOne } from "../../services/requestHelpers";
-import { useAuth } from "../../context/AuthProvider";
+import useEditCreateHomework from "../../hooks/useEditCreateHomework";
 
-function HomeworkForm({ onCloseModal }) {
-  const { user } = useAuth();
-  const QueryClient = useQueryClient();
+function HomeworkForm({ onCloseModal, HomeworkToEdit = {}, isEditing }) {
+  const { _id: homeworkId, ...editValues } = HomeworkToEdit;
 
-  const { register, handleSubmit, reset, formState } = useForm();
-  const { errors } = formState;
-
-  const { mutate: AddHomework } = useMutation({
-    mutationFn: createOne,
-    mutationKey: ["creatingHomework"],
-    onSuccess: () => {
-      toast.success("Homework Created Successfully");
-      QueryClient.invalidateQueries({ queryKey: ["homeworks"] });
-      reset();
-    },
-    // onError: (err) => {
-    //   toast.error(err);
-    // },
-  });
-
-  function handleSubmitForm(data) {
-    const refactoredData = { ...data, teacher: user._id, class: user.class };
-    AddHomework({ model: "homeworks", refactoredData });
-    onCloseModal();
-  }
+  const { register, handleSubmit, errors, handleSubmitForm } =
+    useEditCreateHomework({
+      isEditing,
+      editValues,
+      homeworkId,
+      onCloseModal,
+    });
 
   return (
     <StyledFormLayout onSubmit={handleSubmit(handleSubmitForm)}>
@@ -96,7 +77,7 @@ function HomeworkForm({ onCloseModal }) {
           Cancel
         </Button>
         <Button variation="update" type="small">
-          Add Homework
+          {isEditing ? "update homework" : "Add Homework"}
         </Button>
       </ButtonContainer>
     </StyledFormLayout>

@@ -4,6 +4,7 @@ import { ImCross } from "react-icons/im";
 import { cloneElement, createContext, useState } from "react";
 import { useContext } from "react";
 import { styled } from "styled-components";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 const StyledOverlay = styled.div`
   position: absolute;
@@ -99,11 +100,12 @@ function Open({ children, opens: opendWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(modalContext);
-  if (name !== openName) return;
+  const ref = useOutsideClick(close);
 
+  if (name !== openName) return;
   return createPortal(
     <StyledOverlay>
-      <StyledModal>
+      <StyledModal ref={ref}>
         <button className="close" onClick={close}>
           <ImCross />
         </button>

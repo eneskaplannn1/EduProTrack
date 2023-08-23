@@ -11,11 +11,13 @@ import { deleteOne, getOne } from "../../services/requestHelpers";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import ConfirmDelete from "../../UI/ConfirmDelete";
+import { ClipLoader } from "react-spinners";
+import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 
 function TeacherDetail() {
   const { teacherId } = useParams();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => {
       return getOne("teachers", teacherId);
     },
@@ -30,13 +32,12 @@ function TeacherDetail() {
     mutationKey: ["deleteTeacher"],
     onSuccess: async () => {
       toast.success("Teacher deleted successfully");
-      await QueryClient.invalidateQueries({ queryKey: ["teachers"] });
+      await QueryClient.invalidateQueries({ queryKey: ["teacher"] });
       navigate("/teachers");
     },
   });
-
-  if (isLoading) return <></>;
-
+  if (isLoading)
+    return <ClipLoader loading={isLoading} color="#fff" size={500} />;
   const {
     name,
     email,
@@ -56,18 +57,15 @@ function TeacherDetail() {
         <img src={img1} />
       </DetailImage>
       <DetailInfo>
-        <div>FullName : {name}</div>
-        <div>Email :{email}</div>
-        <div>Phone : {phoneNum}</div>
-        <div>Address :{address}</div>
-        <div>Gender : {gender}</div>
-        <div>Age : {age}</div>
-        <div>
-          Admission Date :
-          {new Intl.DateTimeFormat("en-US").format(new Date(adminssionDate))}
-        </div>
-        <div>Class : I will handle this</div>
-        <div>Role : {role}</div>
+        <div>Full Name: {name}</div>
+        <div>Email: {email}</div>
+        <div>Phone: {phoneNum}</div>
+        <div>Address: {address}</div>
+        <div>Gender: {gender}</div>
+        <div>Age: {age}</div>
+        <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
+        <div>Class: I will handle this</div>
+        <div>Role: {role}</div>
       </DetailInfo>
       <ButtonContainer>
         <Modal>
@@ -77,7 +75,7 @@ function TeacherDetail() {
             </Button>
           </Modal.Open>
           <Modal.Window name="update-teacher">
-            <TeacherForm />
+            <TeacherForm isEditing={true} TeacherToEdit={data.data.doc} />
           </Modal.Window>
         </Modal>
         <Modal>

@@ -15,13 +15,15 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import ConfirmDelete from "../../UI/ConfirmDelete";
+import { ClipLoader } from "react-spinners";
+import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 
 function StudentDetail() {
   const { studentId } = useParams();
 
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getOne("students", studentId),
-    queryKey: ["Student"],
+    queryKey: ["student", studentId],
   });
 
   const navigate = useNavigate();
@@ -36,8 +38,9 @@ function StudentDetail() {
       navigate("/students");
     },
   });
+  if (isLoading)
+    return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
-  if (isLoading) return <></>;
   const {
     name,
     email,
@@ -63,10 +66,7 @@ function StudentDetail() {
         <div>Age : {age}</div>
         <div>Phone : {phoneNum}</div>
         <div>Address : Some dummy address</div>
-        <div>
-          Admission Date :
-          {new Intl.DateTimeFormat("en-US").format(new Date(adminssionDate))}
-        </div>
+        <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
         <div>Gender : {gender}</div>
         <div>Class : I will handle this</div>
         <div>Role : {role}</div>
@@ -79,7 +79,7 @@ function StudentDetail() {
             </Button>
           </Modal.Open>
           <Modal.Window name="update-student">
-            <StudentForm />
+            <StudentForm isEditing={true} StudentToEdit={data.data.doc} />
           </Modal.Window>
         </Modal>
         <Modal>

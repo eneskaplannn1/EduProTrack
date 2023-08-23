@@ -3,40 +3,17 @@ import FormElement from "./FormElement";
 import ButtonContainer from "../Button/ButtonContainer";
 import Button from "../Button/Button";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createOne } from "../../services/requestHelpers";
+import { useMutation } from "@tanstack/react-query";
+import { createOne, updateOne } from "../../services/requestHelpers";
 import { toast } from "react-hot-toast";
+import useEditCreateTeacher from "../../hooks/useEditCreateTeacher";
 
-function TeacherForm({ onCloseModal }) {
-  const QueryClient = useQueryClient();
+function TeacherForm({ onCloseModal, isEditing, TeacherToEdit = {} }) {
+  const { _id: teacherId, ...editValues } = TeacherToEdit;
 
-  const { register, handleSubmit, reset, formState } = useForm();
-  const { errors } = formState;
+  const { handleSubmitForm, register, handleSubmit, errors } =
+    useEditCreateTeacher({ teacherId, editValues, onCloseModal, isEditing });
 
-  const {
-    mutate: AddTeacher,
-    isLoading,
-    isError,
-    error,
-  } = useMutation({
-    mutationFn: createOne,
-    mutationKey: ["creatingTeacher"],
-    onSuccess: () => {
-      toast.success("Teacher Created Successfully");
-      QueryClient.invalidateQueries({ queryKey: ["teachers"] });
-      reset();
-    },
-    // onError: (err) => {
-    //   toast.error(err);
-    // },
-  });
-
-  function handleSubmitForm(data) {
-    console.log(data);
-
-    const refactoredData = { ...data };
-    AddTeacher({ model: "teachers", refactoredData });
-  }
   return (
     <StyledFormLayout onSubmit={handleSubmit(handleSubmitForm)}>
       <FormElement>
@@ -66,15 +43,17 @@ function TeacherForm({ onCloseModal }) {
         />
         {errors?.email?.message && <div>{errors.email.message}</div>}
       </FormElement>
-      <FormElement>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          {...register("password", { required: "Enter your password" })}
-        />
-        {errors?.password?.message && <div>{errors.password.message}</div>}
-      </FormElement>
+      {!isEditing && (
+        <FormElement>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            {...register("password", { required: "Enter your password" })}
+          />
+          {errors?.password?.message && <div>{errors.password.message}</div>}
+        </FormElement>
+      )}
       <FormElement>
         <label htmlFor="address">Address</label>
         <input
@@ -112,13 +91,12 @@ function TeacherForm({ onCloseModal }) {
           <option value="female">Female</option>
         </select>
       </FormElement>
-
       <ButtonContainer>
         <Button variation="cancel" type="small" onClick={onCloseModal}>
           Cancel
         </Button>
         <Button variation="update" type="small">
-          Add Teacher
+          {isEditing ? "Update Teacher data" : "Add Teacher"}
         </Button>
       </ButtonContainer>
     </StyledFormLayout>

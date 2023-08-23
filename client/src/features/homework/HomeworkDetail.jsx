@@ -10,6 +10,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteOne, getOne } from "../../services/requestHelpers";
 import ConfirmDelete from "../../UI/ConfirmDelete";
 import { toast } from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
+import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 
 function HomeworkDetail() {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ function HomeworkDetail() {
 
   const { data, isLoading } = useQuery({
     queryFn: () => getOne("homeworks", homeworkId),
-    queryKey: ["Homework"],
+    queryKey: ["homework", homeworkId],
   });
 
   const { isLoading: isDeleting, mutate: deleteHomework } = useMutation({
@@ -30,8 +32,8 @@ function HomeworkDetail() {
       navigate("/homeworks");
     },
   });
-  if (isLoading) return <></>;
-
+  if (isLoading)
+    return <ClipLoader loading={isLoading} color="#fff" size={500} />;
   const {
     subject,
     topic,
@@ -41,6 +43,8 @@ function HomeworkDetail() {
     expirationDate,
     _id,
   } = data.data.doc;
+  console.log(status);
+
   return (
     <>
       <BackButton />
@@ -51,8 +55,8 @@ function HomeworkDetail() {
         <div>Status : {status}</div>
         <div>Teacher :I will handle this later</div>
         <div>Students : I will handle this later</div>
-        <div>Starting Date :{startDate}</div>
-        <div>Expiration Date : {expirationDate}</div>
+        <div>Starting Date :{formatHumanReadableDate(startDate)}</div>
+        <div>Expiration Date : {formatHumanReadableDate(expirationDate)}</div>
       </DetailInfo>
       <ButtonContainer>
         <Modal>
@@ -62,7 +66,7 @@ function HomeworkDetail() {
             </Button>
           </Modal.Open>
           <Modal.Window name="update-homework">
-            <HomeworkForm />
+            <HomeworkForm HomeworkToEdit={data.data.doc} isEditing={true} />
           </Modal.Window>
         </Modal>
         <Modal>
