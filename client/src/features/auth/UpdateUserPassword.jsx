@@ -1,40 +1,77 @@
+import { styled } from "styled-components";
+
 import Button from "../../UI/Button/Button";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
 import FormElement from "../../UI/form/FormElement";
 import StyledFormLayout from "../../UI/form/FormLayout";
-import classes from "./UpdateUserDataForm.module.css";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { updatePassword } from "../../services/requestHelpers";
+import { toast } from "react-hot-toast";
 
+const StyledDiv = styled.div`
+  margin: 1rem 0;
+
+  h4 {
+    margin-bottom: 1rem;
+  }
+`;
+//prettier-ignore
 function UpdatePasswordForm() {
-  //prettier-ignore
-  const { container, input } = classes;
+  const {handleSubmit,register,formState: { errors }} = useForm();
+
+  const { mutate: updateUserPassword, isLoading: isUpdating } = useMutation({
+    mutationFn: updatePassword,
+    mutationKey:["updatePass"],
+    onError:(err)=>toast.error(err.message)
+  });
+
+  function handleSubmitForm(data) {
+    const {password,newPassword}=data
+    updateUserPassword({password,newPassword});
+  }
 
   return (
-    <div className={container}>
+    <StyledDiv>
       <h4>Update Password</h4>
-      <StyledFormLayout>
+      <StyledFormLayout onSubmit={handleSubmit(handleSubmitForm)}>
         <FormElement>
-          <label htmlFor="password">New password (min 8 chars)</label>
-          <input type="password" id="password" className={input} />
+          <label htmlFor="password">Old Password </label>
+          <input
+            type="password"
+            id="password"
+            {...register("password", { required: "Enter your email" })}
+          />
+          {errors?.password?.message && <div>{errors.password.message}</div>}
+        </FormElement>
+        <FormElement>
+          <label htmlFor="newPassword">New password </label>
+          <input
+            type="password"
+            id="newPassword"
+            {...register("newPassword", { required: "Enter your email" })}
+          />
+          {errors?.newPassword?.message && <div>{errors.newPassword.message}</div>}
         </FormElement>
         <FormElement>
           <label htmlFor="confirmPass">Confirm password</label>
           <input
             type="password"
             id="confirmPass"
-            placeholder=""
-            className={input}
+            {...register("confirmPass", { required: "Enter your email" })}
           />
+          {errors?.confirmPass?.message && <div>{errors.confirmPass.message}</div>}
         </FormElement>
         <ButtonContainer>
           <Button size="small" variation="cancel">
             Cancel
           </Button>
           <Button size="small" variation="update">
-            Update Password
+            {isUpdating ? "Updating password" : "Update Password"}
           </Button>
         </ButtonContainer>
       </StyledFormLayout>
-    </div>
+    </StyledDiv>
   );
 }
 

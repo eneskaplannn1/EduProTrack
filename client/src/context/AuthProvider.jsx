@@ -7,8 +7,9 @@ const initialState = {
 };
 function reducer(state, action) {
   if (action.type === "login")
-    return { ...state, user: { ...action.payload, role: "Admin" } };
+    return { ...state, user: { ...action.payload, role: "Student" } };
   if (action.type === "logout") return { ...initialState };
+  if (action.type === "update-user") return { user: action.payload };
 }
 
 function AuthProvider({ children }) {
@@ -20,9 +21,12 @@ function AuthProvider({ children }) {
   const logout = function () {
     dispatch({ type: "logout" });
   };
+  const updateUser = function () {
+    dispatch({ type: "update-user" });
+  };
 
   return (
-    <authContext.Provider value={{ user, login, logout }}>
+    <authContext.Provider value={{ user, login, logout, updateUser }}>
       {children}
     </authContext.Provider>
   );

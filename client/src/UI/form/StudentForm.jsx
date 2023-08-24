@@ -97,7 +97,7 @@ function StudentForm({ onCloseModal, isEditing, StudentToEdit = {} }) {
           Cancel
         </Button>
         <Button disabled={isManipulating} variation="update" type="small">
-          Add Student
+          {isEditing ? "Update Student" : "Add Homework"}
         </Button>
       </ButtonContainer>
     </StyledFormLayout>

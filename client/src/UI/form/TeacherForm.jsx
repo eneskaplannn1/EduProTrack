@@ -2,10 +2,6 @@ import StyledFormLayout from "./FormLayout";
 import FormElement from "./FormElement";
 import ButtonContainer from "../Button/ButtonContainer";
 import Button from "../Button/Button";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { createOne, updateOne } from "../../services/requestHelpers";
-import { toast } from "react-hot-toast";
 import useEditCreateTeacher from "../../hooks/useEditCreateTeacher";
 
 function TeacherForm({ onCloseModal, isEditing, TeacherToEdit = {} }) {

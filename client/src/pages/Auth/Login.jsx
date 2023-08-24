@@ -4,26 +4,24 @@ import FormElement from "../../UI/form/FormElement";
 import StyledFormLayout from "../../UI/form/FormLayout";
 
 import classes from "./Login.module.css";
+import { useForm } from "react-hook-form";
+
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 import { HandleLogin } from "../../services/apiAuth";
-
-import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
 import { useAuth } from "../../context/AuthProvider";
-import { useNavigate } from "react-router-dom";
-
-const DeveloperCredentials = {
-  email: "daniel_johnson@example.co",
-  password: "pass1234",
-};
 
 function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const { register, formState, handleSubmit, reset } = useForm({
-    defaultValues: DeveloperCredentials,
+  const { register, formState, handleSubmit } = useForm({
+    defaultValues: {
+      email: "daniel_johnson@example.co",
+      password: "pass1234",
+    },
   });
 
   const { errors } = formState;
@@ -32,17 +30,16 @@ function Login() {
     mutationFn: HandleLogin,
     queryKey: ["user"],
     onSuccess: (data) => {
-      login(data.data.data.user);
       toast.success("Logged in successfully!");
+      login(data.data.data.user);
       navigate("/");
     },
     onError: (err) => {
-      toast.error(err.response.data.message);
+      toast.error(err.message);
     },
   });
 
   function onSubmitForm(data) {
-    if (!data) return;
     mutate(data);
   }
 

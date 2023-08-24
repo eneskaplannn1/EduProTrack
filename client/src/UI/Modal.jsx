@@ -26,8 +26,8 @@ const StyledModal = styled.div`
   width: 80vw;
   max-width: 80vw;
 
-  height: 80vh;
-  max-height: 80vh;
+  height: 90vh;
+  max-height: 90vh;
 
   overflow: auto;
 

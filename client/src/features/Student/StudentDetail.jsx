@@ -21,7 +21,7 @@ import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 function StudentDetail() {
   const { studentId } = useParams();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => getOne("students", studentId),
     queryKey: ["student", studentId],
   });
@@ -38,20 +38,12 @@ function StudentDetail() {
       navigate("/students");
     },
   });
+
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
-  const {
-    name,
-    email,
-    age,
-    gender,
-    adminssionDate,
-    address,
-    phoneNum,
-    role,
-    _id,
-  } = data.data.doc;
+  const { name, email, age, gender, adminssionDate, phoneNum, role, _id } =
+    data.data.doc;
 
   return (
     <>

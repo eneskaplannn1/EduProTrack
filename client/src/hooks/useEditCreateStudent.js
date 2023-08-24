@@ -17,9 +17,12 @@ function useEditCreateStudent({isEditing,user,studentId,onCloseModal,editValues,
       reset();
       onCloseModal();
     },
-    onError: (err) => toast.error(err)
+    onError: (err) =>{
+      toast.error(err.message)
+    }
     ,
   });
+
 
   const {register,formState: { errors },handleSubmit,reset,} = useForm({
     defaultValues: isEditing ? editValues : "",
