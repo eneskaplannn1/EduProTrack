@@ -1,8 +1,9 @@
 import axios from "axios";
+import customRequst from "../utils/customRequest";
 
 export const getAll = async function (model) {
   try {
-    return await axios.get(`http://localhost:3000/api/v1/${model}`);
+    return await customRequst.get(`http://localhost:3000/api/v1/${model}`);
   } catch (err) {
     throw new Error(err);
   }
@@ -10,7 +11,7 @@ export const getAll = async function (model) {
 
 export const getOne = async function (model, id) {
   try {
-    return await axios.get(`http://localhost:3000/api/v1/${model}/${id}`);
+    return await customRequst.get(`/${model}/${id}`);
   } catch (err) {
     throw new Error(err);
   }
@@ -19,10 +20,7 @@ export const getOne = async function (model, id) {
 export const updateOne = async function (body) {
   const { model, id, data } = body;
   try {
-    const res = await axios.patch(
-      `http://localhost:3000/api/v1/${model}/${id}`,
-      data
-    );
+    const res = await customRequst.patch(`/${model}/${id}`, data);
     console.log(res);
   } catch (err) {
     throw new Error(err);
@@ -32,7 +30,7 @@ export const updateOne = async function (body) {
 export const createOne = async function (body) {
   let { model, data } = body;
   try {
-    await axios.post(`http://localhost:3000/api/v1/${model}`, data);
+    await customRequst.post(`/${model}`, data);
   } catch (err) {
     throw new Error(err.response.data.message);
   }
@@ -41,7 +39,7 @@ export const createOne = async function (body) {
 export const deleteOne = async function (body) {
   const { model, _id } = body;
   try {
-    return await axios.patch(`http://localhost:3000/api/v1/${model}/${_id}`, {
+    return await customRequst.patch(`/${model}/${_id}`, {
       active: false,
     });
   } catch (err) {
@@ -51,10 +49,7 @@ export const deleteOne = async function (body) {
 
 export const updatePassword = async function (body) {
   try {
-    return await axios.post(
-      `http://localhost:3000/api/v1/auth/updatePassword`,
-      body
-    );
+    return await customRequst.patch(`/auth/updatePassword`, body);
   } catch (err) {
     throw new Error(err.response.data.message);
   }

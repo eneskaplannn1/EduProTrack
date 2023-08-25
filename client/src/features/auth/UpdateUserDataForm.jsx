@@ -7,10 +7,9 @@ import Button from "../../UI/Button/Button";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
 import FormElement from "../../UI/form/FormElement";
 import StyledFormLayout from "../../UI/form/FormLayout";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { getOne, updateOne } from "../../services/requestHelpers";
-import { useAuth } from "../../context/AuthProvider";
+import { updateOne } from "../../services/requestHelpers";
 
 const StyledDiv = styled.div`
   margin: 1rem 0;
@@ -20,18 +19,8 @@ const StyledDiv = styled.div`
   }
 `;
 
-function UpdateUserDataForm() {
+function UpdateUserDataForm({ data, isLoading, user }) {
   const QueryClient = useQueryClient();
-  const { user } = useAuth();
-
-  const { data, isLoading } = useQuery({
-    queryFn: () =>
-      getOne(`${user.role === "Student" ? "students" : "teachers"}`, user._id),
-    queryKey: [
-      `${user.role === "Student" ? "students" : "teachers"}`,
-      user._id,
-    ],
-  });
 
   const {
     handleSubmit,
@@ -60,7 +49,6 @@ function UpdateUserDataForm() {
   });
 
   function handleSubmitForm(data) {
-    // console.log({ model: user.role.toLowerCase() + "s", id: user._id, data });
     updateInfo({ model: user.role.toLowerCase() + "s", id: user._id, data });
   }
 

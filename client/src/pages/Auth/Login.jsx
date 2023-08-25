@@ -17,21 +17,27 @@ function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const { register, formState, handleSubmit } = useForm({
+  const { user } = useAuth();
+  if (user) navigate("/");
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
     defaultValues: {
-      email: "daniel_johnson@example.co",
+      email: "olivia_wilson@example.co",
       password: "pass1234",
     },
   });
-
-  const { errors } = formState;
 
   const { mutate, isLoading: isLoggingIn } = useMutation({
     mutationFn: HandleLogin,
     queryKey: ["user"],
     onSuccess: (data) => {
+      if (!data) return;
+      login(data?.data?.data?.user, data?.data?.token);
       toast.success("Logged in successfully!");
-      login(data.data.data.user);
       navigate("/");
     },
     onError: (err) => {

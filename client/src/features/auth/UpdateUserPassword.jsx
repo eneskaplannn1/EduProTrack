@@ -23,7 +23,8 @@ function UpdatePasswordForm() {
   const { mutate: updateUserPassword, isLoading: isUpdating } = useMutation({
     mutationFn: updatePassword,
     mutationKey:["updatePass"],
-    onError:(err)=>toast.error(err.message)
+    onError:(err)=>toast.error(err.message),
+    onSuccess:()=>toast.success("Updated password successfully")
   });
 
   function handleSubmitForm(data) {
