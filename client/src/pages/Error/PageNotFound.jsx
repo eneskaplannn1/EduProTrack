@@ -1,5 +1,5 @@
 function PageNotFound() {
-  return <div>PageNotFound</div>;
+  return <div style={{ color: "black" }}>PageNotFound</div>;
 }
 
 export default PageNotFound;

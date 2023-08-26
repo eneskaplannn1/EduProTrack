@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { LogUserIn } from "../services/apiAuth";
+import { LoginWithJWT } from "../services/apiAuth";
+import { toast } from "react-hot-toast";
 
 const authContext = createContext();
 
@@ -8,11 +9,10 @@ const initialState = {
 };
 
 function reducer(state, action) {
-  if (action.type === "login")
-    return { ...state, user: { ...action.payload, role: "Teacher" } };
+  if (action.type === "login") return { user: { ...action.payload } };
   if (action.type === "logout") return { ...initialState };
   if (action.type === "update-user") return { user: action.payload };
-  if (action.type === "logUserIn") return { user: action.payload };
+  if (action.type === "login-with-jwt") return { user: { ...action.payload } };
 }
 
 function AuthProvider({ children }) {
@@ -27,22 +27,30 @@ function AuthProvider({ children }) {
     dispatch({ type: "logout" });
     localStorage.removeItem("accessToken");
   };
-  const updateUser = function () {
-    dispatch({ type: "update-user" });
+  const updateUser = function (user) {
+    dispatch({ type: "update-user", payload: user });
   };
 
   const token = localStorage.getItem("accessToken");
+
   useEffect(() => {
     if (!token) return;
-
-    LogUserIn()
+    // if (user) return;
+    LoginWithJWT()
       .then((data) => {
-        dispatch({ type: "logUserIn", payload: data });
+        if (!data) {
+          localStorage.removeItem("accessToken");
+          return toast.error(
+            "Your session has been expired please log in again"
+          );
+        }
+        dispatch({ type: "login-with-jwt", payload: data });
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.message);
+        logout();
       });
-  }, [token]);
+  }, [token]); // tokenin yanında user vardı , belirli bir problemi çözmek için koymuştum galiba neden koyduğumu unuttum sonrasında useri kaldırmam gerekti şifre değiştiğinde loginWithJWT fonksiyonunun çalışması için;
 
   return (
     <authContext.Provider value={{ user, login, logout, updateUser }}>

@@ -1,15 +1,11 @@
 import { styled } from "styled-components";
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { ClipLoader } from "react-spinners";
 
 import Button from "../../UI/Button/Button";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
 import FormElement from "../../UI/form/FormElement";
 import StyledFormLayout from "../../UI/form/FormLayout";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { updateOne } from "../../services/requestHelpers";
+import useUpdateUserData from "../../hooks/useUpdateUserData";
 
 const StyledDiv = styled.div`
   margin: 1rem 0;
@@ -19,40 +15,9 @@ const StyledDiv = styled.div`
   }
 `;
 
-function UpdateUserDataForm({ data, isLoading, user }) {
-  const QueryClient = useQueryClient();
-
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    defaultValues: data?.data?.doc,
-  });
-
-  const { mutate: updateInfo, isLoading: isUpdating } = useMutation({
-    mutationFn: updateOne,
-    mutationKey: [
-      `${user.role === "Student" ? "students" : "teachers"}`,
-      user._id,
-    ],
-    onSuccess: () => {
-      toast.success("Your informations updated successfully");
-      QueryClient.invalidateQueries([
-        `${user.role === "Student" ? "students" : "teachers"}`,
-        user._id,
-      ]);
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
-
-  function handleSubmitForm(data) {
-    updateInfo({ model: user.role.toLowerCase() + "s", id: user._id, data });
-  }
-
-  if (isLoading) return <ClipLoader />;
+function UpdateUserDataForm({ user, updateUser }) {
+  const { handleSubmitForm, isUpdating, handleSubmit, errors, register } =
+    useUpdateUserData({ user, updateUser });
 
   return (
     <StyledDiv>

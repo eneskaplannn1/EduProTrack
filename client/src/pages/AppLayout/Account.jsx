@@ -1,27 +1,17 @@
-import { Fragment } from "react";
-
 import UpdateUserDataForm from "../../features/auth/UpdateUserDataForm";
 import UpdateUserPassword from "../../features/auth/UpdateUserPassword";
-import { useQuery } from "@tanstack/react-query";
-import { getOne } from "../../services/requestHelpers";
+
 import { useAuth } from "../../context/AuthProvider";
 
-function Account() {
-  const { user } = useAuth();
+import { Fragment } from "react";
 
-  const { data, isLoading } = useQuery({
-    queryFn: () =>
-      getOne(`${user.role === "Student" ? "students" : "teachers"}`, user._id),
-    queryKey: [
-      `${user.role === "Student" ? "students" : "teachers"}`,
-      user._id,
-    ],
-  });
+function Account() {
+  const { user, updateUser } = useAuth();
 
   return (
     <Fragment>
       <h2>Update your account</h2>
-      <UpdateUserDataForm isLoading={isLoading} user={user} data={data} />
+      <UpdateUserDataForm user={user} updateUser={updateUser} />
       <UpdateUserPassword />
     </Fragment>
   );

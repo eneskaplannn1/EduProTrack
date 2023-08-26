@@ -1,4 +1,3 @@
-import axios from "axios";
 import customRequst from "../utils/customRequest";
 
 export const getAll = async function (model) {
@@ -20,8 +19,7 @@ export const getOne = async function (model, id) {
 export const updateOne = async function (body) {
   const { model, id, data } = body;
   try {
-    const res = await customRequst.patch(`/${model}/${id}`, data);
-    console.log(res);
+    return await customRequst.patch(`/${model}/${id}`, data);
   } catch (err) {
     throw new Error(err);
   }
@@ -48,10 +46,20 @@ export const deleteOne = async function (body) {
 };
 
 export const updatePassword = async function (body) {
+  console.log(body);
   try {
     return await customRequst.patch(`/auth/updatePassword`, body);
   } catch (err) {
     throw new Error(err.response.data.message);
+  }
+};
+
+export const updateMe = async function (body) {
+  const { model, data } = body;
+  try {
+    return await customRequst.patch(`/${model}/updateMe`, data);
+  } catch (err) {
+    throw new Error(err);
   }
 };
 

@@ -1,22 +1,20 @@
-import img1 from "../Screenshot_6.png";
+import { useParams } from "react-router-dom";
 
 import Modal from "../../UI/Modal";
 import { DetailImage, DetailInfo } from "../../UI/Detail";
-
 import StudentForm from "../../UI/form/StudentForm";
-
 import ButtonContainer from "../../UI/Button/ButtonContainer";
+import ConfirmDelete from "../../UI/ConfirmDelete";
 import BackButton from "../../UI/Button/BackButton";
 import Button from "../../UI/Button/Button";
 
-import { deleteOne, getOne } from "../../services/requestHelpers";
-
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-hot-toast";
-import ConfirmDelete from "../../UI/ConfirmDelete";
 import { ClipLoader } from "react-spinners";
+import img from "../../../public/default.jpg";
+
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
+import useDeleteStudent from "../../hooks/useDeleteStudent";
+import { useQuery } from "@tanstack/react-query";
+import { getOne } from "../../services/requestHelpers";
 
 function StudentDetail() {
   const { studentId } = useParams();
@@ -26,18 +24,7 @@ function StudentDetail() {
     queryKey: ["student", studentId],
   });
 
-  const navigate = useNavigate();
-  const QueryClient = useQueryClient();
-
-  const { isLoading: isDeleting, mutate: deleteStudent } = useMutation({
-    mutationFn: deleteOne,
-    mutationKey: ["deleteStudent"],
-    onSuccess: async () => {
-      toast.success("Student deleted successfully");
-      await QueryClient.invalidateQueries({ queryKey: ["students"] });
-      navigate("/students");
-    },
-  });
+  const { isDeleting, deleteStudent } = useDeleteStudent();
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
@@ -50,7 +37,7 @@ function StudentDetail() {
       <BackButton />
 
       <DetailImage>
-        <img src={img1} />
+        <img src={img} />
       </DetailImage>
       <DetailInfo>
         <div>FullName : {name}</div>

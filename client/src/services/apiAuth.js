@@ -13,18 +13,20 @@ import customRequst from "../utils/customRequest";
 export const HandleLogin = async function (data) {
   try {
     const res = await customRequst.post("/auth/login", data);
-    console.log(res);
+    // console.log(res);
     return res;
   } catch (err) {
+    console.log(err);
     throw new Error(err.response.data.message);
   }
 };
 
-export const LogUserIn = async function () {
+export const LoginWithJWT = async function () {
   try {
     const res = await customRequst.get("/auth/logUserIn");
     return res.data;
   } catch (err) {
     console.log(JSON.stringify(err));
+    throw new Error(err.response.data.message);
   }
 };

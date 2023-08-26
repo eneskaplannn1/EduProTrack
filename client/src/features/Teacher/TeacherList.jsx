@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
-import img1 from "../Screenshot_6.png";
 
 import TeacherForm from "../../UI/form/TeacherForm";
 import Modal from "../../UI/Modal";
@@ -8,10 +7,11 @@ import Button from "../../UI/Button/Button";
 import StyledListElement from "../../UI/List/ListElement";
 import StyledListHead from "../../UI/List/ListHead";
 
+import { ClipLoader } from "react-spinners";
+import img from "../../../public/default.jpg";
+
 import { useQuery } from "@tanstack/react-query";
 import { getAll } from "../../services/requestHelpers";
-
-import { ClipLoader } from "react-spinners";
 
 function TeacherList() {
   const { data, isLoading } = useQuery({
@@ -44,7 +44,7 @@ function TeacherList() {
       {data.data.doc.map((teacher) => {
         return (
           <StyledListElement key={teacher._id}>
-            <img src={img1} />
+            <img src={img} />
             <div>{teacher.name}</div>
             <NavLink to={`/teachers/${teacher._id}`}>See details</NavLink>
           </StyledListElement>

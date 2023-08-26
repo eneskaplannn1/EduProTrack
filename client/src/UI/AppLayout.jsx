@@ -1,18 +1,29 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import SideBar from "./Sidebar";
+import { styled } from "styled-components";
 
-import classes from "./AppLayout.module.css";
+const StyledContainer = styled.div`
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  grid-template-rows: 4rem 1fr;
+`;
+const StyledMain = styled.div`
+  padding: 2rem;
+  background-color: #111827;
+  overflow: auto;
+`;
 
 function AppLayout() {
   return (
-    <div className={classes.container}>
-      <Header className={classes.main} />
-      <SideBar className={classes.main} />
-      <main className={classes.main}>
+    <StyledContainer>
+      <Header />
+      <SideBar />
+      <StyledMain>
         <Outlet />
-      </main>
-    </div>
+      </StyledMain>
+    </StyledContainer>
   );
 }
 

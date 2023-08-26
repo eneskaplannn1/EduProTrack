@@ -1,21 +1,20 @@
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { ClipLoader } from "react-spinners";
+
 import Modal from "../../UI/Modal";
 import HomeworkForm from "../../UI/form/HomeworkForm";
 import Button from "../../UI/Button/Button";
 import BackButton from "../../UI/Button/BackButton";
 import { DetailInfo } from "../../UI/Detail";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
-
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
-import { deleteOne, getOne } from "../../services/requestHelpers";
 import ConfirmDelete from "../../UI/ConfirmDelete";
-import { toast } from "react-hot-toast";
-import { ClipLoader } from "react-spinners";
+
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
+import { getOne } from "../../services/requestHelpers";
+import useDeleteHomework from "../../hooks/useDeleteHomework";
 
 function HomeworkDetail() {
-  const navigate = useNavigate();
-  const QueryClient = useQueryClient();
   const { homeworkId } = useParams();
 
   const { data, isLoading } = useQuery({
@@ -23,17 +22,11 @@ function HomeworkDetail() {
     queryKey: ["homework", homeworkId],
   });
 
-  const { isLoading: isDeleting, mutate: deleteHomework } = useMutation({
-    mutationFn: deleteOne,
-    mutationKey: ["deleteHomework"],
-    onSuccess: async () => {
-      toast.success("Homework deleted successfully");
-      await QueryClient.invalidateQueries({ queryKey: ["homeworks"] });
-      navigate("/homeworks");
-    },
-  });
+  const { isDeleting, deleteHomework } = useDeleteHomework();
+
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
+
   const {
     subject,
     topic,
@@ -43,7 +36,6 @@ function HomeworkDetail() {
     expirationDate,
     _id,
   } = data.data.doc;
-  console.log(status);
 
   return (
     <>

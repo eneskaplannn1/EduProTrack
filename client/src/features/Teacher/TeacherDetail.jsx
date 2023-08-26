@@ -1,18 +1,20 @@
 import Modal from "../../UI/Modal";
 import TeacherForm from "../../UI/form/TeacherForm";
 import BackButton from "../../UI/Button/BackButton";
-
-import img1 from "../Screenshot_6.png";
 import { DetailImage, DetailInfo } from "../../UI/Detail";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
+import ConfirmDelete from "../../UI/ConfirmDelete";
 import Button from "../../UI/Button/Button";
+
+import { ClipLoader } from "react-spinners";
+import img from "../../../public/default.jpg";
+import { toast } from "react-hot-toast";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteOne, getOne } from "../../services/requestHelpers";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-hot-toast";
-import ConfirmDelete from "../../UI/ConfirmDelete";
-import { ClipLoader } from "react-spinners";
+import { useParams } from "react-router-dom";
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
+import useDeleteTeacher from "../../hooks/useDeleteTeacher";
 
 function TeacherDetail() {
   const { teacherId } = useParams();
@@ -24,18 +26,8 @@ function TeacherDetail() {
     queryKey: ["Teacher"],
   });
 
-  const navigate = useNavigate();
-  const QueryClient = useQueryClient();
+  const { isDeleting, deleteTeacher } = useDeleteTeacher();
 
-  const { isLoading: isDeleting, mutate: deleteTeacher } = useMutation({
-    mutationFn: deleteOne,
-    mutationKey: ["deleteTeacher"],
-    onSuccess: async () => {
-      toast.success("Teacher deleted successfully");
-      await QueryClient.invalidateQueries({ queryKey: ["teacher"] });
-      navigate("/teachers");
-    },
-  });
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
   const {
@@ -54,7 +46,7 @@ function TeacherDetail() {
     <>
       <BackButton />
       <DetailImage>
-        <img src={img1} />
+        <img src={img} />
       </DetailImage>
       <DetailInfo>
         <div>Full Name: {name}</div>

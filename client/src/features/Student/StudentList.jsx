@@ -7,7 +7,7 @@ import Button from "../../UI/Button/Button";
 import StyledListHead from "../../UI/List/ListHead";
 import StyledListElement from "../../UI/List/ListElement";
 
-import img1 from "../Screenshot_6.png";
+import img from "../../../public/default.jpg";
 import { useQuery } from "@tanstack/react-query";
 import { getAll } from "../../services/requestHelpers";
 import { ClipLoader } from "react-spinners";
@@ -41,7 +41,7 @@ function StudentList() {
       {data.data.doc.map((student) => {
         return (
           <StyledListElement key={student._id}>
-            <img src={img1} />
+            <img src={img} />
             <div>{student.name}</div>
             <NavLink to={`/students/${student._id}`}>See details</NavLink>
           </StyledListElement>

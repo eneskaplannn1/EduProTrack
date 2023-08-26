@@ -1,56 +1,31 @@
+import { styled } from "styled-components";
+
 import Button from "../../UI/Button/Button";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
 import FormElement from "../../UI/form/FormElement";
 import StyledFormLayout from "../../UI/form/FormLayout";
 
-import classes from "./Login.module.css";
-import { useForm } from "react-hook-form";
+import useLogin from "../../hooks/useLogin";
 
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
+const StyledContainer = styled.div`
+  background-color: #18212f;
+  color: #fff;
 
-import { HandleLogin } from "../../services/apiAuth";
-import { useAuth } from "../../context/AuthProvider";
+  width: 80vw;
+  max-width: 80vw;
+  min-height: 90vh;
+  margin: 1rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+`;
 
 function Login() {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const { user } = useAuth();
-  if (user) navigate("/");
-
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm({
-    defaultValues: {
-      email: "olivia_wilson@example.co",
-      password: "pass1234",
-    },
-  });
-
-  const { mutate, isLoading: isLoggingIn } = useMutation({
-    mutationFn: HandleLogin,
-    queryKey: ["user"],
-    onSuccess: (data) => {
-      if (!data) return;
-      login(data?.data?.data?.user, data?.data?.token);
-      toast.success("Logged in successfully!");
-      navigate("/");
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
-
-  function onSubmitForm(data) {
-    mutate(data);
-  }
+  const { register, errors, handleSubmit, onSubmitForm, isLoggingIn } =
+    useLogin();
 
   return (
-    <div className={classes.container}>
+    <StyledContainer>
       <h2>Login Page </h2>
       <StyledFormLayout onSubmit={handleSubmit(onSubmitForm)}>
         <FormElement>
@@ -88,7 +63,7 @@ function Login() {
         </div> */}
         {/* <button className={classes.loginButton}>Login</button> */}
       </StyledFormLayout>
-    </div>
+    </StyledContainer>
   );
 }
 

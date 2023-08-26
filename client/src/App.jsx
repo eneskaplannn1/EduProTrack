@@ -40,7 +40,7 @@ function App() {
             duration: 3000,
           },
           error: {
-            duration: 5000,
+            duration: 3500,
           },
           loading: {
             duration: 3000,
@@ -117,7 +117,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="unAuthorized" element={<UnAuthorized />} />
             <Route path="signup" element={<Signup />} />
-            <Route path="*" element={<PageNotFound />}></Route>
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
