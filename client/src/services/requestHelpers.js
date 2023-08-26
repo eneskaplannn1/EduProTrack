@@ -2,7 +2,8 @@ import customRequst from "../utils/customRequest";
 
 export const getAll = async function (model) {
   try {
-    return await customRequst.get(`http://localhost:3000/api/v1/${model}`);
+    const res = await customRequst.get(`http://localhost:3000/api/v1/${model}`);
+    return res;
   } catch (err) {
     throw new Error(err);
   }
@@ -12,6 +13,7 @@ export const getOne = async function (model, id) {
   try {
     return await customRequst.get(`/${model}/${id}`);
   } catch (err) {
+    console.log(err);
     throw new Error(err);
   }
 };

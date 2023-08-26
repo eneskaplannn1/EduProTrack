@@ -9,10 +9,12 @@ const initialState = {
 };
 
 function reducer(state, action) {
-  if (action.type === "login") return { user: { ...action.payload } };
+  if (action.type === "login")
+    return { user: { ...action.payload, role: "Admin" } };
   if (action.type === "logout") return { ...initialState };
   if (action.type === "update-user") return { user: action.payload };
-  if (action.type === "login-with-jwt") return { user: { ...action.payload } };
+  if (action.type === "login-with-jwt")
+    return { user: { ...action.payload, role: "Admin" } };
 }
 
 function AuthProvider({ children }) {

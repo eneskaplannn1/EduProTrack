@@ -24,6 +24,8 @@ import { AuthProvider } from "./context/AuthProvider";
 import RequiredAuth from "./features/auth/RequiredAuth";
 import UnAuthorized from "./pages/Auth/UnAuthorized";
 import UserProfile from "./features/profile/UserProfile";
+import Class from "./pages/AppLayout/Class";
+import ClassDetail from "./features/class/ClassDetail";
 
 const client = new QueryClient();
 
@@ -92,6 +94,22 @@ function App() {
                 element={
                   <RequiredAuth allowedRoles={["Admin", "Teacher"]}>
                     <StudentDetail />
+                  </RequiredAuth>
+                }
+              />
+              <Route
+                path="classes"
+                element={
+                  <RequiredAuth allowedRoles={["Admin", "Teacher"]}>
+                    <Class />
+                  </RequiredAuth>
+                }
+              />
+              <Route
+                path="classes/:classId"
+                element={
+                  <RequiredAuth allowedRoles={["Admin", "Teacher"]}>
+                    <ClassDetail />
                   </RequiredAuth>
                 }
               />

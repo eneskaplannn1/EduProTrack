@@ -8,10 +8,9 @@ import Button from "../../UI/Button/Button";
 
 import { ClipLoader } from "react-spinners";
 import img from "../../../public/default.jpg";
-import { toast } from "react-hot-toast";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteOne, getOne } from "../../services/requestHelpers";
+import { useQuery } from "@tanstack/react-query";
+import { getOne } from "../../services/requestHelpers";
 import { useParams } from "react-router-dom";
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteTeacher from "../../hooks/useDeleteTeacher";

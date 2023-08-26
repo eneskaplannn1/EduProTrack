@@ -8,6 +8,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
 import { GiTeacher } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
+import { SiGoogleclassroom } from "react-icons/si";
 
 function Sidebar() {
   return (
@@ -28,6 +29,10 @@ function Sidebar() {
         <li>
           <MdAssignment />
           <NavLink to="/homeworks">Homeworks</NavLink>
+        </li>
+        <li>
+          <SiGoogleclassroom />
+          <NavLink to="/classes">Classes</NavLink>
         </li>
         <li>
           <AiFillMessage />

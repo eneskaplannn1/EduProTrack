@@ -1,4 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const variations = {
+  class: css`
+    grid-template-columns: 1fr 1fr 3fr;
+  `,
+};
 
 const StyledListElement = styled.div`
   display: grid;
@@ -21,6 +27,8 @@ const StyledListElement = styled.div`
     width: 4rem;
     border-radius: 50%;
   }
+
+  ${(props) => variations[props?.variation]}
 `;
 
 export default StyledListElement;
