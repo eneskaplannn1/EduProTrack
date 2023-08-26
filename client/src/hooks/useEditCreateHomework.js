@@ -6,28 +6,20 @@ import formatHumanReadableDate from "../utils/formatHumanReadableDate";
 import { useAuth } from "../context/AuthProvider";
 import { createOne, updateOne } from "../services/requestHelpers";
 
-function useEditCreateHomework({
-  isEditing,
-  editValues,
-  homeworkId,
-  onCloseModal,
-}) {
+//prettier-ignore
+function useEditCreateHomework({isEditing,editValues,homeworkId,onCloseModal,classId,teacherId,students}) {
+
   const { user } = useAuth();
 
   const QueryClient = useQueryClient();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
+  const {register,handleSubmit,reset,formState: { errors }} = useForm({
     defaultValues: isEditing
       ? {
           ...editValues,
           startDate: formatHumanReadableDate(editValues.startDate),
           expirationDate: formatHumanReadableDate(editValues.expirationDate),
         }
-      : "",
+      : null,
   });
 
   const { mutate: manipulateHomework } = useMutation({
@@ -44,7 +36,12 @@ function useEditCreateHomework({
   });
 
   function handleSubmitForm(data) {
-    const refactoredData = { ...data, teacher: user._id, class: user.class };
+    const refactoredData = {
+      ...data,
+      teacher: teacherId ? teacherId : user._id,
+      class: classId ? classId : user.class,
+      students:students ? students.map(student=>student._id) : null
+    };
     manipulateHomework({
       model: "homeworks",
       data: refactoredData,

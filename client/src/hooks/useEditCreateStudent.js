@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 
 //prettier-ignore
-function useEditCreateStudent({isEditing,user,studentId,onCloseModal,editValues,}) {
+function useEditCreateStudent({isEditing,user,studentId,onCloseModal,editValues,teacherId,classId}) {
 
   const QueryClient = useQueryClient();
 
@@ -12,7 +12,7 @@ function useEditCreateStudent({isEditing,user,studentId,onCloseModal,editValues,
     mutationFn: isEditing ? updateOne : createOne,
     mutationKey: ["manipulateStudent"],
     onSuccess: () => {
-      QueryClient.invalidateQueries(["students", ["student", studentId]]);
+      QueryClient.invalidateQueries(["students", ["student", studentId],["class",classId]]);
       toast.success(`Student ${isEditing ? "updated" : "created"} Successfully`);
       reset();
       onCloseModal();
@@ -31,8 +31,8 @@ function useEditCreateStudent({isEditing,user,studentId,onCloseModal,editValues,
   function handleSubmitForm(data) {
     const refactoredData = {
       ...data,
-      teacher: user._id,
-      class: user.class,
+      teacher:teacherId ? teacherId: user._id,
+      class:classId ? classId: user.class,
       address: "Some dummy address",
     };
     manipulateStudent({

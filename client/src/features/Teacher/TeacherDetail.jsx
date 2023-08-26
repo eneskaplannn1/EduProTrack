@@ -39,6 +39,7 @@ function TeacherDetail() {
     phoneNum,
     role,
     _id,
+    class: Class,
   } = data.data.doc;
 
   return (
@@ -55,7 +56,7 @@ function TeacherDetail() {
         <div>Gender: {gender}</div>
         <div>Age: {age}</div>
         <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
-        <div>Class: I will handle this</div>
+        <div>Class: {Class.className}</div>
         <div>Role: {role}</div>
       </DetailInfo>
       <ButtonContainer>

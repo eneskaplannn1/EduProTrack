@@ -29,8 +29,19 @@ function StudentDetail() {
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
-  const { name, email, age, gender, adminssionDate, phoneNum, role, _id } =
-    data.data.doc;
+  const {
+    name,
+    email,
+    age,
+    gender,
+    adminssionDate,
+    phoneNum,
+    role,
+    _id,
+    teacher,
+    class: Class,
+  } = data.data.doc;
+  console.log(data.data.doc);
 
   return (
     <>
@@ -44,10 +55,11 @@ function StudentDetail() {
         <div>Email :{email}</div>
         <div>Age : {age}</div>
         <div>Phone : {phoneNum}</div>
-        <div>Address : Some dummy address</div>
-        <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
         <div>Gender : {gender}</div>
-        <div>Class : I will handle this</div>
+        <div>Address : Some dummy address</div>
+        <div>Teacher: {teacher.name}</div>
+        <div>Class Name : {Class.className}</div>
+        <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
         <div>Role : {role}</div>
       </DetailInfo>
       <ButtonContainer>

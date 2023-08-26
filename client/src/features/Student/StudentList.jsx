@@ -20,7 +20,6 @@ function StudentList() {
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
-
   return (
     <Fragment>
       <h1>Student List</h1>

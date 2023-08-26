@@ -35,7 +35,11 @@ function HomeworkDetail() {
     startDate,
     expirationDate,
     _id,
+    teacher,
+    class: Class,
+    students,
   } = data.data.doc;
+  console.log(data.data.doc);
 
   return (
     <>
@@ -43,12 +47,13 @@ function HomeworkDetail() {
       <DetailInfo>
         <div>Subject : {subject}</div>
         <div>Topic : {topic}</div>
-        <div>Description : {description}</div>
         <div>Status : {status}</div>
-        <div>Teacher :I will handle this later</div>
-        <div>Students : I will handle this later</div>
         <div>Starting Date :{formatHumanReadableDate(startDate)}</div>
         <div>Expiration Date : {formatHumanReadableDate(expirationDate)}</div>
+        <div>Description : {description}</div>
+        <div>Classroom : {Class.className}</div>
+        <div>Teacher : {teacher.name}</div>
+        <div>Students : {students.map((student) => student.name + ", ")}</div>
       </DetailInfo>
       <ButtonContainer>
         <Modal>

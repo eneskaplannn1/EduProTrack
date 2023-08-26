@@ -1,11 +1,9 @@
 import { useAuth } from "../context/AuthProvider";
-import classes from "./User.module.css";
 
 function User() {
   const { user } = useAuth();
   return (
-    <div className={classes.user}>
-      {/* <img/> */}
+    <div style={{ display: "flex", marginRight: "8px" }}>
       <p>{user.name}</p>
     </div>
   );

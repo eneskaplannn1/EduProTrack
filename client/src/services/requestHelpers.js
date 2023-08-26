@@ -30,7 +30,9 @@ export const updateOne = async function (body) {
 export const createOne = async function (body) {
   let { model, data } = body;
   try {
-    await customRequst.post(`/${model}`, data);
+    const res = await customRequst.post(`/${model}`, data);
+    console.log(res);
+    return res;
   } catch (err) {
     throw new Error(err.response.data.message);
   }
@@ -42,6 +44,14 @@ export const deleteOne = async function (body) {
     return await customRequst.patch(`/${model}/${_id}`, {
       active: false,
     });
+  } catch (err) {
+    throw new Error(err.response.data.message);
+  }
+};
+export const DeleteHomework = async function (body) {
+  const { model, _id } = body;
+  try {
+    return await customRequst.delete(`/${model}/${_id}`);
   } catch (err) {
     throw new Error(err.response.data.message);
   }

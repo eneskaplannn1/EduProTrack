@@ -10,6 +10,10 @@ import img from "../../../public/default.jpg";
 
 import { useQuery } from "@tanstack/react-query";
 import { getOne } from "../../services/requestHelpers";
+import Modal from "../../UI/Modal";
+import HomeworkForm from "../../UI/form/HomeworkForm";
+import Button from "../../UI/Button/Button";
+import StudentForm from "../../UI/form/StudentForm";
 
 const StyledClassDetail = styled.div`
   h1 {
@@ -24,41 +28,55 @@ const StyledClassDetail = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10rem;
+    gap: 6rem;
     margin: 1.2rem 0;
 
     color: red;
     font-weight: bold;
 
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 `;
 
 function ClassDetail() {
   const { classId } = useParams();
-  console.log(classId);
 
   const { data, isLoading } = useQuery({
     queryFn: () => getOne("classes", classId),
     queryKey: ["class", classId],
   });
 
+  console.log(data);
+
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
-  const { className, students, capacity, teacher } = data.data.doc;
-  console.log(students, teacher);
+  const { className, students, capacity, teacher, classID } = data.data.doc;
+
   return (
     <StyledClassDetail>
       <BackButton />
       <div className="header">
         <div>Class Name : {className}</div>
+        <div>Number of students: {students.length}</div>
         <div>Capacity : {capacity}</div>
       </div>
       <h2 className="teacher">Teacher</h2>
       <StyledListHead>
         <div>Teacher Avatar</div>
         <div>Teacher Name</div>
+        <Modal>
+          <Modal.Open>
+            <Button>Add Homework to all students</Button>
+          </Modal.Open>
+          <Modal.Window>
+            <HomeworkForm
+              teacherId={teacher._id}
+              classId={classID}
+              students={students}
+            />
+          </Modal.Window>
+        </Modal>
       </StyledListHead>
       <StyledListElement>
         <img src={img} />
@@ -70,6 +88,14 @@ function ClassDetail() {
       <StyledListHead>
         <div>Students Avatar</div>
         <div>Student Name</div>
+        <Modal>
+          <Modal.Open>
+            <Button>Add student to class</Button>
+          </Modal.Open>
+          <Modal.Window>
+            <StudentForm teacherId={teacher._id} classId={classID} />
+          </Modal.Window>
+        </Modal>
       </StyledListHead>
       {students.map((student) => {
         return (

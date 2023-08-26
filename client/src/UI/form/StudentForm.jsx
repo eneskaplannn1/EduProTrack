@@ -6,18 +6,13 @@ import StyledFormLayout from "./FormLayout";
 import { useAuth } from "../../context/AuthProvider";
 import useEditCreateStudent from "../../hooks/useEditCreateStudent";
 
-function StudentForm({ onCloseModal, isEditing, StudentToEdit = {} }) {
+//prettier-ignore
+function StudentForm({onCloseModal,isEditing,StudentToEdit = {},teacherId = null,classId = null,}) {
   const { _id: studentId, ...editValues } = StudentToEdit;
   const { user } = useAuth();
 
   const { isManipulating, handleSubmit, register, errors, handleSubmitForm } =
-    useEditCreateStudent({
-      isEditing,
-      user,
-      studentId,
-      onCloseModal,
-      editValues,
-    });
+    useEditCreateStudent({isEditing,user,studentId,onCloseModal,editValues,teacherId,classId});
 
   return (
     <StyledFormLayout onSubmit={handleSubmit(handleSubmitForm)}>
@@ -97,7 +92,7 @@ function StudentForm({ onCloseModal, isEditing, StudentToEdit = {} }) {
           Cancel
         </Button>
         <Button disabled={isManipulating} variation="update" type="small">
-          {isEditing ? "Update Student" : "Add Homework"}
+          {isEditing ? "Update Student" : "Add Student"}
         </Button>
       </ButtonContainer>
     </StyledFormLayout>

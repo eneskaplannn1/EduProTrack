@@ -4,16 +4,12 @@ import ButtonContainer from "../Button/ButtonContainer";
 import Button from "../Button/Button";
 import useEditCreateHomework from "../../hooks/useEditCreateHomework";
 
-function HomeworkForm({ onCloseModal, HomeworkToEdit = {}, isEditing }) {
+//prettier-ignore
+function HomeworkForm({onCloseModal,HomeworkToEdit = {},isEditing=false,classId=null,teacherId=null,students=[]}) {
   const { _id: homeworkId, ...editValues } = HomeworkToEdit;
 
   const { register, handleSubmit, errors, handleSubmitForm } =
-    useEditCreateHomework({
-      isEditing,
-      editValues,
-      homeworkId,
-      onCloseModal,
-    });
+    useEditCreateHomework({isEditing,editValues,homeworkId,onCloseModal,classId,teacherId,students});
 
   return (
     <StyledFormLayout onSubmit={handleSubmit(handleSubmitForm)}>

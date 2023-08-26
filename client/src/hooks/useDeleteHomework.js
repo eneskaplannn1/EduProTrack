@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import { deleteOne } from "../services/requestHelpers";
+import { DeleteHomework } from "../services/requestHelpers";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ function useDeleteHomework() {
   const QueryClient = useQueryClient();
 
   const { isLoading: isDeleting, mutate: deleteHomework } = useMutation({
-    mutationFn: deleteOne,
+    mutationFn: DeleteHomework,
     mutationKey: ["deleteHomework"],
     onSuccess: async () => {
       toast.success("Homework deleted successfully");
