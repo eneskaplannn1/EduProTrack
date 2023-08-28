@@ -1,8 +1,6 @@
 import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 
-import Modal from "../../UI/Modal";
-import StudentForm from "../../UI/form/StudentForm";
 import Button from "../../UI/Button/Button";
 import StyledListHead from "../../UI/List/ListHead";
 import StyledListElement from "../../UI/List/ListElement";
@@ -32,16 +30,9 @@ function StudentList() {
       <StyledListHead>
         <div>Student Avatar</div>
         <div>Student Name</div>
-        <Modal>
-          <Modal.Open>
-            <Button size="small" variation="add">
-              Add New Student
-            </Button>
-          </Modal.Open>
-          <Modal.Window>
-            <StudentForm />
-          </Modal.Window>
-        </Modal>
+        <NavLink to={`/classes/${user.class}`}>
+          <Button>Add Student</Button>
+        </NavLink>
       </StyledListHead>
       {data.data.doc.map((student) => {
         return (

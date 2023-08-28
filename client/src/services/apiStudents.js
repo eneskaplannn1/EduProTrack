@@ -18,6 +18,7 @@ export const getTeachersStudent = async function (id) {
     throw new Error(err);
   }
 };
+
 export const getStudent = async function (id) {
   try {
     return await customRequst.get(`/students/${id}`);
@@ -27,16 +28,25 @@ export const getStudent = async function (id) {
   }
 };
 
-export const updateStudent = async function (body) {
-  const { id, data } = body;
+export const updateStudent = async function ({ data, id }) {
+  const refactoredData = {
+    name: data.name,
+    username: data.username,
+    email: data.email,
+    age: data.age,
+    phoneNum: data.phoneNum,
+    gender: data.gender,
+  };
+
   try {
-    return await customRequst.patch(`/students/${id}`, data);
+    return await customRequst.patch(`/students/${id}`, refactoredData);
   } catch (err) {
     throw new Error(err);
   }
 };
 
 export const createStudent = async function ({ data }) {
+  console.log(data);
   try {
     const res = await customRequst.post(`/students`, data);
     return res;

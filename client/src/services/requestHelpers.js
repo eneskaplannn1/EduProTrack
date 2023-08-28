@@ -1,7 +1,7 @@
 import customRequst from "../utils/customRequest";
 
 export const updatePassword = async function (body) {
-  console.log(body);
+  // console.log(body);
   try {
     return await customRequst.patch(`/auth/updatePassword`, body);
   } catch (err) {
@@ -31,7 +31,7 @@ export const getOne = async function (model, id) {
   try {
     return await customRequst.get(`/${model}/${id}`);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     throw new Error(err);
   }
 };

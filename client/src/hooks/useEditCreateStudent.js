@@ -51,7 +51,6 @@ function useEditCreateStudent({
       address: "Some dummy address",
     };
     manipulateStudent({
-      model: "students",
       data: refactoredData,
       id: studentId,
     });

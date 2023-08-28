@@ -46,7 +46,7 @@ function ClassDetail() {
     queryKey: ["class", classId],
   });
 
-  console.log(data);
+  // console.log(data);
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;

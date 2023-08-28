@@ -6,6 +6,10 @@ const StyledListHead = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 1rem 0;
+
+  a {
+    justify-self: end;
+  }
 `;
 
 export default StyledListHead;
