@@ -21,8 +21,13 @@ const StyledContainer = styled.div`
 `;
 
 function Login() {
-  const { register, errors, handleSubmit, onSubmitForm, isLoggingIn } =
-    useLogin();
+  const {
+    register,
+    errors,
+    handleSubmit,
+    onSubmitForm,
+    isLoading: isLoggingIn,
+  } = useLogin();
 
   return (
     <StyledContainer>

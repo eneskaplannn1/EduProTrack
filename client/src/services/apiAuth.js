@@ -14,7 +14,7 @@ export const HandleLogin = async function (data) {
   try {
     return await customRequst.post("/auth/login", data);
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     throw new Error(err.response.data.message);
   }
 };

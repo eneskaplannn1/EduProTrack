@@ -11,8 +11,6 @@ function useLogin() {
   const navigate = useNavigate();
 
   const { user } = useAuth();
-  if (user) navigate("/");
-
   const {
     register,
     formState: { errors },
@@ -24,12 +22,11 @@ function useLogin() {
     },
   });
 
-  const { mutate, isLoading: isLoggingIn } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: HandleLogin,
     queryKey: ["user"],
     onSuccess: (data) => {
       if (!data) return;
-      console.log(data.data.data);
       login(data.data.data.user, data.data.token);
       toast.success("Logged in successfully!");
       navigate("/");
@@ -39,11 +36,13 @@ function useLogin() {
     },
   });
 
+  if (user) navigate("/");
+
   function onSubmitForm(data) {
     mutate(data);
   }
 
-  return { register, errors, handleSubmit, onSubmitForm, isLoggingIn };
+  return { register, errors, handleSubmit, onSubmitForm, isLoading };
 }
 
 export default useLogin;

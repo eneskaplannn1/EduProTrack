@@ -3,11 +3,20 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { createTeacher, updateTeacher } from "../services/apiTeachers";
 
-//prettier-ignore
-function useEditCreateTeacher({ isEditing, editValues, teacherId ,onCloseModal}) {
+function useEditCreateTeacher({
+  isEditing,
+  editValues,
+  teacherId,
+  onCloseModal,
+}) {
   const QueryClient = useQueryClient();
 
-  const {register,handleSubmit,reset,formState: { errors }} = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: isEditing ? editValues : "",
   });
 
@@ -18,17 +27,22 @@ function useEditCreateTeacher({ isEditing, editValues, teacherId ,onCloseModal})
       toast.success(
         `Teacher ${isEditing ? "updated" : "created"}  successfully`
       );
-      QueryClient.invalidateQueries({ queryKey: ["teachers"] });
+      Promise.all([
+        QueryClient.invalidateQueries({ queryKey: ["teachers"] }),
+        teacherId
+          ? QueryClient.invalidateQueries({ queryKey: ["teacher", teacherId] })
+          : "",
+      ]);
       reset();
       onCloseModal();
     },
-    onError: (err) => toast.error(err)
+    onError: (err) => toast.error(err),
   });
 
   function handleSubmitForm(data) {
     AddEditTeacher({ model: "teachers", data, id: teacherId });
   }
-  return {handleSubmitForm,register,handleSubmit,errors};
+  return { handleSubmitForm, register, handleSubmit, errors };
 }
 
 export default useEditCreateTeacher;

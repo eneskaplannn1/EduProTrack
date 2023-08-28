@@ -6,13 +6,24 @@ import formatHumanReadableDate from "../utils/formatHumanReadableDate";
 import { useAuth } from "../context/AuthProvider";
 import { createHomework, updateHomework } from "../services/apiHomeworks";
 
-//prettier-ignore
-function useEditCreateHomework({isEditing,editValues,homeworkId,onCloseModal,classId,teacherId,students}) {
-
+function useEditCreateHomework({
+  isEditing,
+  editValues,
+  homeworkId,
+  onCloseModal,
+  classId,
+  teacherId,
+  students,
+}) {
   const { user } = useAuth();
 
   const QueryClient = useQueryClient();
-  const {register,handleSubmit,reset,formState: { errors }} = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: isEditing
       ? {
           ...editValues,
@@ -24,13 +35,16 @@ function useEditCreateHomework({isEditing,editValues,homeworkId,onCloseModal,cla
 
   const { mutate: manipulateHomework } = useMutation({
     mutationFn: isEditing ? updateHomework : createHomework,
-    mutationKey: ["manipulateHomework"],
+    mutationKey: ["manipulateHomeworks"],
     onSuccess: () => {
       toast.success(
         `Homework ${isEditing ? "updated" : "created"} Successfully`
       );
-      QueryClient.invalidateQueries(["homeworks", ["homework", homeworkId]]);
-      reset();
+      Promise.all([
+        QueryClient.invalidateQueries(["homeworks"]),
+        QueryClient.invalidateQueries(["homework", homeworkId]),
+      ]),
+        reset();
       onCloseModal();
     },
   });
@@ -40,10 +54,11 @@ function useEditCreateHomework({isEditing,editValues,homeworkId,onCloseModal,cla
       ...data,
       teacher: teacherId ? teacherId : user._id,
       class: classId ? classId : user.class,
-      students:students ? students.map(student=>student._id) : null
+      students: students ? students.map((student) => student._id) : "",
     };
+    console.log(data);
+    console.log(refactoredData);
     manipulateHomework({
-      model: "homeworks",
       data: refactoredData,
       id: homeworkId,
     });

@@ -11,21 +11,24 @@ import img from "../../../public/default.jpg";
 import { ClipLoader } from "react-spinners";
 
 import { useQuery } from "@tanstack/react-query";
-import { getStudents } from "../../services/apiStudents";
+import { getTeachersStudent } from "../../services/apiStudents";
+import { useAuth } from "../../context/AuthProvider";
 
 function StudentList() {
+  const { user } = useAuth();
+
   const { data, isLoading } = useQuery({
-    queryFn: getStudents,
+    queryFn: () => getTeachersStudent(user._id),
     queryKey: ["students"],
   });
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
-  console.log(data);
+  // console.log(data);
   return (
     <Fragment>
-      <h1>Student List</h1>
+      <h1>{user.name}&#39;s students list</h1>
       <StyledListHead>
         <div>Student Avatar</div>
         <div>Student Name</div>

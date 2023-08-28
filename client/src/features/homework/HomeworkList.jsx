@@ -8,27 +8,47 @@ import StyledListElement from "../../UI/List/ListElement";
 import { Fragment } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
-import { getHomeworks } from "../../services/apiHomeworks";
+import {
+  getStudentHomeworks,
+  getTeacherHomeworks,
+} from "../../services/apiHomeworks";
+import { useAuth } from "../../context/AuthProvider";
 
 function HomeworkList() {
+  const { user } = useAuth();
+
   const { data, isLoading } = useQuery({
-    queryFn: getHomeworks,
+    queryFn:
+      user.role === "Student"
+        ? () => getStudentHomeworks(user._id)
+        : () => getTeacherHomeworks(user._id),
     queryKey: ["homeworks"],
   });
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
-
+  // console.log(data);
   return (
     <Fragment>
-      <h1>Homework List</h1>
+      <h2>
+        <span style={{ color: "#db6d6d" }}>{user.name}&#39;s</span> Homework
+        List
+      </h2>
       <StyledListHead>
         <div>Subject</div>
         <div>Topic</div>
         <Modal>
           <Modal.Open>
-            <Button size="small" variation="add">
-              Add New Homework
+            <Button
+              //!sonra hallet
+              //!sonra hallet
+              //!sonra hallet
+              disabled={true}
+              style={{ color: "red" }}
+              size="small"
+              variation="add"
+            >
+              Do not use This
             </Button>
           </Modal.Open>
           <Modal.Window>

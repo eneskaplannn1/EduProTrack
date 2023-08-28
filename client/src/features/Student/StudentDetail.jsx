@@ -56,8 +56,8 @@ function StudentDetail() {
         <div>Phone : {phoneNum}</div>
         <div>Gender : {gender}</div>
         <div>Address : Some dummy address</div>
-        <div>Teacher: {teacher.name}</div>
-        <div>Class Name : {Class.className}</div>
+        <div>Teacher: {teacher?.name}</div>
+        <div>Class Name : {Class?.className}</div>
         <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
         <div>Role : {role}</div>
       </DetailInfo>

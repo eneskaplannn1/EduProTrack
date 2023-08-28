@@ -13,21 +13,44 @@ export const getHomework = async function (id) {
   try {
     return await customRequst.get(`/homeworks/${id}`);
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
+  }
+};
+export const getStudentHomeworks = async function (id) {
+  try {
+    return await customRequst.get(`/students/${id}/homeworks`);
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+export const getTeacherHomeworks = async function (id) {
+  try {
+    return await customRequst.get(`/teachers/${id}/homeworks`);
+  } catch (err) {
     throw new Error(err);
   }
 };
 
 export const updateHomework = async function (body) {
   const { id, data } = body;
+  const refactoredData = {
+    subject: data.subject,
+    topic: data.topic,
+    description: data.description,
+    startDate: data.startDate,
+    expirationDate: data.expirationDate,
+    status: data.status,
+  };
+  console.log(refactoredData);
   try {
-    return await customRequst.patch(`/homeworks/${id}`, data);
+    return await customRequst.patch(`/homeworks/${id}`, refactoredData);
   } catch (err) {
     throw new Error(err);
   }
 };
 
 export const createHomework = async function ({ data }) {
+  // console.log(data);
   try {
     const res = await customRequst.post(`/homeworks`, data);
     console.log(res);

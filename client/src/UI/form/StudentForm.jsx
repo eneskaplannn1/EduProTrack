@@ -8,6 +8,7 @@ import useEditCreateStudent from "../../hooks/useEditCreateStudent";
 
 //prettier-ignore
 function StudentForm({onCloseModal,isEditing,StudentToEdit = {},teacherId = null,classId = null,}) {
+  
   const { _id: studentId, ...editValues } = StudentToEdit;
   const { user } = useAuth();
 
