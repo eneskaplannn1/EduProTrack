@@ -6,21 +6,25 @@ const StyledBack = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
   margin-bottom: 1rem;
+  width: 300px;
 
   cursor: pointer;
+
+  &:hover {
+    color: green;
+  }
 `;
 
 function BackButton() {
   const navigate = useNavigate();
   return (
-    <div style={{ display: "inline-block" }}>
-      <StyledBack onClick={() => navigate(-1)}>
-        <ImArrowLeft2 />
+    <StyledBack onClick={() => navigate(-1)}>
+      <ImArrowLeft2 />
 
-        <span>Go back</span>
-      </StyledBack>
-    </div>
+      <span>Go back</span>
+    </StyledBack>
   );
 }
 

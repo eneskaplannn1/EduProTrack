@@ -11,18 +11,18 @@ import ButtonContainer from "../../UI/Button/ButtonContainer";
 import ConfirmDelete from "../../UI/ConfirmDelete";
 
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
-import { getOne } from "../../services/requestHelpers";
 import useDeleteHomework from "../../hooks/useDeleteHomework";
+import { getHomework } from "../../services/apiHomeworks";
 
 function HomeworkDetail() {
   const { homeworkId } = useParams();
 
   const { data, isLoading } = useQuery({
-    queryFn: () => getOne("homeworks", homeworkId),
+    queryFn: () => getHomework(homeworkId),
     queryKey: ["homework", homeworkId],
   });
 
-  const { isDeleting, deleteHomework } = useDeleteHomework();
+  const { isDeleting, DeleteHomework } = useDeleteHomework();
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
@@ -52,7 +52,7 @@ function HomeworkDetail() {
         <div>Expiration Date : {formatHumanReadableDate(expirationDate)}</div>
         <div>Description : {description}</div>
         <div>Classroom : {Class.className}</div>
-        <div>Teacher : {teacher.name}</div>
+        <div>Teacher : {teacher?.name}</div>
         <div>Students : {students.map((student) => student.name + ", ")}</div>
       </DetailInfo>
       <ButtonContainer>
@@ -77,7 +77,7 @@ function HomeworkDetail() {
               resourceName="Homework"
               disabled={isDeleting}
               onConfirm={() => {
-                return deleteHomework({ model: "homeworks", _id });
+                return DeleteHomework({ _id });
               }}
             />
           </Modal.Window>

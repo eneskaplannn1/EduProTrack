@@ -8,18 +8,21 @@ import StyledListHead from "../../UI/List/ListHead";
 import StyledListElement from "../../UI/List/ListElement";
 
 import img from "../../../public/default.jpg";
-import { useQuery } from "@tanstack/react-query";
-import { getAll } from "../../services/requestHelpers";
 import { ClipLoader } from "react-spinners";
+
+import { useQuery } from "@tanstack/react-query";
+import { getStudents } from "../../services/apiStudents";
 
 function StudentList() {
   const { data, isLoading } = useQuery({
-    queryFn: () => getAll("students"),
+    queryFn: getStudents,
     queryKey: ["students"],
   });
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
+
+  console.log(data);
   return (
     <Fragment>
       <h1>Student List</h1>

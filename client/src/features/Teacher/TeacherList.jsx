@@ -11,13 +11,11 @@ import { ClipLoader } from "react-spinners";
 import img from "../../../public/default.jpg";
 
 import { useQuery } from "@tanstack/react-query";
-import { getAll } from "../../services/requestHelpers";
+import { getTeachers } from "../../services/apiTeachers";
 
 function TeacherList() {
   const { data, isLoading } = useQuery({
-    queryFn: () => {
-      return getAll("teachers");
-    },
+    queryFn: getTeachers,
     queryKey: ["teachers"],
   });
 

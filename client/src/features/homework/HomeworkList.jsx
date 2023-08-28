@@ -6,13 +6,13 @@ import Button from "../../UI/Button/Button";
 import StyledListHead from "../../UI/List/ListHead";
 import StyledListElement from "../../UI/List/ListElement";
 import { Fragment } from "react";
-import { getAll } from "../../services/requestHelpers";
 import { useQuery } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
+import { getHomeworks } from "../../services/apiHomeworks";
 
 function HomeworkList() {
   const { data, isLoading } = useQuery({
-    queryFn: () => getAll("homeworks"),
+    queryFn: getHomeworks,
     queryKey: ["homeworks"],
   });
 

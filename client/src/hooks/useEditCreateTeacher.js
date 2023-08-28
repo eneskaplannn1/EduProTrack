@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { createOne, updateOne } from "../services/requestHelpers";
 import { toast } from "react-hot-toast";
+import { createTeacher, updateTeacher } from "../services/apiTeachers";
 
 //prettier-ignore
 function useEditCreateTeacher({ isEditing, editValues, teacherId ,onCloseModal}) {
@@ -12,7 +12,7 @@ function useEditCreateTeacher({ isEditing, editValues, teacherId ,onCloseModal})
   });
 
   const { mutate: AddEditTeacher } = useMutation({
-    mutationFn: isEditing ? updateOne : createOne,
+    mutationFn: isEditing ? updateTeacher : createTeacher,
     mutationKey: ["manipulateTeacher"],
     onSuccess: () => {
       toast.success(

@@ -10,22 +10,22 @@ import { ClipLoader } from "react-spinners";
 import img from "../../../public/default.jpg";
 
 import { useQuery } from "@tanstack/react-query";
-import { getOne } from "../../services/requestHelpers";
 import { useParams } from "react-router-dom";
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteTeacher from "../../hooks/useDeleteTeacher";
+import { getTeacher } from "../../services/apiTeachers";
 
 function TeacherDetail() {
   const { teacherId } = useParams();
 
   const { data, isLoading } = useQuery({
     queryFn: () => {
-      return getOne("teachers", teacherId);
+      return getTeacher(teacherId);
     },
     queryKey: ["Teacher"],
   });
 
-  const { isDeleting, deleteTeacher } = useDeleteTeacher();
+  const { isDeleting, DeleteTeacher } = useDeleteTeacher();
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
@@ -81,7 +81,7 @@ function TeacherDetail() {
               resourceName="teacher"
               disabled={isDeleting}
               onConfirm={() => {
-                deleteTeacher({ model: "teachers", _id });
+                DeleteTeacher({ _id });
               }}
             />
           </Modal.Window>

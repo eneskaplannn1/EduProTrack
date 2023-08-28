@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createOne, updateOne } from "../services/requestHelpers";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { createStudent, updateStudent } from "../services/apiStudents";
 
 //prettier-ignore
 function useEditCreateStudent({isEditing,user,studentId,onCloseModal,editValues,teacherId,classId}) {
@@ -9,7 +9,7 @@ function useEditCreateStudent({isEditing,user,studentId,onCloseModal,editValues,
   const QueryClient = useQueryClient();
 
   const { mutate: manipulateStudent, isLoading: isManipulating } = useMutation({
-    mutationFn: isEditing ? updateOne : createOne,
+    mutationFn: isEditing ? updateStudent : createStudent,
     mutationKey: ["manipulateStudent"],
     onSuccess: () => {
       QueryClient.invalidateQueries(["students", ["student", studentId],["class",classId]]);

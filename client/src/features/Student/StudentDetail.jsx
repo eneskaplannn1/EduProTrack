@@ -14,17 +14,17 @@ import img from "../../../public/default.jpg";
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteStudent from "../../hooks/useDeleteStudent";
 import { useQuery } from "@tanstack/react-query";
-import { getOne } from "../../services/requestHelpers";
+import { getStudent } from "../../services/apiStudents";
 
 function StudentDetail() {
   const { studentId } = useParams();
 
   const { data, isLoading } = useQuery({
-    queryFn: () => getOne("students", studentId),
+    queryFn: () => getStudent(studentId),
     queryKey: ["student", studentId],
   });
 
-  const { isDeleting, deleteStudent } = useDeleteStudent();
+  const { isDeleting, DeleteStudent } = useDeleteStudent();
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
@@ -41,7 +41,6 @@ function StudentDetail() {
     teacher,
     class: Class,
   } = data.data.doc;
-  console.log(data.data.doc);
 
   return (
     <>
@@ -83,7 +82,7 @@ function StudentDetail() {
             <ConfirmDelete
               resourceName="student"
               onConfirm={() => {
-                deleteStudent({ model: "students", _id: _id });
+                DeleteStudent({ _id });
               }}
               disabled={isDeleting}
             />

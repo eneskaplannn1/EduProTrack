@@ -26,7 +26,6 @@ function UserProfile() {
             new Date(user.adminssionDate)
           )}
         </div>
-        <div>ClassName : I will handle this later</div>
       </DetailInfo>
       <ButtonContainer>
         <NavLink to="/account">

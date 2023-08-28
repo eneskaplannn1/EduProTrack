@@ -29,6 +29,7 @@ function useLogin() {
     queryKey: ["user"],
     onSuccess: (data) => {
       if (!data) return;
+      console.log(data.data.data);
       login(data.data.data.user, data.data.token);
       toast.success("Logged in successfully!");
       navigate("/");

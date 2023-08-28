@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 
 import formatHumanReadableDate from "../utils/formatHumanReadableDate";
 import { useAuth } from "../context/AuthProvider";
-import { createOne, updateOne } from "../services/requestHelpers";
+import { createHomework, updateHomework } from "../services/apiHomeworks";
 
 //prettier-ignore
 function useEditCreateHomework({isEditing,editValues,homeworkId,onCloseModal,classId,teacherId,students}) {
@@ -23,7 +23,7 @@ function useEditCreateHomework({isEditing,editValues,homeworkId,onCloseModal,cla
   });
 
   const { mutate: manipulateHomework } = useMutation({
-    mutationFn: isEditing ? updateOne : createOne,
+    mutationFn: isEditing ? updateHomework : createHomework,
     mutationKey: ["manipulateHomework"],
     onSuccess: () => {
       toast.success(

@@ -1,14 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { deleteOne } from "../services/requestHelpers";
 import { toast } from "react-hot-toast";
+
+import { deleteStudent } from "../services/apiStudents";
 
 function useDeleteStudent() {
   const navigate = useNavigate();
   const QueryClient = useQueryClient();
 
-  const { isLoading: isDeleting, mutate: deleteStudent } = useMutation({
-    mutationFn: deleteOne,
+  const { isLoading: isDeleting, mutate: DeleteStudent } = useMutation({
+    mutationFn: deleteStudent,
     mutationKey: ["deleteStudent"],
     onSuccess: async () => {
       toast.success("Student deleted successfully");
@@ -16,7 +17,7 @@ function useDeleteStudent() {
       navigate("/students");
     },
   });
-  return { isDeleting, deleteStudent };
+  return { isDeleting, DeleteStudent };
 }
 
 export default useDeleteStudent;

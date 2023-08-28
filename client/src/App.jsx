@@ -70,15 +70,17 @@ function App() {
 
               {/* everyone  */}
               <Route path="profile" element={<UserProfile />} />
-              <Route path="messages" element={<Message />} />
               <Route path="homeworks" element={<Homework />} />
               <Route
                 path="homeworks/:homeworkId"
                 element={<HomeworkDetail />}
               />
+              <Route path="account" element={<Account />} />
+              {/* maybe I will implement these some time in the future
               <Route path="settings" element={<Settings />} />
               <Route path="notifications" element={<Notification />} />
-              <Route path="account" element={<Account />} />
+              <Route path="messages" element={<Message />} />
+              */}
               {/* admin,teacher */}
 
               <Route
