@@ -15,8 +15,10 @@ import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteStudent from "../../hooks/useDeleteStudent";
 import { useQuery } from "@tanstack/react-query";
 import { getStudent } from "../../services/apiStudents";
+import { useAuth } from "../../context/AuthProvider";
 
 function StudentDetail() {
+  const { user } = useAuth();
   const { studentId } = useParams();
 
   const { data, isLoading } = useQuery({
@@ -61,34 +63,36 @@ function StudentDetail() {
         <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
         <div>Role : {role}</div>
       </DetailInfo>
-      <ButtonContainer>
-        <Modal>
-          <Modal.Open opens="update-student">
-            <Button size="small" variation="update">
-              Update Student
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="update-student">
-            <StudentForm isEditing={true} StudentToEdit={data.data.doc} />
-          </Modal.Window>
-        </Modal>
-        <Modal>
-          <Modal.Open opens="delete-student">
-            <Button type="small" variation="delete">
-              Delete Student
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="delete-student">
-            <ConfirmDelete
-              resourceName="student"
-              onConfirm={() => {
-                DeleteStudent({ _id });
-              }}
-              disabled={isDeleting}
-            />
-          </Modal.Window>
-        </Modal>
-      </ButtonContainer>
+      {user.role === "Admin" && (
+        <ButtonContainer>
+          <Modal>
+            <Modal.Open opens="update-student">
+              <Button size="small" variation="update">
+                Update Student
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="update-student">
+              <StudentForm isEditing={true} StudentToEdit={data.data.doc} />
+            </Modal.Window>
+          </Modal>
+          <Modal>
+            <Modal.Open opens="delete-student">
+              <Button type="small" variation="delete">
+                Delete Student
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="delete-student">
+              <ConfirmDelete
+                resourceName="student"
+                onConfirm={() => {
+                  DeleteStudent({ _id });
+                }}
+                disabled={isDeleting}
+              />
+            </Modal.Window>
+          </Modal>
+        </ButtonContainer>
+      )}
     </>
   );
 }

@@ -120,7 +120,7 @@ function App() {
               <Route
                 path="teachers"
                 element={
-                  <RequiredAuth allowedRoles={["Admin", "Teacher"]}>
+                  <RequiredAuth allowedRoles={["Admin"]}>
                     <Teacher />
                   </RequiredAuth>
                 }
@@ -128,7 +128,7 @@ function App() {
               <Route
                 path="teachers/:teacherId"
                 element={
-                  <RequiredAuth allowedRoles={["Admin", "Teacher"]}>
+                  <RequiredAuth allowedRoles={["Admin"]}>
                     <TeacherDetail />
                   </RequiredAuth>
                 }

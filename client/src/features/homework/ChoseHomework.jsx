@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import Button from "../../UI/Button/Button";
-import ButtonContainer from "../../UI/Button/ButtonContainer";
 import Modal from "../../UI/Modal";
 import HomeworkForm from "../../UI/form/HomeworkForm";
 
@@ -17,10 +16,10 @@ function ChoseHomework({ teacherId, classId, students }) {
   return (
     <StyledChoseHomework>
       <Modal>
-        <Modal.Open>
+        <Modal.Open opens="give-homework-student">
           <Button>Give homework to spesific students</Button>
         </Modal.Open>
-        <Modal.Window>
+        <Modal.Window name="give-homework-student">
           <HomeworkForm
             teacherId={teacherId}
             classId={classId}
@@ -30,10 +29,10 @@ function ChoseHomework({ teacherId, classId, students }) {
         </Modal.Window>
       </Modal>
       <Modal>
-        <Modal.Open>
+        <Modal.Open opens="give-homework-class">
           <Button>Give homework to Class</Button>
         </Modal.Open>
-        <Modal.Window>
+        <Modal.Window name="give-homework-class">
           <HomeworkForm
             teacherId={teacherId}
             classId={classId}

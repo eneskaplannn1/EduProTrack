@@ -14,8 +14,10 @@ import { useParams } from "react-router-dom";
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteTeacher from "../../hooks/useDeleteTeacher";
 import { getTeacher } from "../../services/apiTeachers";
+import { useAuth } from "../../context/AuthProvider";
 
 function TeacherDetail() {
+  const { user } = useAuth();
   const { teacherId } = useParams();
 
   const { data, isLoading } = useQuery({
@@ -59,34 +61,36 @@ function TeacherDetail() {
         <div>Class: {Class.className}</div>
         <div>Role: {role}</div>
       </DetailInfo>
-      <ButtonContainer>
-        <Modal>
-          <Modal.Open opens="update-teacher">
-            <Button type="small" variation="update">
-              Update Teacher
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="update-teacher">
-            <TeacherForm isEditing={true} TeacherToEdit={data.data.doc} />
-          </Modal.Window>
-        </Modal>
-        <Modal>
-          <Modal.Open opens="update-teacher">
-            <Button type="small" variation="delete">
-              Delete Teacher
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="update-teacher">
-            <ConfirmDelete
-              resourceName="teacher"
-              disabled={isDeleting}
-              onConfirm={() => {
-                DeleteTeacher({ _id });
-              }}
-            />
-          </Modal.Window>
-        </Modal>
-      </ButtonContainer>
+      {user.role === "Admin" && (
+        <ButtonContainer>
+          <Modal>
+            <Modal.Open opens="update-teacher">
+              <Button type="small" variation="update">
+                Update Teacher
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="update-teacher">
+              <TeacherForm isEditing={true} TeacherToEdit={data.data.doc} />
+            </Modal.Window>
+          </Modal>
+          <Modal>
+            <Modal.Open opens="update-teacher">
+              <Button type="small" variation="delete">
+                Delete Teacher
+              </Button>
+            </Modal.Open>
+            <Modal.Window name="update-teacher">
+              <ConfirmDelete
+                resourceName="teacher"
+                disabled={isDeleting}
+                onConfirm={() => {
+                  DeleteTeacher({ _id });
+                }}
+              />
+            </Modal.Window>
+          </Modal>
+        </ButtonContainer>
+      )}
     </>
   );
 }

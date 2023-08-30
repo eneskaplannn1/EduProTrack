@@ -19,12 +19,7 @@ import ChoseHomework from "../homework/ChoseHomework";
 const StyledClassDetail = styled.div`
   h1 {
   }
-  .teacher {
-    color: #eab34d;
-  }
-  .student {
-    color: yellow;
-  }
+
   .header {
     display: flex;
     align-items: center;
@@ -60,15 +55,15 @@ function ClassDetail() {
         <div>Number of students: {students.length}</div>
         <div>Capacity : {capacity}</div>
       </div>
-      <h2 className="teacher">Teacher</h2>
+      <h2>Teacher</h2>
       <StyledListHead>
         <div>Teacher Avatar</div>
         <div>Teacher Name</div>
         <Modal>
-          <Modal.Open>
+          <Modal.Open opens="choose-homework">
             <Button>Give Homework</Button>
           </Modal.Open>
-          <Modal.Window>
+          <Modal.Window name="choose-homework">
             <ChoseHomework
               teacherId={teacher._id}
               classId={classID}
@@ -82,8 +77,7 @@ function ClassDetail() {
         <div>{teacher.name}</div>
         <NavLink to={`/teachers/${teacher._id}`}>See details</NavLink>
       </StyledListElement>
-
-      <h2 className="student">Students</h2>
+      <h2>Students</h2>
       <StyledListHead>
         <div>Students Avatar</div>
         <div>Student Name</div>
