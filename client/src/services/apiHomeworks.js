@@ -50,7 +50,6 @@ export const updateHomework = async function (body) {
 };
 
 export const createHomework = async function ({ data }) {
-  // console.log(data);
   try {
     const res = await customRequst.post(`/homeworks`, data);
     console.log(res);

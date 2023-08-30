@@ -100,12 +100,12 @@ function Open({ children, opens: opendWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(modalContext);
-  const ref = useOutsideClick(close);
+  // const ref = useOutsideClick(close);
 
   if (name !== openName) return;
   return createPortal(
     <StyledOverlay>
-      <StyledModal ref={ref}>
+      <StyledModal>
         <button className="close" onClick={close}>
           <ImCross />
         </button>

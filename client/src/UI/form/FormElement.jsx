@@ -17,20 +17,22 @@ const StyledFormElement = styled.div`
     margin-left: 1rem;
   }
   input,
+  input:focus,
   select {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.6rem;
     border: 1px solid #4b5563;
-    background-color: #18212f;
+    background-color: #323d4f;
     border-radius: 5px;
     justify-self: center;
+    border: none;
+    outline: none;
     color: white;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
     width: 90%;
-  }
 
-  input:focus,
-  select:focus {
-    border: 3px solid green;
+    &focus {
+      border: 3px solid green;
+    }
   }
 `;
 

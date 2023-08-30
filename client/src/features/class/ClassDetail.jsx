@@ -14,6 +14,7 @@ import Modal from "../../UI/Modal";
 import HomeworkForm from "../../UI/form/HomeworkForm";
 import Button from "../../UI/Button/Button";
 import StudentForm from "../../UI/form/StudentForm";
+import ChoseHomework from "../homework/ChoseHomework";
 
 const StyledClassDetail = styled.div`
   h1 {
@@ -46,8 +47,6 @@ function ClassDetail() {
     queryKey: ["class", classId],
   });
 
-  // console.log(data);
-
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
@@ -67,10 +66,10 @@ function ClassDetail() {
         <div>Teacher Name</div>
         <Modal>
           <Modal.Open>
-            <Button>Add Homework to all students</Button>
+            <Button>Give Homework</Button>
           </Modal.Open>
           <Modal.Window>
-            <HomeworkForm
+            <ChoseHomework
               teacherId={teacher._id}
               classId={classID}
               students={students}

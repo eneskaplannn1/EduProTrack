@@ -77,6 +77,7 @@ function StudentForm({onCloseModal,isEditing,StudentToEdit = {},teacherId = null
         <label htmlFor="gender">Gender</label>
         <select
           id="gender"
+          name="students"
           {...register("gender", { required: "Select your gender" })}
         >
           <option value="male">Male</option>

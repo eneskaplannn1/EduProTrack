@@ -14,6 +14,7 @@ function useEditCreateHomework({
   classId,
   teacherId,
   students,
+  chooseStudent,
 }) {
   const { user } = useAuth();
 
@@ -54,9 +55,10 @@ function useEditCreateHomework({
       ...data,
       teacher: teacherId ? teacherId : user._id,
       class: classId ? classId : user.class,
-      students: students ? students.map((student) => student._id) : "",
+      students: chooseStudent
+        ? data.students
+        : students.map((student) => student._id),
     };
-    console.log(data);
     console.log(refactoredData);
     manipulateHomework({
       data: refactoredData,
