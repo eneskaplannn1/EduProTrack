@@ -37,6 +37,7 @@ function HomeworkList() {
       <StyledListHead>
         <div>Subject</div>
         <div>Topic</div>
+        <div>Status</div>
         <Modal>
           <Modal.Open>
             <Button
@@ -58,9 +59,10 @@ function HomeworkList() {
       </StyledListHead>
       {data.data.doc.map((homework) => {
         return (
-          <StyledListElement key={homework._id}>
+          <StyledListElement variation="homework" key={homework._id}>
             <div>{homework.subject}</div>
             <div>{homework.topic}</div>
+            <div>{homework.status}</div>
             <NavLink to={`/homeworks/${homework._id}`}>See details</NavLink>
           </StyledListElement>
         );

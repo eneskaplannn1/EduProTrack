@@ -11,15 +11,11 @@ import img from "../../../public/default.jpg";
 import { useQuery } from "@tanstack/react-query";
 import { getOne } from "../../services/requestHelpers";
 import Modal from "../../UI/Modal";
-import HomeworkForm from "../../UI/form/HomeworkForm";
 import Button from "../../UI/Button/Button";
 import StudentForm from "../../UI/form/StudentForm";
 import ChoseHomework from "../homework/ChoseHomework";
 
 const StyledClassDetail = styled.div`
-  h1 {
-  }
-
   .header {
     display: flex;
     align-items: center;
@@ -56,7 +52,7 @@ function ClassDetail() {
         <div>Capacity : {capacity}</div>
       </div>
       <h2>Teacher</h2>
-      <StyledListHead>
+      <StyledListHead variation="class">
         <div>Teacher Avatar</div>
         <div>Teacher Name</div>
         <Modal>
@@ -78,7 +74,7 @@ function ClassDetail() {
         <NavLink to={`/teachers/${teacher._id}`}>See details</NavLink>
       </StyledListElement>
       <h2>Students</h2>
-      <StyledListHead>
+      <StyledListHead variation="class">
         <div>Students Avatar</div>
         <div>Student Name</div>
         <Modal>

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
 
 import Modal from "../../UI/Modal";
@@ -12,7 +12,7 @@ import ConfirmDelete from "../../UI/ConfirmDelete";
 
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteHomework from "../../hooks/useDeleteHomework";
-import { getHomework } from "../../services/apiHomeworks";
+import { getHomework, updateHomework } from "../../services/apiHomeworks";
 import { useAuth } from "../../context/AuthProvider";
 
 function HomeworkDetail() {
@@ -25,6 +25,11 @@ function HomeworkDetail() {
   });
 
   const { isDeleting, DeleteHomework } = useDeleteHomework();
+
+  const { mutate, isLoading: isSending } = useMutation({
+    mutationFn: updateHomework,
+    mutationKey: ["homeworks", ["homework", homeworkId]],
+  });
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
@@ -62,36 +67,57 @@ function HomeworkDetail() {
         )}
         <div>Description : {description}</div>
       </DetailInfo>
-      {user.role !== "Student" && (
+      {
         <ButtonContainer>
-          <Modal>
-            <Modal.Open opens="update-homework">
-              <Button variation="update" size="small">
-                Update Homework
-              </Button>
-            </Modal.Open>
-            <Modal.Window name="update-homework">
-              <HomeworkForm HomeworkToEdit={data.data.doc} isEditing={true} />
-            </Modal.Window>
-          </Modal>
-          <Modal>
-            <Modal.Open opens="delete-homework">
-              <Button variation="delete" size="small">
-                Delete Homework
-              </Button>
-            </Modal.Open>
-            <Modal.Window name="delete-homework">
-              <ConfirmDelete
-                resourceName="Homework"
-                disabled={isDeleting}
-                onConfirm={() => {
-                  return DeleteHomework({ _id });
-                }}
-              />
-            </Modal.Window>
-          </Modal>
+          {user.role !== "Student" ? (
+            <>
+              <Modal>
+                <Modal.Open opens="update-homework">
+                  <Button variation="update" size="small">
+                    Update Homework
+                  </Button>
+                </Modal.Open>
+                <Modal.Window name="update-homework">
+                  <HomeworkForm
+                    HomeworkToEdit={data.data.doc}
+                    isEditing={true}
+                  />
+                </Modal.Window>
+              </Modal>
+              <Modal>
+                <Modal.Open opens="delete-homework">
+                  <Button variation="delete" size="small">
+                    Delete Homework
+                  </Button>
+                </Modal.Open>
+                <Modal.Window name="delete-homework">
+                  <ConfirmDelete
+                    resourceName="Homework"
+                    disabled={isDeleting}
+                    onConfirm={() => {
+                      return DeleteHomework({ _id });
+                    }}
+                  />
+                </Modal.Window>
+              </Modal>
+            </>
+          ) : status === "Pending" || status === "Failed" ? (
+            <Button
+              onClick={() => {
+                console.log(status);
+                mutate({
+                  data: { status: "Evaluating" },
+                  id: homeworkId,
+                });
+              }}
+            >
+              {isSending ? "Sending Homework" : "Send Homework"}
+            </Button>
+          ) : status === "Success" ? (
+            <Button>Homework Successfull</Button>
+          ) : null}
         </ButtonContainer>
-      )}
+      }
     </>
   );
 }

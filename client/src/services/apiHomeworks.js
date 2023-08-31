@@ -33,17 +33,25 @@ export const getTeacherHomeworks = async function (id) {
 
 export const updateHomework = async function (body) {
   const { id, data } = body;
-  const refactoredData = {
-    subject: data.subject,
-    topic: data.topic,
-    description: data.description,
-    startDate: data.startDate,
-    expirationDate: data.expirationDate,
-    status: data.status,
-  };
+  console.log(1);
+  console.log(body);
+  let refactoredData;
+  if (data.status) {
+    refactoredData = { status: data.status };
+  } else {
+    refactoredData = {
+      subject: data.subject,
+      topic: data.topic,
+      description: data.description,
+      startDate: data.startDate,
+      expirationDate: data.expirationDate,
+    };
+  }
   console.log(refactoredData);
   try {
-    return await customRequst.patch(`/homeworks/${id}`, refactoredData);
+    const res = await customRequst.patch(`/homeworks/${id}`, refactoredData);
+    console.log(res);
+    return res;
   } catch (err) {
     throw new Error(err);
   }

@@ -4,6 +4,9 @@ const variations = {
   class: css`
     grid-template-columns: 1fr 1fr 3fr;
   `,
+  homework: css`
+    grid-template-columns: 1fr 2.5fr 1fr 1fr;
+  `,
 };
 
 const StyledListElement = styled.div`
