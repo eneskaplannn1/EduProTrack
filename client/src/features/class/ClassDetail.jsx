@@ -59,7 +59,7 @@ function ClassDetail() {
           <Modal.Open opens="choose-homework">
             <Button>Give Homework</Button>
           </Modal.Open>
-          <Modal.Window name="choose-homework">
+          <Modal.Window variation="medium" name="choose-homework">
             <ChoseHomework
               teacherId={teacher._id}
               classId={classID}

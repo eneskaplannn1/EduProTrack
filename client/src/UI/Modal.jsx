@@ -3,8 +3,8 @@ import { createPortal } from "react-dom";
 import { ImCross } from "react-icons/im";
 import { cloneElement, createContext, useState } from "react";
 import { useContext } from "react";
-import { styled } from "styled-components";
-import useOutsideClick from "../hooks/useOutsideClick";
+import { css, styled } from "styled-components";
+// import useOutsideClick from "../hooks/useOutsideClick";
 
 const StyledOverlay = styled.div`
   position: absolute;
@@ -17,17 +17,34 @@ const StyledOverlay = styled.div`
   z-index: 1000;
   transition: all 0.4s ease;
 `;
+
+const variations = {
+  small: css`
+    width: 30vw;
+    height: 30vh;
+    max-width: 30vw;
+    max-height: 30vh;
+  `,
+  medium: css`
+    width: 60vw;
+    height: 60vh;
+    max-width: 60vw;
+    max-height: 60vh;
+    padding: 1rem;
+  `,
+  large: css`
+    width: 80vw;
+    height: 80vh;
+    max-width: 80vw;
+    max-height: 80vh;
+  `,
+};
+
 const StyledModal = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-
-  width: 80vw;
-  max-width: 80vw;
-
-  height: 90vh;
-  max-height: 90vh;
 
   overflow: auto;
 
@@ -75,7 +92,12 @@ const StyledModal = styled.div`
       background-color: #263756;
     }
   }
+
+  ${(props) => variations[props.variation]}
 `;
+StyledModal.defaultProps = {
+  variation: "large",
+};
 
 const modalContext = createContext();
 
@@ -98,14 +120,14 @@ function Open({ children, opens: opendWindowName }) {
   return cloneElement(children, { onClick: () => open(opendWindowName) });
 }
 
-function Window({ children, name }) {
+function Window({ children, name, variation }) {
   const { openName, close } = useContext(modalContext);
   // const ref = useOutsideClick(close);
 
   if (name !== openName) return;
   return createPortal(
     <StyledOverlay>
-      <StyledModal>
+      <StyledModal variation={variation}>
         <button className="close" onClick={close}>
           <ImCross />
         </button>

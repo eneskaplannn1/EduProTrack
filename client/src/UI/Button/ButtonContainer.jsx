@@ -1,14 +1,11 @@
-import { ClimbingBoxLoader } from "react-spinners";
 import { css, styled } from "styled-components";
 
 const variations = {
   column: css`
     flex-direction: column;
-    color: red;
   `,
   row: css`
     flex-direction: row;
-    color: blue;
   `,
 };
 

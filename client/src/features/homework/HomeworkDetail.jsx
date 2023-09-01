@@ -14,6 +14,7 @@ import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteHomework from "../../hooks/useDeleteHomework";
 import { getHomework, updateHomework } from "../../services/apiHomeworks";
 import { useAuth } from "../../context/AuthProvider";
+import EvaluateHomework from "./EvaluateHomework";
 
 function HomeworkDetail() {
   const { user } = useAuth();
@@ -47,13 +48,22 @@ function HomeworkDetail() {
     students,
   } = data.data.doc;
 
+  function updateHomeworkStatus(status) {
+    mutate({
+      data: { status: status },
+      id: homeworkId,
+    });
+  }
+
   return (
     <>
       <BackButton />
       <DetailInfo>
         <div>Subject : {subject}</div>
         <div>Topic : {topic}</div>
-        <div>Status : {status}</div>
+        <div className={status.toLowerCase()}>
+          Status : <span>{status}</span>
+        </div>
         <div>Starting Date :{formatHumanReadableDate(startDate)}</div>
         <div>Expiration Date : {formatHumanReadableDate(expirationDate)}</div>
         <div>Teacher : {teacher?.name}</div>
@@ -90,7 +100,7 @@ function HomeworkDetail() {
                     Delete Homework
                   </Button>
                 </Modal.Open>
-                <Modal.Window name="delete-homework">
+                <Modal.Window variation="medium" name="delete-homework">
                   <ConfirmDelete
                     resourceName="Homework"
                     disabled={isDeleting}
@@ -100,22 +110,27 @@ function HomeworkDetail() {
                   />
                 </Modal.Window>
               </Modal>
+              {status === "Evaluating" && (
+                <Modal>
+                  <Modal.Open opens="evaluate-homework">
+                    <Button>Evaluate Homework</Button>
+                  </Modal.Open>
+                  <Modal.Window variation="small" name="evaluate-homework">
+                    <EvaluateHomework
+                      isSending={isSending}
+                      updateHomeworkStatus={updateHomeworkStatus}
+                    />
+                  </Modal.Window>
+                </Modal>
+              )}
             </>
-          ) : status === "Pending" || status === "Failed" ? (
-            <Button
-              onClick={() => {
-                console.log(status);
-                mutate({
-                  data: { status: "Evaluating" },
-                  id: homeworkId,
-                });
-              }}
-            >
-              {isSending ? "Sending Homework" : "Send Homework"}
-            </Button>
-          ) : status === "Success" ? (
-            <Button>Homework Successfull</Button>
-          ) : null}
+          ) : (
+            status === "Pending" && (
+              <Button>
+                {isSending ? "Sending Homework" : "Send Homework"}
+              </Button>
+            )
+          )}
         </ButtonContainer>
       }
     </>

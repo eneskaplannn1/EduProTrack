@@ -39,7 +39,7 @@ const StyledListElement = styled.div`
   .failed {
     color: #ff0000;
   }
-  .successfull {
+  .successful {
     color: #00ff00;
   }
   ${(props) => variations[props?.variation]}

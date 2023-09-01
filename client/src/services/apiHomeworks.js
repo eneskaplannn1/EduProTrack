@@ -33,8 +33,6 @@ export const getTeacherHomeworks = async function (id) {
 
 export const updateHomework = async function (body) {
   const { id, data } = body;
-  console.log(1);
-  console.log(body);
   let refactoredData;
   if (data.status) {
     refactoredData = { status: data.status };

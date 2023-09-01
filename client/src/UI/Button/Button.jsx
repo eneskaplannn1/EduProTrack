@@ -29,6 +29,18 @@ const variations = {
       color: #2bee4f;
     }
   `,
+  positive: css`
+    background-color: #2bee4f;
+    color: #fff;
+  `,
+  negative: css`
+    background-color: #fa5252;
+    color: #fff;
+
+    &:hover {
+      background-color: #c92a2a;
+    }
+  `,
   update: css`
     background: #4f46e5;
     color: #fff;
