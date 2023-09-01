@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../context/AuthProvider";
 import { useMutation } from "@tanstack/react-query";
@@ -9,8 +9,11 @@ import { toast } from "react-hot-toast";
 function useLogin() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { user } = useAuth();
+  if (user) navigate(location?.state?.from ? location.state.from : "/");
+
   const {
     register,
     formState: { errors },
@@ -35,8 +38,6 @@ function useLogin() {
       toast.error(err.message);
     },
   });
-
-  if (user) navigate("/");
 
   function onSubmitForm(data) {
     mutate(data);

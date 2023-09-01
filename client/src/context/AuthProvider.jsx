@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 const authContext = createContext();
 
 const initialState = {
-  user: null,
+  user: undefined,
 };
 
 function reducer(state, action) {
@@ -30,7 +30,6 @@ function AuthProvider({ children }) {
   const updateUser = function (user) {
     dispatch({ type: "update-user", payload: user });
   };
-
   const token = localStorage.getItem("accessToken");
 
   useEffect(() => {

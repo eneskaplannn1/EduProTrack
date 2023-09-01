@@ -5,7 +5,7 @@ const variations = {
     grid-template-columns: 1fr 1fr 3fr;
   `,
   homework: css`
-    grid-template-columns: 1fr 2.5fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
   `,
 };
 
@@ -18,7 +18,7 @@ const StyledListElement = styled.div`
   padding: 1rem 0;
 
   a {
-    color: #9c27b0;
+    color: #ca24e8;
     justify-self: end;
   }
 
@@ -30,7 +30,18 @@ const StyledListElement = styled.div`
     width: 4rem;
     border-radius: 50%;
   }
-
+  .pending {
+    color: #f3e33b;
+  }
+  .evaluating {
+    color: #345fdd;
+  }
+  .failed {
+    color: #ff0000;
+  }
+  .successfull {
+    color: #00ff00;
+  }
   ${(props) => variations[props?.variation]}
 `;
 

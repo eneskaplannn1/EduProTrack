@@ -21,13 +21,8 @@ const StyledContainer = styled.div`
 `;
 
 function Login() {
-  const {
-    register,
-    errors,
-    handleSubmit,
-    onSubmitForm,
-    isLoading: isLoggingIn,
-  } = useLogin();
+  const { register, errors, handleSubmit, onSubmitForm, isLoading } =
+    useLogin();
 
   return (
     <StyledContainer>
@@ -36,7 +31,7 @@ function Login() {
         <FormElement>
           <label htmlFor="email">Email:</label>
           <input
-            disabled={isLoggingIn}
+            disabled={isLoading}
             type="email"
             id="email"
             {...register("email", { required: "Enter your email" })}
@@ -46,7 +41,7 @@ function Login() {
         <FormElement>
           <label htmlFor="password">Password:</label>
           <input
-            disabled={isLoggingIn}
+            disabled={isLoading}
             type="password"
             id="password"
             {...register("password", { required: "Enter your password" })}
@@ -54,8 +49,8 @@ function Login() {
           {errors?.password && <div>{errors.password.message}</div>}
         </FormElement>
         <ButtonContainer>
-          <Button disabled={isLoggingIn} type="small" variation="login">
-            {isLoggingIn ? "Logging In" : "Login"}
+          <Button disabled={isLoading} type="small" variation="login">
+            {isLoading ? "Logging In" : "Login"}
           </Button>
         </ButtonContainer>
         {/* <div className={classes.signupForgot}>
