@@ -22,7 +22,9 @@ const DetailInfo = styled.ul`
     color: #00ff00;
   }
 `;
+
 const DetailImage = styled.div`
+  margin-left: 15rem;
   img {
     width: 200px;
     border-radius: 50%;

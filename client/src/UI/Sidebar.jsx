@@ -3,12 +3,11 @@ import { styled } from "styled-components";
 
 import { PiStudentBold } from "react-icons/pi";
 import { MdAssignment } from "react-icons/md";
-import { AiFillMessage } from "react-icons/ai";
-import { IoMdNotifications } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
 import { GiTeacher } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { SiGoogleclassroom } from "react-icons/si";
+import { useAuth } from "../context/AuthProvider";
 
 const StyledSidebar = styled.div`
   grid-row: 2 / 3;
@@ -42,6 +41,8 @@ const StyledSidebar = styled.div`
 `;
 
 function Sidebar() {
+  const { user } = useAuth();
+  console.log(user.class);
   return (
     <StyledSidebar>
       <ul>
@@ -64,16 +65,22 @@ function Sidebar() {
         </li>
         <li>
           <SiGoogleclassroom />
-          <NavLink to="/classes">Classes</NavLink>
+          <NavLink to={`/classes/${user.class}`}>Class</NavLink>
         </li>
         <li>
+          <SiGoogleclassroom />
+          <NavLink to="/classes" end>
+            Classes
+          </NavLink>
+        </li>
+        {/* <li>
           <AiFillMessage />
           <NavLink to="/messages">Messages</NavLink>
         </li>
         <li>
           <IoMdNotifications />
           <NavLink to="/notifications">Upload Notices</NavLink>
-        </li>
+        </li> */}
         <li>
           <IoSettingsSharp />
           <NavLink to="/settings">Settings</NavLink>

@@ -52,16 +52,16 @@ function StudentDetail() {
         <img src={img} />
       </DetailImage>
       <DetailInfo>
-        <div>FullName : {name}</div>
-        <div>Email :{email}</div>
-        <div>Age : {age}</div>
-        <div>Phone : {phoneNum}</div>
-        <div>Gender : {gender}</div>
-        <div>Address : Some dummy address</div>
-        <div>Teacher: {teacher?.name}</div>
-        <div>Class Name : {Class?.className}</div>
-        <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
-        <div>Role : {role}</div>
+        <li>FullName : {name}</li>
+        <li>Email :{email}</li>
+        <li>Age : {age}</li>
+        <li>Phone : {phoneNum}</li>
+        <li>Gender : {gender}</li>
+        <li>Address : Some dummy address</li>
+        <li>Teacher: {teacher?.name}</li>
+        <li>Class Name : {Class?.className}</li>
+        <li>Admission Date: {formatHumanReadableDate(adminssionDate)}</li>
+        <li>Role : {role}</li>
       </DetailInfo>
       {user.role === "Admin" && (
         <ButtonContainer>

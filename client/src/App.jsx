@@ -99,14 +99,7 @@ function App() {
                   </RequiredAuth>
                 }
               />
-              <Route
-                path="classes"
-                element={
-                  <RequiredAuth allowedRoles={["Admin", "Teacher"]}>
-                    <Class />
-                  </RequiredAuth>
-                }
-              />
+
               <Route
                 path="classes/:classId"
                 element={
@@ -117,6 +110,14 @@ function App() {
               />
 
               {/* only admin */}
+              <Route
+                path="classes"
+                element={
+                  <RequiredAuth allowedRoles={["Admin"]}>
+                    <Class />
+                  </RequiredAuth>
+                }
+              />
               <Route
                 path="teachers"
                 element={

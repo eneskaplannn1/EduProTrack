@@ -21,20 +21,20 @@ function HomeworkList() {
         <span style={{ color: "#e4e0e0" }}>{user.name}&#39;s</span> Homework
         List
       </h2>
-      <StyledListHead>
-        <div>Subject</div>
-        <div>Topic</div>
-        <div>Status</div>
-        <div>Homework Detail</div>
+      <StyledListHead variation="homework">
+        <li>Subject</li>
+        <li>Topic</li>
+        <li>Status</li>
+        <li>Homework Detail</li>
       </StyledListHead>
       {data?.data?.doc.map((homework) => {
         return (
           <StyledListElement variation="homework" key={homework?._id}>
-            <div>{homework?.subject}</div>
-            <div>{homework?.topic}</div>
-            <div className={homework?.status.toLowerCase()}>
+            <li>{homework?.subject}</li>
+            <li>{homework?.topic}</li>
+            <li className={homework?.status.toLowerCase()}>
               {homework?.status}
-            </div>
+            </li>
             <NavLink to={`/homeworks/${homework?._id}`}>See details</NavLink>
           </StyledListElement>
         );

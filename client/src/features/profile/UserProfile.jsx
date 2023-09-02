@@ -14,18 +14,19 @@ function UserProfile() {
         <img src={img} />
       </DetailImage>
       <DetailInfo>
-        <div>FullName : {user.name}</div>
-        <div>Email : {user.email}</div>
-        <div>Phone : {user.phoneNum}</div>
-        <div>Address : 123 Main Street, City</div>
-        <div>Gender : {user.gender}</div>
-        <div>Age : {user.age}</div>
-        <div>
+        <li>FullName : {user.name}</li>
+        <li>Email : {user.email}</li>
+        <li>Gender : {user.gender}</li>
+        <li>Age : {user.age}</li>
+        <li>Phone : {user.phoneNum}</li>
+        <li>Address : 123 Main Street, City</li>
+        <li>Role : {user.role}</li>
+        <li>
           Admission Date :
           {new Intl.DateTimeFormat("en-US").format(
             new Date(user.adminssionDate)
           )}
-        </div>
+        </li>
       </DetailInfo>
       <ButtonContainer>
         <NavLink to="/account">

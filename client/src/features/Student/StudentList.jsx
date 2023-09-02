@@ -27,18 +27,18 @@ function StudentList() {
   return (
     <Fragment>
       <h1>{user.name}&#39;s students list</h1>
-      <StyledListHead>
-        <div>Student Avatar</div>
-        <div>Student Name</div>
+      <StyledListHead variation="student">
+        <li>Student Avatar</li>
+        <li>Student Name</li>
         <NavLink to={`/classes/${user.class}`}>
           <Button>Add Student</Button>
         </NavLink>
       </StyledListHead>
       {data.data.doc.map((student) => {
         return (
-          <StyledListElement key={student._id}>
+          <StyledListElement variation="student" key={student._id}>
             <img src={img} />
-            <div>{student.name}</div>
+            <li>{student.name}</li>
             <NavLink to={`/students/${student._id}`}>See details</NavLink>
           </StyledListElement>
         );

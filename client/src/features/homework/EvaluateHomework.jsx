@@ -9,13 +9,13 @@ const StyledEvaluateHomework = styled.div`
   justify-content: center;
 `;
 
-function EvaluateHomework({ updateHomeworkStatus, onCloseModal, isSending }) {
+function EvaluateHomework({ handleHomeworkStatus, onCloseModal, isSending }) {
   return (
     <StyledEvaluateHomework>
       <ButtonContainer variation="column">
         <Button
           onClick={() => {
-            updateHomeworkStatus("Successful");
+            handleHomeworkStatus("Successful");
             onCloseModal();
           }}
           variation="positive"
@@ -24,7 +24,7 @@ function EvaluateHomework({ updateHomeworkStatus, onCloseModal, isSending }) {
         </Button>
         <Button
           onClick={() => {
-            updateHomeworkStatus("Failed");
+            handleHomeworkStatus("Failed");
             onCloseModal();
           }}
           variation="negative"

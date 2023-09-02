@@ -11,6 +11,7 @@ const StyledBack = styled.div`
   width: 300px;
 
   cursor: pointer;
+  transition: color 0.8s ease;
 
   &:hover {
     color: green;

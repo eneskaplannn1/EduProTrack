@@ -10,11 +10,15 @@ import { DetailInfo } from "../../UI/Detail";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
 import ConfirmDelete from "../../UI/ConfirmDelete";
 
+import EvaluateHomework from "./EvaluateHomework";
+
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteHomework from "../../hooks/useDeleteHomework";
-import { getHomework, updateHomework } from "../../services/apiHomeworks";
+import {
+  getHomework,
+  updateHomework as updateHomeworkStatus,
+} from "../../services/apiHomeworks";
 import { useAuth } from "../../context/AuthProvider";
-import EvaluateHomework from "./EvaluateHomework";
 
 function HomeworkDetail() {
   const { user } = useAuth();
@@ -25,12 +29,12 @@ function HomeworkDetail() {
     queryKey: ["homework", homeworkId],
   });
 
-  const { isDeleting, DeleteHomework } = useDeleteHomework();
-
   const { mutate, isLoading: isSending } = useMutation({
-    mutationFn: updateHomework,
+    mutationFn: updateHomeworkStatus,
     mutationKey: ["homeworks", ["homework", homeworkId]],
   });
+
+  const { isDeleting, DeleteHomework } = useDeleteHomework();
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
@@ -48,7 +52,7 @@ function HomeworkDetail() {
     students,
   } = data.data.doc;
 
-  function updateHomeworkStatus(status) {
+  function handleHomeworkStatus(status) {
     mutate({
       data: { status: status },
       id: homeworkId,
@@ -59,80 +63,72 @@ function HomeworkDetail() {
     <>
       <BackButton />
       <DetailInfo>
-        <div>Subject : {subject}</div>
-        <div>Topic : {topic}</div>
-        <div className={status.toLowerCase()}>
+        <li>Subject : {subject}</li>
+        <li>Topic : {topic}</li>
+        <li className={status.toLowerCase()}>
           Status : <span>{status}</span>
-        </div>
-        <div>Starting Date :{formatHumanReadableDate(startDate)}</div>
-        <div>Expiration Date : {formatHumanReadableDate(expirationDate)}</div>
-        <div>Teacher : {teacher?.name}</div>
+        </li>
+        <li>Starting Date :{formatHumanReadableDate(startDate)}</li>
+        <li>Expiration Date : {formatHumanReadableDate(expirationDate)}</li>
+        <li>Teacher : {teacher?.name}</li>
         {user.role !== "Student" && (
           <>
-            <div>Classroom : {Class.className}</div>
-            <div>
-              Students : {students.map((student) => student.name + ", ")}
-            </div>
+            <li>Classroom : {Class.className}</li>
+            <li>Students : {students.map((student) => student.name + ", ")}</li>
           </>
         )}
-        <div>Description : {description}</div>
+        <li>Description : {description}</li>
       </DetailInfo>
-      {
-        <ButtonContainer>
-          {user.role !== "Student" ? (
-            <>
+
+      <ButtonContainer>
+        {user.role !== "Student" ? (
+          <>
+            <Modal>
+              <Modal.Open opens="update-homework">
+                <Button variation="update" size="small">
+                  Update Homework
+                </Button>
+              </Modal.Open>
+              <Modal.Window name="update-homework">
+                <HomeworkForm HomeworkToEdit={data.data.doc} isEditing={true} />
+              </Modal.Window>
+            </Modal>
+            <Modal>
+              <Modal.Open opens="delete-homework">
+                <Button variation="delete" size="small">
+                  Delete Homework
+                </Button>
+              </Modal.Open>
+              <Modal.Window variation="medium" name="delete-homework">
+                <ConfirmDelete
+                  resourceName="Homework"
+                  disabled={isDeleting}
+                  onConfirm={() => {
+                    return DeleteHomework({ _id });
+                  }}
+                />
+              </Modal.Window>
+            </Modal>
+            {status === "Evaluating" && (
               <Modal>
-                <Modal.Open opens="update-homework">
-                  <Button variation="update" size="small">
-                    Update Homework
-                  </Button>
+                <Modal.Open opens="evaluate-homework">
+                  <Button>Evaluate Homework</Button>
                 </Modal.Open>
-                <Modal.Window name="update-homework">
-                  <HomeworkForm
-                    HomeworkToEdit={data.data.doc}
-                    isEditing={true}
+                <Modal.Window variation="small" name="evaluate-homework">
+                  <EvaluateHomework
+                    isSending={isSending}
+                    handleHomeworkStatus={handleHomeworkStatus}
                   />
                 </Modal.Window>
               </Modal>
-              <Modal>
-                <Modal.Open opens="delete-homework">
-                  <Button variation="delete" size="small">
-                    Delete Homework
-                  </Button>
-                </Modal.Open>
-                <Modal.Window variation="medium" name="delete-homework">
-                  <ConfirmDelete
-                    resourceName="Homework"
-                    disabled={isDeleting}
-                    onConfirm={() => {
-                      return DeleteHomework({ _id });
-                    }}
-                  />
-                </Modal.Window>
-              </Modal>
-              {status === "Evaluating" && (
-                <Modal>
-                  <Modal.Open opens="evaluate-homework">
-                    <Button>Evaluate Homework</Button>
-                  </Modal.Open>
-                  <Modal.Window variation="small" name="evaluate-homework">
-                    <EvaluateHomework
-                      isSending={isSending}
-                      updateHomeworkStatus={updateHomeworkStatus}
-                    />
-                  </Modal.Window>
-                </Modal>
-              )}
-            </>
-          ) : (
-            status === "Pending" && (
-              <Button>
-                {isSending ? "Sending Homework" : "Send Homework"}
-              </Button>
-            )
-          )}
-        </ButtonContainer>
-      }
+            )}
+          </>
+        ) : (
+          status === "Pending" && (
+            <Button>{isSending ? "Sending Homework" : "Send Homework"}</Button>
+          )
+        )}
+      </ButtonContainer>
     </>
   );
 }

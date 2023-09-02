@@ -51,15 +51,15 @@ function TeacherDetail() {
         <img src={img} />
       </DetailImage>
       <DetailInfo>
-        <div>Full Name: {name}</div>
-        <div>Email: {email}</div>
-        <div>Phone: {phoneNum}</div>
-        <div>Address: {address}</div>
-        <div>Gender: {gender}</div>
-        <div>Age: {age}</div>
-        <div>Admission Date: {formatHumanReadableDate(adminssionDate)}</div>
-        <div>Class: {Class.className}</div>
-        <div>Role: {role}</div>
+        <li>Full Name: {name}</li>
+        <li>Email: {email}</li>
+        <li>Phone: {phoneNum}</li>
+        <li>Address: {address}</li>
+        <li>Gender: {gender}</li>
+        <li>Age: {age}</li>
+        <li>Admission Date: {formatHumanReadableDate(adminssionDate)}</li>
+        <li>Class: {Class.className}</li>
+        <li>Role: {role}</li>
       </DetailInfo>
       {user.role === "Admin" && (
         <ButtonContainer>

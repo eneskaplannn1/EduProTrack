@@ -25,7 +25,7 @@ function TeacherList() {
   return (
     <Fragment>
       <h1>Teacher List</h1>
-      <StyledListHead>
+      <StyledListHead variation="teacher">
         <div>Teacher Avatar</div>
         <div>Teacher Name</div>
         <Modal>
@@ -41,7 +41,7 @@ function TeacherList() {
       </StyledListHead>
       {data.data.doc.map((teacher) => {
         return (
-          <StyledListElement key={teacher._id}>
+          <StyledListElement variation="teacher" key={teacher._id}>
             <img src={img} />
             <div>{teacher.name}</div>
             <NavLink to={`/teachers/${teacher._id}`}>See details</NavLink>

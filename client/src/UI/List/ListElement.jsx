@@ -7,11 +7,16 @@ const variations = {
   homework: css`
     grid-template-columns: 1fr 2fr 1fr 1fr;
   `,
+  student: css`
+    grid-template-columns: 1fr 1fr 1fr;
+  `,
+  teacher: css`
+    grid-template-columns: 1fr 1fr 1fr;
+  `,
 };
 
-const StyledListElement = styled.div`
+const StyledListElement = styled.ul`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid white;
