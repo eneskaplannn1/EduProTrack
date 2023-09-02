@@ -7,8 +7,9 @@ const StyledBack = styled.div`
   align-items: center;
   gap: 1rem;
 
+  width: 8rem;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
-  width: 300px;
 
   cursor: pointer;
   transition: color 0.8s ease;

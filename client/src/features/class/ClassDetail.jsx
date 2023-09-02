@@ -6,15 +6,13 @@ import StyledListElement from "../../UI/List/ListElement";
 
 import { ClipLoader } from "react-spinners";
 import { styled } from "styled-components";
-import img from "../../../public/default.jpg";
 
-import { useQuery } from "@tanstack/react-query";
-import { getOne } from "../../services/requestHelpers";
 import Modal from "../../UI/Modal";
 import Button from "../../UI/Button/Button";
 import StudentForm from "../../UI/form/StudentForm";
 import ChoseHomework from "../homework/ChoseHomework";
 import useClass from "../../hooks/useClass";
+import StudentTable from "../Student/StudentTable";
 
 const StyledHeader = styled.ul`
   display: flex;
@@ -36,9 +34,8 @@ function ClassDetail() {
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
-
   const { className, students, capacity, teacher, classID } = data.data.doc;
-
+  console.log(students);
   return (
     <>
       <BackButton />
@@ -51,8 +48,8 @@ function ClassDetail() {
       <>
         <h2>Teacher</h2>
         <StyledListHead variation="teacher">
-          <div>Teacher Avatar</div>
-          <div>Teacher Name</div>
+          <li>Teacher Avatar</li>
+          <li>Teacher Name</li>
           <Modal>
             <Modal.Open opens="choose-homework">
               <Button>Give Homework</Button>
@@ -67,8 +64,8 @@ function ClassDetail() {
           </Modal>
         </StyledListHead>
         <StyledListElement variation="teacher">
-          <img src={img} />
-          <div>{teacher.name}</div>
+          <img src={`/users/${teacher.photo}`} />
+          <li>{teacher.name}</li>
           <NavLink to={`/teachers/${teacher._id}`}>See details</NavLink>
         </StyledListElement>
       </>
@@ -78,6 +75,7 @@ function ClassDetail() {
         <StyledListHead variation="class">
           <div>Students Avatar</div>
           <div>Student Name</div>
+
           <Modal>
             <Modal.Open>
               <Button>Add student to class</Button>
@@ -87,15 +85,7 @@ function ClassDetail() {
             </Modal.Window>
           </Modal>
         </StyledListHead>
-        {students.map((student) => {
-          return (
-            <StyledListElement variation="student" key={student._id}>
-              <img src={img} />
-              <div>{student.name}</div>
-              <NavLink to={`/students/${student._id}`}>See details</NavLink>
-            </StyledListElement>
-          );
-        })}
+        <StudentTable students={students} />
       </>
     </>
   );

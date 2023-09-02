@@ -12,6 +12,8 @@ const StyledContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 1.8rem;
+
+  gap: 2rem;
 `;
 const StyledClass = styled.div`
   background-color: #28334d;
@@ -42,21 +44,18 @@ function ClassList() {
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
   return (
-    <>
-      <h1>Classroom List</h1>
-      <StyledContainer>
-        {data.data.doc.map((classroom) => (
-          <StyledClass key={classroom._id}>
-            <h3>{classroom.className}</h3>
-            <div>Capacity: {classroom.capacity}</div>
-            <div>Total Students: {classroom.students.length}</div>
-            <NavLink to={`/classes/${classroom._id}`}>
-              <Button>See Detail</Button>
-            </NavLink>
-          </StyledClass>
-        ))}
-      </StyledContainer>
-    </>
+    <StyledContainer>
+      {data.data.doc.map((classroom) => (
+        <StyledClass key={classroom._id}>
+          <h3>{classroom.className}</h3>
+          <div>Capacity: {classroom.capacity}</div>
+          <div>Total Students: {classroom.students.length}</div>
+          <NavLink to={`/classes/${classroom._id}`}>
+            <Button>See Detail</Button>
+          </NavLink>
+        </StyledClass>
+      ))}
+    </StyledContainer>
   );
 }
 

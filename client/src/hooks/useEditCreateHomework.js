@@ -36,7 +36,7 @@ function useEditCreateHomework({
 
   const { mutate: manipulateHomework } = useMutation({
     mutationFn: isEditing ? updateHomework : createHomework,
-    mutationKey: ["manipulateHomeworks"],
+    mutationKey: ["homework", homeworkId],
     onSuccess: () => {
       toast.success(
         `Homework ${isEditing ? "updated" : "created"} Successfully`

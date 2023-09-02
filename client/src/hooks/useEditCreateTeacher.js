@@ -22,17 +22,13 @@ function useEditCreateTeacher({
 
   const { mutate: AddEditTeacher } = useMutation({
     mutationFn: isEditing ? updateTeacher : createTeacher,
-    mutationKey: ["manipulateTeacher"],
+    mutationKey: ["teacher", ["teacher", teacherId]],
     onSuccess: () => {
       toast.success(
         `Teacher ${isEditing ? "updated" : "created"}  successfully`
       );
-      Promise.all([
-        QueryClient.invalidateQueries({ queryKey: ["teachers"] }),
-        teacherId
-          ? QueryClient.invalidateQueries({ queryKey: ["teacher", teacherId] })
-          : "",
-      ]);
+      QueryClient.invalidateQueries({ queryKey: ["teachers"] });
+      QueryClient.invalidateQueries({ queryKey: ["teacher", teacherId] });
       reset();
       onCloseModal();
     },

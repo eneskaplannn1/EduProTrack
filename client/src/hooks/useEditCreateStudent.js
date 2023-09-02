@@ -16,7 +16,7 @@ function useEditCreateStudent({
 
   const { mutate: manipulateStudent, isLoading: isManipulating } = useMutation({
     mutationFn: isEditing ? updateStudent : createStudent,
-    mutationKey: ["manipulateStudent"],
+    mutationKey: ["student", studentId],
     onSuccess: () => {
       Promise.all([
         QueryClient.invalidateQueries(["students"]),

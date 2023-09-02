@@ -7,7 +7,6 @@ import ConfirmDelete from "../../UI/ConfirmDelete";
 import Button from "../../UI/Button/Button";
 
 import { ClipLoader } from "react-spinners";
-import img from "../../../public/default.jpg";
 
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
@@ -24,7 +23,7 @@ function TeacherDetail() {
     queryFn: () => {
       return getTeacher(teacherId);
     },
-    queryKey: ["Teacher"],
+    queryKey: ["teacher", teacherId],
   });
 
   const { isDeleting, DeleteTeacher } = useDeleteTeacher();
@@ -41,6 +40,7 @@ function TeacherDetail() {
     phoneNum,
     role,
     _id,
+    photo,
     class: Class,
   } = data.data.doc;
 
@@ -48,7 +48,7 @@ function TeacherDetail() {
     <>
       <BackButton />
       <DetailImage>
-        <img src={img} />
+        <img src={`/users/${photo}`} />
       </DetailImage>
       <DetailInfo>
         <li>Full Name: {name}</li>

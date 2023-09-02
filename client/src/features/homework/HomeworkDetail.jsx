@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ClipLoader } from "react-spinners";
 
 import Modal from "../../UI/Modal";
@@ -14,13 +14,11 @@ import EvaluateHomework from "./EvaluateHomework";
 
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteHomework from "../../hooks/useDeleteHomework";
-import {
-  getHomework,
-  updateHomework as updateHomeworkStatus,
-} from "../../services/apiHomeworks";
+import { getHomework, updateHomeworkStatus } from "../../services/apiHomeworks";
 import { useAuth } from "../../context/AuthProvider";
 
 function HomeworkDetail() {
+  const queryClient = useQueryClient();
   const { user } = useAuth();
   const { homeworkId } = useParams();
 
@@ -32,6 +30,9 @@ function HomeworkDetail() {
   const { mutate, isLoading: isSending } = useMutation({
     mutationFn: updateHomeworkStatus,
     mutationKey: ["homeworks", ["homework", homeworkId]],
+    onSuccess: () => {
+      queryClient.invalidateQueries(["homeworks", ["homework", homeworkId]]);
+    },
   });
 
   const { isDeleting, DeleteHomework } = useDeleteHomework();
@@ -90,7 +91,11 @@ function HomeworkDetail() {
                 </Button>
               </Modal.Open>
               <Modal.Window name="update-homework">
-                <HomeworkForm HomeworkToEdit={data.data.doc} isEditing={true} />
+                <HomeworkForm
+                  students={students}
+                  HomeworkToEdit={data.data.doc}
+                  isEditing={true}
+                />
               </Modal.Window>
             </Modal>
             <Modal>

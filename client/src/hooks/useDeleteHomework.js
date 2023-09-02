@@ -9,7 +9,7 @@ function useDeleteHomework() {
 
   const { isLoading: isDeleting, mutate: DeleteHomework } = useMutation({
     mutationFn: deleteHomework,
-    mutationKey: ["deleteHomework"],
+    mutationKey: ["homeworks"],
     onSuccess: async () => {
       toast.success("Homework deleted successfully");
       await QueryClient.invalidateQueries({ queryKey: ["homeworks"] });

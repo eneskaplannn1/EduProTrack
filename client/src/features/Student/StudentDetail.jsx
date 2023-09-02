@@ -9,7 +9,6 @@ import BackButton from "../../UI/Button/BackButton";
 import Button from "../../UI/Button/Button";
 
 import { ClipLoader } from "react-spinners";
-import img from "../../../public/default.jpg";
 
 import formatHumanReadableDate from "../../utils/formatHumanReadableDate";
 import useDeleteStudent from "../../hooks/useDeleteStudent";
@@ -41,6 +40,7 @@ function StudentDetail() {
     role,
     _id,
     teacher,
+    photo,
     class: Class,
   } = data.data.doc;
 
@@ -49,7 +49,7 @@ function StudentDetail() {
       <BackButton />
 
       <DetailImage>
-        <img src={img} />
+        <img src={`/users/${photo}`} />
       </DetailImage>
       <DetailInfo>
         <li>FullName : {name}</li>

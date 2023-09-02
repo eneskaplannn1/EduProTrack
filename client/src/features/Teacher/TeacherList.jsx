@@ -4,14 +4,13 @@ import { Fragment } from "react";
 import TeacherForm from "../../UI/form/TeacherForm";
 import Modal from "../../UI/Modal";
 import Button from "../../UI/Button/Button";
-import StyledListElement from "../../UI/List/ListElement";
 import StyledListHead from "../../UI/List/ListHead";
 
 import { ClipLoader } from "react-spinners";
-import img from "../../../public/default.jpg";
 
 import { useQuery } from "@tanstack/react-query";
 import { getTeachers } from "../../services/apiTeachers";
+import TeacherTable from "./TeacherTable";
 
 function TeacherList() {
   const { data, isLoading } = useQuery({
@@ -24,7 +23,6 @@ function TeacherList() {
 
   return (
     <Fragment>
-      <h1>Teacher List</h1>
       <StyledListHead variation="teacher">
         <div>Teacher Avatar</div>
         <div>Teacher Name</div>
@@ -39,15 +37,7 @@ function TeacherList() {
           </Modal.Window>
         </Modal>
       </StyledListHead>
-      {data.data.doc.map((teacher) => {
-        return (
-          <StyledListElement variation="teacher" key={teacher._id}>
-            <img src={img} />
-            <div>{teacher.name}</div>
-            <NavLink to={`/teachers/${teacher._id}`}>See details</NavLink>
-          </StyledListElement>
-        );
-      })}
+      <TeacherTable data={data} />
     </Fragment>
   );
 }

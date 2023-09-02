@@ -1,5 +1,3 @@
-import img from "../../../public/default.jpg";
-
 import Button from "../../UI/Button/Button";
 import { NavLink } from "react-router-dom";
 import ButtonContainer from "../../UI/Button/ButtonContainer";
@@ -11,7 +9,7 @@ function UserProfile() {
   return (
     <>
       <DetailImage>
-        <img src={img} />
+        <img src={`/users/${user.photo}`} />
       </DetailImage>
       <DetailInfo>
         <li>FullName : {user.name}</li>

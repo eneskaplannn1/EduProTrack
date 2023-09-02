@@ -3,30 +3,25 @@ import { NavLink } from "react-router-dom";
 
 import Button from "../../UI/Button/Button";
 import StyledListHead from "../../UI/List/ListHead";
-import StyledListElement from "../../UI/List/ListElement";
 
-import img from "../../../public/default.jpg";
 import { ClipLoader } from "react-spinners";
 
 import { useQuery } from "@tanstack/react-query";
-import { getTeachersStudent } from "../../services/apiStudents";
-import { useAuth } from "../../context/AuthProvider";
+import { getStudents, getTeachersStudent } from "../../services/apiStudents";
+import StudentsTable from "./StudentTable";
 
-function StudentList() {
-  const { user } = useAuth();
-
+function StudentList({ user }) {
   const { data, isLoading } = useQuery({
-    queryFn: () => getTeachersStudent(user._id),
+    queryFn:
+      user.role !== "Admin" ? () => getTeachersStudent(user._id) : getStudents,
     queryKey: ["students"],
   });
 
   if (isLoading)
     return <ClipLoader loading={isLoading} color="#fff" size={500} />;
 
-  // console.log(data);
   return (
     <Fragment>
-      <h1>{user.name}&#39;s students list</h1>
       <StyledListHead variation="student">
         <li>Student Avatar</li>
         <li>Student Name</li>
@@ -34,15 +29,7 @@ function StudentList() {
           <Button>Add Student</Button>
         </NavLink>
       </StyledListHead>
-      {data.data.doc.map((student) => {
-        return (
-          <StyledListElement variation="student" key={student._id}>
-            <img src={img} />
-            <li>{student.name}</li>
-            <NavLink to={`/students/${student._id}`}>See details</NavLink>
-          </StyledListElement>
-        );
-      })}
+      <StudentsTable students={data?.data?.doc} />
     </Fragment>
   );
 }
