@@ -16,6 +16,7 @@ function Header() {
     logout();
     navigate("/login");
   }
+
   return (
     <div className={classes.header}>
       <h3>School Management System</h3>

@@ -12,10 +12,12 @@ body {
 
   min-height: 100vh;
 }
+
 button {
   color: inherit;
   background-color: inherit;
 }
+
 img {
   width: 100%;
 }
@@ -40,8 +42,8 @@ button {
 
 select:disabled,
 input:disabled {
-  background-color: var(--color-grey-200);
-  color: var(--color-grey-500);
+  background-color: #1a1d22;
+  color: #9ca3af;
 }
 
 a {

@@ -29,7 +29,7 @@ function HomeworkDetail() {
 
   const { mutate, isLoading: isSending } = useMutation({
     mutationFn: updateHomeworkStatus,
-    mutationKey: ["homeworks", ["homework", homeworkId]],
+    mutationKey: ["homework", homeworkId],
     onSuccess: () => {
       queryClient.invalidateQueries(["homeworks", ["homework", homeworkId]]);
     },
