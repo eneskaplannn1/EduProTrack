@@ -1,3 +1,6 @@
 [submodule "hello-world"]
 	path = hello-world
 	url = https://github.com/eneskaplannn1/hello-world.git
+[submodule "EduProTrack-backend"]
+	path = EduProTrack-backend
+	url = https://github.com/eneskaplannn1/EduProTrack-backend
