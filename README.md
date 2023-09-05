@@ -1,6 +1,10 @@
+## [EduProTrack](https://eduprotrack-frontend.onrender.com/login)
+
 # FullStack Application Powered with Nodejs/Reactjs and MongoDB
 
-This Project was bootstrapped with [Vite](https://github.com/vitejs/vite)
+![Screenshot_3](https://github.com/eneskaplannn1/EduProTrack/assets/111773033/e579a6fd-fad5-4de2-bb9c-3d93a494786e)
+
+### This Project was bootstrapped with [Vite](https://github.com/vitejs/vite)
 
 ## How to Run Application
 
@@ -17,7 +21,7 @@ cd into both Project Directory and open two terminal window
 ```bash
 cd EduProTrack-frontend
 npm install
-npm run dev #(runs react at localhost:5173)
+npm run dev # (runs react at localhost:5173)
 ```
 
 ### Second window
@@ -28,20 +32,22 @@ before starting NodeJS server you should fill the fields in example.env file wit
 ```bash
 cd EduProTrack-frontend
 npm install
-npm start #(runs nodemon at localhost:3000)
+npm start # (runs nodemon at localhost:3000)
 ```
+
+## Technologies Used
+
+Client
+Server
+Database
+
+## USAGE
 
 ## Backend Features :
 
-+,-,\* ile li nin solunda olan şeyden açığa çıkıyor
-
-- deneme
-
-1. First list item
-   - First nested list item
-     - Second nested list item
-
 ## Frontend Features :
+
+## Challenge Task Solutions
 
 ## Contributing
 
