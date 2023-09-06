@@ -1,6 +1,0 @@
-[submodule "EduProTrack-backend"]
-	path = EduProTrack-backend
-	url = https://github.com/eneskaplannn1/EduProTrack-backend
-[submodule "EduProTrack-frontend"]
-	path = EduProTrack-frontend
-	url = https://github.com/eneskaplannn1/EduProTrack-frontend
