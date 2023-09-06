@@ -1,0 +1,73 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: white;
+
+  min-height: 100vh;
+}
+
+button {
+  color: inherit;
+  background-color: inherit;
+}
+
+img {
+  width: 100%;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #3b3c3d;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-weight: bold;
+}
+
+*:disabled {
+  cursor: not-allowed;
+}
+
+select:disabled,
+input:disabled {
+  background-color: #1a1d22;
+  color: #9ca3af;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: 0.4s ease;
+}
+
+a.active,
+a.active svg {
+  color: rgb(144, 229, 17);
+}
+
+ul {
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}

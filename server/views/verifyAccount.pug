@@ -1,0 +1,16 @@
+    extends baseEmail 
+
+
+block content
+    .page-container
+        h1 Email Verification
+        p To verify your account, please click the button below.
+        .verification-box
+            p=`Hello ${firstName}`
+            p
+            | Your account needs to be verified. Please click the button below to
+            | verify your account.
+            a.verification-button(href=`${url}`) Verify My Account
+        footer
+            p Prepared as part of your project.
+            p &copy; 2023

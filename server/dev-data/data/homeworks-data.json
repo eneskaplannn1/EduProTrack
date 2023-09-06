@@ -1,0 +1,152 @@
+[
+  {
+    "_id": "64a8850c8a97a7750bb96a54",
+    "subject": "Science",
+    "topic": "Laws of Motion Experiment",
+    "description": "Perform an experiment to demonstrate the laws of motion. Convey the principles of motion through a hands-on activity.",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa2553b"],
+    "teacher": "64a6a31b5605dfc0d2a121ff",
+    "class": "64acfc9ca69d5a98b5f266fc"
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a55",
+    "subject": "English",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa2553e"],
+    "teacher": "64a6a31b5605dfc0d2a121ff",
+    "class": "64acfc9ca69d5a98b5f266fc",
+    "topic": "Literary Exploration",
+    "description": "Read chapters 5-8 and answer the comprehension questions. Engage with the text and analyze its content deeply."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a56",
+    "subject": "Physics",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa2553f"],
+    "teacher": "64a6a31b5605dfc0d2a121ff",
+    "class": "64acfc9ca69d5a98b5f266fc",
+    "topic": "Projectile Motion Problems",
+    "description": "Solve problems 1-15 on projectile motion. Apply mathematical principles to analyze the trajectory of objects."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a57",
+    "subject": "Geography",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25540"],
+    "teacher": "64a6a31b5605dfc0d2a121fe",
+    "class": "64acfc9ca69d5a98b5f266fc",
+    "topic": "Continents and Countries",
+    "description": "Create a detailed map of the continents and label major countries. Explore the world's geography."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a58",
+    "subject": "Biology",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25541"],
+    "teacher": "64a6a31b5605dfc0d2a121fe",
+    "class": "64acfc9ca69d5a98b5f266fc",
+    "topic": "Human Anatomy Report",
+    "description": "Research and write a comprehensive report on the intricacies of human anatomy."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a59",
+    "subject": "Art",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25543"],
+    "teacher": "64a6a31b5605dfc0d2a121fe",
+    "class": "64acfc9ca69d5a98b5f266fd",
+    "topic": "Pencil Shading Still Life",
+    "description": "Create a visually captivating still life composition using pencil shading techniques."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a5a",
+    "subject": "Music",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25542"],
+    "teacher": "64a6a31b5605dfc0d2a121fe",
+    "class": "64acfc9ca69d5a98b5f266fd",
+    "topic": "Melodic Composition",
+    "description": "Compose a captivating and harmonious melody in the key of C major."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a5b",
+    "subject": "Physical Education",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25544"],
+    "teacher": "64a6a31b5605dfc0d2a121fe",
+    "class": "64acfc9ca69d5a98b5f266fd",
+    "topic": "Stretching Exercise Video",
+    "description": "Record a comprehensive video demonstrating various stretching exercises."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a5c",
+    "subject": "Computer Science",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25545"],
+    "teacher": "64a6a31b5605dfc0d2a12200",
+    "class": "64acfc9ca69d5a98b5f266fd",
+    "topic": "Factorial Calculation Program",
+    "description": "Develop a program to calculate the factorial of a given number using programming concepts."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a5d",
+    "subject": "Chemistry",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25546"],
+    "teacher": "64a6a31b5605dfc0d2a12200",
+    "class": "64acfc9ca69d5a98b5f266fd",
+    "topic": "Titrating Acid Concentration",
+    "description": "Conduct a titration experiment to accurately determine the concentration of a given acid."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a5e",
+    "subject": "Literature",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25547"],
+    "teacher": "64a6a31b5605dfc0d2a12200",
+    "class": "64acfc9ca69d5a98b5f266fe",
+    "topic": "Character Analysis",
+    "description": "Read 'To Kill a Mockingbird' and craft a comprehensive character analysis."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a5f",
+    "subject": "Physical Education",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25548"],
+    "teacher": "64a6a31b5605dfc0d2a12200",
+    "class": "64acfc9ca69d5a98b5f266fe",
+    "topic": "5K Run Challenge",
+    "description": "Participate in a challenging 5K run and record your completion time for a healthy and active lifestyle."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a60",
+    "subject": "Foreign Language",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa25549"],
+    "teacher": "64a6a31b5605dfc0d2a12200",
+    "class": "64acfc9ca69d5a98b5f266fe",
+    "topic": "Vocabulary Flashcards Practice",
+    "description": "Devote 20 minutes daily to practice foreign language vocabulary using interactive flashcards."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a52",
+    "subject": "Mathematics",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa2553c"],
+    "teacher": "64a6a31b5605dfc0d2a121ff",
+    "class": "64acfc9ca69d5a98b5f266fe",
+    "topic": "Page 56 Exercises",
+    "description": "Complete exercises 1-10 on page 56 to reinforce mathematical problem-solving skills."
+  },
+  {
+    "_id": "64a8850c8a97a7750bb96a53",
+    "subject": "History",
+    "status": "Pending",
+    "students": ["64a6a9a21220e1126fa2552a"],
+    "teacher": "64a6a31b5605dfc0d2a121ff",
+    "class": "64acfc9ca69d5a98b5f266fe",
+    "topic": "Causes of World War II",
+    "description": "Write a concise essay exploring the significant causes and events leading to World War II."
+  }
+]
