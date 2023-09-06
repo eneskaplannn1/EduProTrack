@@ -101,14 +101,14 @@ First of all clone the project
 git clone https://github.com/eneskaplannn1/EduProTrack.git
 ```
 
-The "**EduProTrack-frontend**" directory contains the React code. The "**EduProTrack-backend**" directory contains the code for the node.js express server.This project requries a **MongoDB** database to run.
+The "**client**" directory contains the React code. The "**server**" directory contains the code for the node.js express server.This project requries a **MongoDB** database to run.
 
 cd both Project Directory and open two terminal window
 
 ### First window
 
 ```bash
-cd EduProTrack-frontend
+cd client
 npm install
 npm run dev # (runs react at localhost:5173)
 ```
@@ -118,7 +118,7 @@ npm run dev # (runs react at localhost:5173)
 Important: Before starting the Node.js server, make sure to fill in the fields in the example.env file located in the EduProTrack-server root directory with the correct values. Then, run the following commands consecutively.
 
 ```bash
-cd EduProTrack-frontend
+cd server
 npm install
 node ./dev-data/data/import-devData.js --import # this code is responsible for creating teacher,homework student and class datas into mongoDB database
 npm start # (runs nodemon at localhost:3000)
