@@ -1,4 +1,4 @@
-## [EduProTrack](https://eduprotrack-frontend.onrender.com/login)
+## [EduProTrack](https://eduprotrack-frontend.onrender.com)
 
 # FullStack Application Powered with Nodejs/Reactjs and MongoDB
 
