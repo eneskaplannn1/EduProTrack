@@ -1,5 +1,17 @@
-## [EduProTrack](https://eduprotrack-frontend.onrender.com)  
-login function takes some time due to cloud provider
+## [EduProTrack](https://eduprotrack-frontend.onrender.com)  # login function takes some time due to cloud provider
+example User Credentials
+
+- Student
+  - gmail : noah_clark@gmail.com
+  - password : pass1234
+- Teacher
+  - gmail : emily_johnson@gmail.com
+  - password : pass1234
+- Admin
+  - gmail : exampleAdmin@gmail.com
+  - password : pass1234
+
+
 
 # MERN Stack Application
 
@@ -9,6 +21,7 @@ login function takes some time due to cloud provider
 
 ## Introduction
 This is a side project I've been working on, a full-stack school management application created using the MERN stack (MongoDB, Express, React, and Node.js). The application focuses on managing students, teachers, classes, and homework, and how they are interconnected. In this application, teachers can assign homework to their students, students can submit their homework to their teachers and await evaluation, among other features. Please note that since this project is something I've been working on in my free time, I cannot guarantee that everything will work flawlessly. However, I would greatly appreciate it if you could report any issues you encounter.
+
 
 ## Key Features
 
@@ -109,7 +122,6 @@ npm start # (runs nodemon at localhost:3000)
 
 ### Comment 
 I intend to keep adding more features to this application such as notifications and messages, so if you like it, please give it a star, that will encourage me to to keep improving the project.
-
 
 
 ## Contributing
