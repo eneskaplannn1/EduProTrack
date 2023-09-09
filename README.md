@@ -13,8 +13,8 @@ example User Credentials
   - password : pass1234
 
 # MERN Stack Application
+![Screenshot_3](https://github.com/eneskaplannn1/EduProTrack/assets/111773033/8a214507-ba72-40d8-91b7-a6fb6fa112c2)
 
-![Screenshot_3](https://github.com/eneskaplannn1/EduProTrack/assets/111773033/e579a6fd-fad5-4de2-bb9c-3d93a494786e)
 
 ### This Project was bootstrapped with [Vite](https://github.com/vitejs/vite)
 
